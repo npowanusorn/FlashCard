@@ -10,6 +10,14 @@ import Foundation
 struct Stack {
     private var items: [String] = []
     
+    var isEmpty: Bool {
+        return items.isEmpty
+    }
+    
+    func count() -> Int {
+        return items.count
+    }
+    
     func peek() -> String? {
         return items.first
     }
@@ -19,6 +27,6 @@ struct Stack {
     }
     
     mutating func push(_ elem: String) {
-        items.insert(elem, at: 0)
+        items.insertBeginning(elem)
     }
 }

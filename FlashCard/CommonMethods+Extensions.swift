@@ -79,3 +79,9 @@ extension UIColor {
         }
     }
 }
+
+extension Array {
+    mutating func insertBeginning(_ elem: Element) {
+        self.insert(elem, at: 0)
+    }
+}

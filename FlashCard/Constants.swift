@@ -11,6 +11,7 @@ enum K {
     enum Defaults {
         static let chapterNameList = "ChapterNameList"
         static let chapterNameArrayAppend = "-keys"
+        static let isShuffled = "isShuffled"
     }
     
     enum CellIDs {
@@ -29,5 +30,9 @@ enum K {
         static let emptyLabel = "No lists found"
         static let emptySearch = "No item found for: %@"
         static let review = "Review"
+    }
+    
+    enum Language {
+        static let ko = "ko"
     }
 }

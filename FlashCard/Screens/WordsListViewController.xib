@@ -78,8 +78,8 @@
                 <constraint firstItem="Ct9-dG-4jV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="VN5-iN-mYC"/>
                 <constraint firstAttribute="trailing" secondItem="Gby-zV-nOj" secondAttribute="trailing" id="Yiq-vC-4Hl"/>
                 <constraint firstItem="Gby-zV-nOj" firstAttribute="top" secondItem="Ct9-dG-4jV" secondAttribute="bottom" id="cMK-yl-8sP"/>
+                <constraint firstAttribute="bottom" secondItem="Gby-zV-nOj" secondAttribute="bottom" id="mMV-oi-XxM"/>
                 <constraint firstItem="Gby-zV-nOj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qa3-Bl-GnE"/>
-                <constraint firstAttribute="bottom" secondItem="Gby-zV-nOj" secondAttribute="bottom" id="yee-Za-xXg"/>
             </constraints>
             <point key="canvasLocation" x="145.80152671755724" y="-13.380281690140846"/>
         </view>
