@@ -10,8 +10,16 @@ import UniformTypeIdentifiers
 
 class HomeViewController: UITableViewController {
     
-    var list: [String] = []
+    var list = [String]()
+    var filteredList = [String]()
     let defaults = UserDefaults.standard
+    let searchController = UISearchController(searchResultsController: nil)
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    var isFiltering: Bool {
+        return searchController.isActive && !isSearchBarEmpty
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +30,12 @@ class HomeViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = editButtonItem
         self.navigationItem.largeTitleDisplayMode = .always
         list = defaults.object(forKey: K.Defaults.chapterNameList) as? [String] ?? [String]()
+        filteredList = list
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     @objc func addTapped() {
@@ -45,6 +59,7 @@ class HomeViewController: UITableViewController {
                 return
             }
             list.append(json.title)
+            list.sort(using: .localizedStandard)
             
             defaults.setValue(list, forKey: K.Defaults.chapterNameList)
             var dict: [String: String] = [:]
@@ -58,6 +73,13 @@ class HomeViewController: UITableViewController {
             tableView.reloadData()
         }
     }
+    
+    func filterListForSearch(_ search: String) {
+        filteredList = list.filter { (chapterName: String) -> Bool in
+            return chapterName.lowercased().contains(search.lowercased())
+        }
+        tableView.reloadData()
+    }
 }
 
 // MARK: - Table view data source
@@ -67,18 +89,38 @@ extension HomeViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if list.count == 0 {
-            self.tableView.setEmptyMessage(K.Texts.emptyLabel)
+        if isFiltering {
+            if filteredList.count == 0 {
+                self.tableView.setEmptyMessage(K.Texts.emptySearch.formatted(string: searchController.searchBar.text ?? ""))
+                self.navigationItem.leftBarButtonItem?.isEnabled = false
+            } else {
+                self.tableView.restore()
+                searchController.searchBar.isHidden = false
+                self.navigationItem.leftBarButtonItem?.isEnabled = true
+            }
+            return filteredList.count
         } else {
-            self.tableView.restore()
+            if list.count == 0 {
+                self.tableView.setEmptyMessage(K.Texts.emptyLabel)
+                searchController.searchBar.isHidden = true
+                self.navigationItem.leftBarButtonItem?.isEnabled = false
+            } else {
+                self.tableView.restore()
+                searchController.searchBar.isHidden = false
+                self.navigationItem.leftBarButtonItem?.isEnabled = true
+            }
+            return list.count
         }
-        return list.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIDs.homeVCID, for: indexPath)
         var content = UIListContentConfiguration.cell()
-        content.text = list[indexPath.row]
+        if isFiltering {
+            content.text = filteredList[indexPath.row]
+        } else {
+            content.text = list[indexPath.row]
+        }
         cell.contentConfiguration = content
         cell.accessoryType = .disclosureIndicator
         return cell
@@ -87,8 +129,13 @@ extension HomeViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.isSelected = false
-        let wordsVC = WordsListViewController(chapter: list[indexPath.row])
+        var selectedChapter = isFiltering ? filteredList[indexPath.row] : list[indexPath.row]
+        let wordsVC = WordsListViewController(chapter: selectedChapter)
         self.navigationController?.pushViewController(wordsVC, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return isSearchBarEmpty
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -106,5 +153,12 @@ extension HomeViewController: UIDocumentPickerDelegate {
                 parse(json: data)
             }
         }
+    }
+}
+
+extension HomeViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        filterListForSearch(searchText)
     }
 }

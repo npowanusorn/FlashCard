@@ -27,5 +27,7 @@ enum K {
         static let addErrorDuplicate = "%@ already exists"
         static let dismiss = "Dismiss"
         static let emptyLabel = "No lists found"
+        static let emptySearch = "No item found for: %@"
+        static let review = "Review"
     }
 }

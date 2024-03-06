@@ -11,9 +11,11 @@ class WordsListViewController: UIViewController {
 
     let chapter: String
     let defaults = UserDefaults.standard
-    var wordsDictArr: [String:String] = [:]
+    var wordsDictArr = [String:String]()
     var keysForChapter = [String()]
 
+    @IBOutlet weak var reviewBtn: UIButton!
+    @IBOutlet weak var quizBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
@@ -31,7 +33,10 @@ class WordsListViewController: UIViewController {
     }
     
     @IBAction func reviewTapped(_ sender: Any) {
-        print("review")
+        AppCache.shared.listForChapter = wordsDictArr
+        AppCache.shared.keyArrayForChapter = keysForChapter
+        let reviewVC = ReviewViewController()
+        self.navigationController?.pushViewController(reviewVC, animated: true)
     }
     
     @IBAction func quizTapped(_ sender: Any) {
@@ -51,6 +56,11 @@ class WordsListViewController: UIViewController {
         segmentedControl.setTitle(K.Texts.all, forSegmentAt: 0)
         segmentedControl.setTitle(K.Texts.kor, forSegmentAt: 1)
         segmentedControl.setTitle(K.Texts.en, forSegmentAt: 2)
+        
+        if keysForChapter.isEmpty {
+            reviewBtn.isEnabled = false
+            quizBtn.isEnabled = false
+        }
     }
 }
     // MARK: - Table view data source
@@ -77,7 +87,6 @@ extension WordsListViewController: UITableViewDelegate, UITableViewDataSource {
         var content = UIListContentConfiguration.cell()
         content.secondaryTextProperties.numberOfLines = 0
         content.secondaryTextProperties.font = UIFont.systemFont(ofSize: UIFont.systemFontSize, weight: .regular)
-//        content.textProperties.font = UIFont.systemFont(ofSize: UIFont.systemFontSize, weight: .regular)
         content.prefersSideBySideTextAndSecondaryText = true
         content.text = keysForChapter[indexPath.row]
         content.secondaryText = wordsDictArr[keysForChapter[indexPath.row]]
