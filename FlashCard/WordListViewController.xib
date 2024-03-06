@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WordListViewController" customModule="flashcard" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="2Sp-5q-K5S" id="c01-ak-OOw"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController id="8W4-XZ-qQ2">
+            <view key="view" contentMode="scaleToFill" id="2Sp-5q-K5S">
+                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Lxt-qe-7dQ">
+                        <rect key="frame" x="0.0" y="89" width="393" height="763"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="-1" id="8aE-wA-4dZ"/>
+                            <outlet property="delegate" destination="-1" id="ykj-MM-tXe"/>
+                        </connections>
+                    </tableView>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7pt-og-Lit">
+                        <rect key="frame" x="20" y="59" width="353" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="Udl-WO-zU5"/>
+                        </constraints>
+                        <segments>
+                            <segment title="First"/>
+                            <segment title="Second"/>
+                            <segment title="Third"/>
+                        </segments>
+                    </segmentedControl>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k3f-Du-9qP">
+                        <rect key="frame" x="20" y="778" width="353" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="7CR-Ig-o6E"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                    </button>
+                </subviews>
+                <viewLayoutGuide key="safeArea" id="ZIa-oF-RzR"/>
+                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                <constraints>
+                    <constraint firstItem="ZIa-oF-RzR" firstAttribute="trailing" secondItem="Lxt-qe-7dQ" secondAttribute="trailing" id="I24-pR-kXa"/>
+                    <constraint firstItem="Lxt-qe-7dQ" firstAttribute="leading" secondItem="ZIa-oF-RzR" secondAttribute="leading" id="Jj3-0H-0bh"/>
+                    <constraint firstItem="ZIa-oF-RzR" firstAttribute="trailing" secondItem="7pt-og-Lit" secondAttribute="trailing" constant="20" id="aCi-Au-p5D"/>
+                    <constraint firstItem="7pt-og-Lit" firstAttribute="top" secondItem="ZIa-oF-RzR" secondAttribute="top" id="bvX-C3-TaZ"/>
+                    <constraint firstItem="ZIa-oF-RzR" firstAttribute="bottom" secondItem="k3f-Du-9qP" secondAttribute="bottom" id="g0K-Of-QPH"/>
+                    <constraint firstItem="7pt-og-Lit" firstAttribute="leading" secondItem="ZIa-oF-RzR" secondAttribute="leading" constant="20" id="kb8-ie-99R"/>
+                    <constraint firstItem="Lxt-qe-7dQ" firstAttribute="top" secondItem="7pt-og-Lit" secondAttribute="bottom" id="mg1-tZ-HHU"/>
+                    <constraint firstItem="k3f-Du-9qP" firstAttribute="leading" secondItem="ZIa-oF-RzR" secondAttribute="leading" constant="20" id="oZK-sF-wxH"/>
+                    <constraint firstItem="ZIa-oF-RzR" firstAttribute="trailing" secondItem="k3f-Du-9qP" secondAttribute="trailing" constant="20" id="x0n-mi-lOU"/>
+                    <constraint firstAttribute="bottom" secondItem="Lxt-qe-7dQ" secondAttribute="bottom" id="yUL-7A-SNV"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="-460" y="-16"/>
+        </viewController>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
