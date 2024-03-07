@@ -7,6 +7,11 @@
 
 import UIKit
 
+func makeMenu(children: [UIAction]) -> UIMenu {
+    let menu = UIMenu(options: .displayInline, children: children)
+    return menu
+}
+
 // MARK: - String
 extension String {
     func formatted(string: String) -> String {

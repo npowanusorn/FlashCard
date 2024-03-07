@@ -26,7 +26,15 @@ class HomeViewController: UITableViewController {
 
         self.title = K.Texts.home
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.CellIDs.homeVCID)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        let action1 = UIAction(title: "Add from file", image: UIImage(systemName: "doc.fill")) { _ in
+            self.addTapped()
+        }
+        let action2 = UIAction(title: "Create", image: UIImage(systemName: "plus")) { _ in
+            print("create")
+        }
+        let menu = makeMenu(children: [action1, action2])
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), menu: menu)
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         self.navigationItem.leftBarButtonItem = editButtonItem
         self.navigationItem.largeTitleDisplayMode = .always
         list = defaults.object(forKey: K.Defaults.chapterNameList) as? [String] ?? [String]()
@@ -84,8 +92,12 @@ class HomeViewController: UITableViewController {
 
 // MARK: - Table view data source
 extension HomeViewController {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        50
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

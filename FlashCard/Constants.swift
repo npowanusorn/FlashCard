@@ -5,7 +5,7 @@
 //  Created by Nucha Powanusorn on 05/03/2024.
 //
 
-import Foundation
+import UIKit
 
 enum K {
     enum Defaults {
@@ -35,4 +35,9 @@ enum K {
     enum Language {
         static let ko = "ko"
     }
+}
+
+enum ScreenSize {
+    static let width = UIScreen.main.bounds.size.width
+    static let height = UIScreen.main.bounds.size.height
 }
