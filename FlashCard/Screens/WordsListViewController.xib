@@ -4,14 +4,13 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WordsListViewController" customModule="FlashCard" customModuleProvider="target">
             <connections>
-                <outlet property="buttonsStackView" destination="pTP-kk-mW0" id="CWw-i1-mFA"/>
-                <outlet property="quizBtn" destination="eYX-4v-RZ3" id="Ydn-Kd-zaJ"/>
-                <outlet property="reviewBtn" destination="SI4-g0-rTN" id="PV6-wd-0zU"/>
+                <outlet property="segmentedControl" destination="rwb-Na-J75" id="cPM-or-V6Q"/>
                 <outlet property="tableView" destination="Gby-zV-nOj" id="xc0-EZ-3Cr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,45 +23,24 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Gby-zV-nOj">
                     <rect key="frame" x="0.0" y="59" width="393" height="793"/>
                 </tableView>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pTP-kk-mW0">
-                    <rect key="frame" x="16" y="768" width="361" height="50"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SI4-g0-rTN">
-                            <rect key="frame" x="0.0" y="0.0" width="175.66666666666666" height="50"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="filled" title="Review" cornerStyle="large">
-                                <fontDescription key="titleFontDescription" type="boldSystem" pointSize="17"/>
-                            </buttonConfiguration>
-                            <connections>
-                                <action selector="reviewTapped:" destination="-1" eventType="touchUpInside" id="9tn-C9-gdC"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYX-4v-RZ3">
-                            <rect key="frame" x="185.66666666666663" y="0.0" width="175.33333333333337" height="50"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="filled" title="Quiz" cornerStyle="large">
-                                <fontDescription key="titleFontDescription" type="boldSystem" pointSize="17"/>
-                            </buttonConfiguration>
-                            <connections>
-                                <action selector="quizTapped:" destination="-1" eventType="touchUpInside" id="VPO-Zv-wgg"/>
-                            </connections>
-                        </button>
-                    </subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwb-Na-J75" customClass="SCView" customModule="FlashCard" customModuleProvider="target">
+                    <rect key="frame" x="20" y="758" width="353" height="40"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="qSi-LX-4yE"/>
+                        <constraint firstAttribute="height" constant="40" id="ntB-tQ-qdE"/>
                     </constraints>
-                </stackView>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
             <constraints>
-                <constraint firstItem="pTP-kk-mW0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="4Sg-lA-rga"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pTP-kk-mW0" secondAttribute="trailing" constant="16" id="755-3l-brD"/>
+                <constraint firstItem="rwb-Na-J75" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="1ce-sO-SE8"/>
+                <constraint firstAttribute="bottom" secondItem="Gby-zV-nOj" secondAttribute="bottom" id="CLb-Pe-5E4"/>
                 <constraint firstItem="Gby-zV-nOj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Lqs-vO-GZF"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="pTP-kk-mW0" secondAttribute="bottom" id="OJs-ey-Kuz"/>
                 <constraint firstItem="Gby-zV-nOj" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="UHg-O9-7ah"/>
-                <constraint firstAttribute="bottom" secondItem="Gby-zV-nOj" secondAttribute="bottom" id="Zft-Dm-O1h"/>
                 <constraint firstItem="Gby-zV-nOj" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="aJ8-3X-q6c"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rwb-Na-J75" secondAttribute="trailing" constant="20" id="b7z-W0-2yB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="rwb-Na-J75" secondAttribute="bottom" constant="20" id="rEF-VM-d8E"/>
             </constraints>
             <point key="canvasLocation" x="145.80152671755724" y="-13.380281690140846"/>
         </view>
@@ -70,6 +48,9 @@
     <resources>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

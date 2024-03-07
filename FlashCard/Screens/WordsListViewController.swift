@@ -14,15 +14,12 @@ class WordsListViewController: UIViewController {
     let defaults = UserDefaults.standard
     var wordsDictArr = [String:String]()
     var keysForChapter = [String()]
-    let segmentedControl = UISegmentedControl()
-
-    @IBOutlet weak var reviewBtn: UIButton!
-    @IBOutlet weak var quizBtn: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var buttonsStackView: UIStackView!
     
-    init(chapter: String) {
-        self.chapter = chapter
+    @IBOutlet weak var segmentedControl: SCView!
+    @IBOutlet weak var tableView: UITableView!
+    
+    init() {
+        self.chapter = AppCache.shared.selectedChapters.first!
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,7 +27,32 @@ class WordsListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @IBAction func segmentedControlDidChange(_ sender: Any) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = chapter
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.CellIDs.wordsVCID)
+        wordsDictArr = defaults.object(forKey: chapter) as? [String: String] ?? [:]
+        keysForChapter = defaults.array(forKey: chapter + K.Defaults.chapterNameArrayAppend) as? [String] ?? []
+        setupSegmentedControl()
+        self.navigationItem.rightBarButtonItem?.isEnabled = !keysForChapter.isEmpty
+        
+        let reviewAction = UIAction(title: K.Texts.review) { _ in
+            AppCache.shared.dictForSelectedChapter = self.wordsDictArr
+            AppCache.shared.keyArrayForSelectedChapter = self.keysForChapter
+            let reviewVC = ReviewViewController()
+            self.navigationController?.pushViewController(reviewVC, animated: true)
+        }
+        let quizAction = UIAction(title: K.Texts.quiz) { _ in
+            // TODO
+        }
+        let menu = UIMenu(options: .displayInline, children: [reviewAction, quizAction])
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: K.Image.book), menu: menu)
+    }
+    
+    func didTapSegment(_ segment: Int) {
         tableView.reloadData()
     }
     
@@ -38,66 +60,15 @@ class WordsListViewController: UIViewController {
         tableView.reloadData()
     }
     
-    @IBAction func reviewTapped(_ sender: Any) {
-        AppCache.shared.listForChapter = wordsDictArr
-        AppCache.shared.keyArrayForChapter = keysForChapter
-        let reviewVC = ReviewViewController()
-        self.navigationController?.pushViewController(reviewVC, animated: true)
-    }
-    
-    @IBAction func quizTapped(_ sender: Any) {
-        print("quiz")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//        self.title = chapter
-        self.navigationItem.largeTitleDisplayMode = .never
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.CellIDs.wordsVCID)
-        wordsDictArr = defaults.object(forKey: chapter) as? [String: String] ?? [:]
-        keysForChapter = defaults.array(forKey: chapter + K.Defaults.chapterNameArrayAppend) as? [String] ?? []
-        segmentedControl.insertSegment(withTitle: K.Texts.all, at: 0, animated: false)
-        segmentedControl.insertSegment(withTitle: K.Texts.kor, at: 1, animated: false)
-        segmentedControl.insertSegment(withTitle: K.Texts.en, at: 2, animated: false)
-        segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.addTarget(self, action: #selector(segmentedControlChanged), for: .valueChanged)
-//        seg.sizeToFit()
-        self.navigationItem.titleView = segmentedControl
-        if keysForChapter.isEmpty {
-            reviewBtn.isEnabled = false
-            quizBtn.isEnabled = false
-        }
-        
-        let action1 = UIAction(title: "Review") { _ in
-            AppCache.shared.listForChapter = self.wordsDictArr
-            AppCache.shared.keyArrayForChapter = self.keysForChapter
-            let reviewVC = ReviewViewController()
-            self.navigationController?.pushViewController(reviewVC, animated: true)
-        }
-        let action2 = UIAction(title: "Quiz") { _ in
-//            AppCache.shared.listForChapter = self.wordsDictArr
-//            AppCache.shared.keyArrayForChapter = self.keysForChapter
-//            let reviewVC = ReviewViewController()
-//            self.navigationController?.pushViewController(reviewVC, animated: true)
-        }
-        let menu = UIMenu(options: .displayInline, children: [action1, action2])
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "book.pages.fill"), menu: menu)
-        buttonsStackView.isHidden = true
-//        let screenSize = UIScreen.main.bounds.size
-//        let gradientView = UIView(frame: CGRect(x: 0, y: screenSize.height - 100, width: screenSize.width, height: 100))
-//        gradientView.backgroundColor = .black
-//        let gradient = CAGradientLayer()
-//        gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
-//        gradient.endPoint = CGPoint(x: 0.5, y: 1)
-//        let blackColor = UIColor.black
-//        gradient.colors = [blackColor.withAlphaComponent(0.0).cgColor, blackColor.withAlphaComponent(0.7).cgColor, blackColor.withAlphaComponent(1.0).cgColor]
-//        gradient.locations = [NSNumber(value: 0.0), NSNumber(value: 0.6), NSNumber(value: 1.0)]
-//        gradient.frame = gradientView.bounds
-//        gradientView.layer.mask = gradient
-//        self.view.addSubview(gradientView)
-//        self.view.bringSubviewToFront(buttonsStackView)
+    func setupSegmentedControl() {
+        segmentedControl.didTapSegment = didTapSegment(_:)
+        segmentedControl.backgroundColor = .tertiarySystemGroupedBackground
+        segmentedControl.currentIndexBackgroundColor = .systemFill
+        segmentedControl.borderColor = .clear
+        segmentedControl.borderWidth = 0
+        segmentedControl.numberOfSegments = 3
+        segmentedControl.segmentsTitle = [K.Texts.all, K.Texts.kor, K.Texts.en]
+        segmentedControl.isHidden = true
     }
 }
     // MARK: - Table view data source
@@ -127,9 +98,9 @@ extension WordsListViewController: UITableViewDelegate, UITableViewDataSource {
         content.prefersSideBySideTextAndSecondaryText = true
         content.text = keysForChapter[indexPath.row]
         content.secondaryText = wordsDictArr[keysForChapter[indexPath.row]]
-        if segmentedControl.selectedSegmentIndex == 1 {
+        if segmentedControl.currentIndex == 1 {
             content.secondaryTextProperties.color = UIColor.label.withAlphaComponent(0)
-        } else if segmentedControl.selectedSegmentIndex == 2 {
+        } else if segmentedControl.currentIndex == 2 {
             content.textProperties.color = UIColor.label.withAlphaComponent(0)
         }
         cell.contentConfiguration = content

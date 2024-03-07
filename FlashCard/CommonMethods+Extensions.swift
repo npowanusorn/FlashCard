@@ -7,28 +7,30 @@
 
 import UIKit
 
-func makeMenu(children: [UIAction]) -> UIMenu {
+func makeMenu(children: [UIMenuElement]) -> UIMenu {
     let menu = UIMenu(options: .displayInline, children: children)
     return menu
 }
+
+
 
 // MARK: - String
 extension String {
     func formatted(string: String) -> String {
         self.replacingOccurrences(of: "%@", with: string)
     }
-
+    
     var isValidDouble: Bool {
         return Double(self) != nil
     }
-
+    
     var isValidInteger: Bool {
         return Int(self) != nil
     }
 }
 
 extension UITableView {
-
+    
     func setEmptyMessage(_ message: String) {
         let messageLabel = UILabel(frame: CGRect(x: 20, y: 0, width: self.bounds.size.width - 40, height: self.bounds.size.height))
         messageLabel.text = message
@@ -41,7 +43,7 @@ extension UITableView {
         self.separatorStyle = .none
         self.isUserInteractionEnabled = false
     }
-
+    
     func restore() {
         self.backgroundView = nil
         self.separatorStyle = .singleLine
@@ -50,25 +52,23 @@ extension UITableView {
 }
 
 extension UIView {
-    func roundCornerWithShadow(cornerRadius: CGFloat, shadowRadius: CGFloat, offsetX: CGFloat, offsetY: CGFloat, colour: UIColor, opacity: Float) {
-        
-        self.clipsToBounds = false
-
-        let layer = self.layer
-        layer.masksToBounds = false
-        layer.cornerRadius = cornerRadius
-        layer.shadowOffset = CGSize(width: offsetX, height: offsetY);
-        layer.shadowColor = colour.cgColor
-        layer.shadowRadius = shadowRadius
-        layer.shadowOpacity = opacity
-        layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: layer.bounds.minX, y: layer.bounds.minY, width: layer.bounds.width+40, height: layer.bounds.height+45), cornerRadius: layer.cornerRadius).cgPath
-        
-//        let bColour = self.backgroundColor
-//        self.backgroundColor = nil
-//        layer.backgroundColor = bColour?.cgColor
-        
+    func fadeIn(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+        if isHidden {
+            isHidden = false
+        }
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 1
+        }, completion: completion)
     }
     
+    func fadeOut(duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+        if isHidden {
+            isHidden = false
+        }
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 0
+        }, completion: completion)
+    }
 }
 
 extension UIColor {
@@ -85,8 +85,36 @@ extension UIColor {
     }
 }
 
-extension Array {
+extension Array<String> {
+    func countStringContainingOccurrences(_ elem: String) -> Int {
+        var count = 0
+        for item in self {
+            if item.contains(elem) {
+                count += 1
+            }
+        }
+        return count
+    }
+    
     mutating func insertBeginning(_ elem: Element) {
         self.insert(elem, at: 0)
+    }
+}
+
+extension Dictionary {
+    static func stringAdd(lhs: [String: String], rhs: [String: String]) -> [String: String] {
+        var result = lhs
+        rhs.forEach { elem in
+            if let _ = lhs[elem.key] {
+                result[elem.key + K.Texts.dup] = elem.value
+            } else {
+                result[elem.key] = elem.value
+            }
+        }
+        return result
+    }
+    
+    static func += (lhs: inout [Key: Value], rhs: [Key: Value]) {
+        rhs.forEach { lhs[$0] = $1 }
     }
 }

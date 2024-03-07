@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		502F20442B99694B001053D8 /* SCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502F20432B99694B001053D8 /* SCView.swift */; };
+		502F20482B998EFE001053D8 /* SelectChaptersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 502F20472B998EFE001053D8 /* SelectChaptersViewController.xib */; };
+		502F20492B998EFE001053D8 /* SelectChaptersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502F20462B998EFE001053D8 /* SelectChaptersViewController.swift */; };
 		50C125B02B983FC900BC57B6 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C125AE2B983FC900BC57B6 /* ReviewViewController.swift */; };
 		50C125B12B983FC900BC57B6 /* ReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50C125AF2B983FC900BC57B6 /* ReviewViewController.xib */; };
 		50C125B42B98441700BC57B6 /* RoundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C125B32B98441700BC57B6 /* RoundShadowView.swift */; };
@@ -26,6 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		502F20432B99694B001053D8 /* SCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCView.swift; sourceTree = "<group>"; };
+		502F20462B998EFE001053D8 /* SelectChaptersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChaptersViewController.swift; sourceTree = "<group>"; };
+		502F20472B998EFE001053D8 /* SelectChaptersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectChaptersViewController.xib; sourceTree = "<group>"; };
 		50C125AE2B983FC900BC57B6 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewViewController.swift; path = ../../ReviewViewController.swift; sourceTree = "<group>"; };
 		50C125AF2B983FC900BC57B6 /* ReviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ReviewViewController.xib; path = ../../ReviewViewController.xib; sourceTree = "<group>"; };
 		50C125B32B98441700BC57B6 /* RoundShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundShadowView.swift; sourceTree = "<group>"; };
@@ -61,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				50C125B32B98441700BC57B6 /* RoundShadowView.swift */,
+				502F20432B99694B001053D8 /* SCView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -117,6 +124,8 @@
 				50F354B52B979635003AEBE1 /* HomeViewController.xib */,
 				50F354C22B97DD4A003AEBE1 /* WordsListViewController.swift */,
 				50F354C32B97DD4A003AEBE1 /* WordsListViewController.xib */,
+				502F20462B998EFE001053D8 /* SelectChaptersViewController.swift */,
+				502F20472B998EFE001053D8 /* SelectChaptersViewController.xib */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -181,6 +190,7 @@
 			files = (
 				50F354C52B97DD4A003AEBE1 /* WordsListViewController.xib in Resources */,
 				50F354A92B979202003AEBE1 /* LaunchScreen.storyboard in Resources */,
+				502F20482B998EFE001053D8 /* SelectChaptersViewController.xib in Resources */,
 				50C125B12B983FC900BC57B6 /* ReviewViewController.xib in Resources */,
 				50F354A62B979202003AEBE1 /* Assets.xcassets in Resources */,
 				50F354B72B979635003AEBE1 /* HomeViewController.xib in Resources */,
@@ -195,9 +205,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				50C125B62B984DBD00BC57B6 /* AppCache.swift in Sources */,
+				502F20492B998EFE001053D8 /* SelectChaptersViewController.swift in Sources */,
 				50F354C42B97DD4A003AEBE1 /* WordsListViewController.swift in Sources */,
 				50F354EF2B980695003AEBE1 /* CommonMethods+Extensions.swift in Sources */,
 				50F3549D2B979201003AEBE1 /* AppDelegate.swift in Sources */,
+				502F20442B99694B001053D8 /* SCView.swift in Sources */,
 				50F3549F2B979201003AEBE1 /* SceneDelegate.swift in Sources */,
 				50C125B92B9852A100BC57B6 /* Stack.swift in Sources */,
 				50F354ED2B98009D003AEBE1 /* Constants.swift in Sources */,
@@ -360,7 +372,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.boba.FlashCard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boba.FlashCard1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -387,7 +399,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.boba.FlashCard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boba.FlashCard1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

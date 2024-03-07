@@ -26,24 +26,35 @@ class HomeViewController: UITableViewController {
 
         self.title = K.Texts.home
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.CellIDs.homeVCID)
-        let action1 = UIAction(title: "Add from file", image: UIImage(systemName: "doc.fill")) { _ in
+        let action1 = UIAction(title: K.Texts.importFromFile, image: UIImage(systemName: K.Image.importFromFile)) { _ in
             self.addTapped()
         }
-        let action2 = UIAction(title: "Create", image: UIImage(systemName: "plus")) { _ in
+        let action2 = UIAction(title: K.Texts.create, image: UIImage(systemName: K.Image.plus)) { _ in
             print("create")
         }
-        let menu = makeMenu(children: [action1, action2])
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), menu: menu)
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        let divider = makeMenu(children: [action1, action2])
+        let action3 = UIAction(title: K.Texts.review, image: UIImage(systemName: K.Image.book)) { _ in
+            let vc = SelectChaptersViewController()
+            let nav = UINavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
+        }
+        let action4 = UIAction(title: K.Texts.quiz, image: UIImage(systemName: K.Image.book)) { _ in
+            print("quiz")
+        }
+        let menu = makeMenu(children: [divider, action3, action4])
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: K.Image.ellipsis), menu: menu)
         self.navigationItem.leftBarButtonItem = editButtonItem
         self.navigationItem.largeTitleDisplayMode = .always
         list = defaults.object(forKey: K.Defaults.chapterNameList) as? [String] ?? [String]()
+        AppCache.shared.allChapters = list
         filteredList = list
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.placeholder = K.Texts.search
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        
+        setupNotification()
     }
     
     @objc func addTapped() {
@@ -87,6 +98,16 @@ class HomeViewController: UITableViewController {
             return chapterName.lowercased().contains(search.lowercased())
         }
         tableView.reloadData()
+    }
+    
+    func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationReceived), name: K.Notifications.selectedChapters, object: nil)
+    }
+    
+    @objc func notificationReceived() {
+        AppCache.shared.selectedChapters = AppCache.shared.reviewQuizSelectedChapters
+        let reviewVC = ReviewViewController()
+        self.navigationController?.pushViewController(reviewVC, animated: true)
     }
 }
 
@@ -141,8 +162,8 @@ extension HomeViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.isSelected = false
-        var selectedChapter = isFiltering ? filteredList[indexPath.row] : list[indexPath.row]
-        let wordsVC = WordsListViewController(chapter: selectedChapter)
+        AppCache.shared.selectedChapters = isFiltering ? [filteredList[indexPath.row]] : [list[indexPath.row]]
+        let wordsVC = WordsListViewController()
         self.navigationController?.pushViewController(wordsVC, animated: true)
     }
     

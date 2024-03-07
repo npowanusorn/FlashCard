@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectChaptersViewController" customModule="FlashCard" customModuleProvider="target">
+            <connections>
+                <outlet property="selectAllBtn" destination="9nk-cD-WBE" id="NdF-0h-Qo7"/>
+                <outlet property="tableView" destination="ucw-bq-6Ol" id="LPU-Ur-XCD"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ucw-bq-6Ol">
+                    <rect key="frame" x="0.0" y="59" width="393" height="793"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9nk-cD-WBE">
+                    <rect key="frame" x="20" y="778" width="353" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="hTx-du-O3S"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="selectAllTapped:" destination="-1" eventType="touchUpInside" id="3pi-5u-foG"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="9nk-cD-WBE" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="37y-vI-B8K"/>
+                <constraint firstItem="9nk-cD-WBE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="CEH-8V-9jx"/>
+                <constraint firstItem="ucw-bq-6Ol" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Cv7-u2-ygf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9nk-cD-WBE" secondAttribute="trailing" constant="20" id="gqv-RR-dpq"/>
+                <constraint firstItem="ucw-bq-6Ol" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="kJs-b4-xAi"/>
+                <constraint firstAttribute="bottom" secondItem="ucw-bq-6Ol" secondAttribute="bottom" id="tUn-8f-WcI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ucw-bq-6Ol" secondAttribute="trailing" id="yX1-o5-AaG"/>
+            </constraints>
+            <point key="canvasLocation" x="-16.030534351145036" y="-11.267605633802818"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
