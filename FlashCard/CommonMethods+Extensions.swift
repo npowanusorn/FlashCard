@@ -85,6 +85,25 @@ extension UIColor {
     }
 }
 
+extension Array {
+    func randomElement(count: Int) -> [Self.Element]? {
+        guard count <= self.count else { return [Self.Element]() }
+        if count == self.count { return self }
+        var randIdx = [Int]()
+        while randIdx.count < count {
+            let rand = Int.random(in: 0..<self.count)
+            if !randIdx.contains(rand) {
+                randIdx.append(rand)
+            }
+        }
+        var arr = [Self.Element]()
+        for i in randIdx {
+            arr.append(self[i])
+        }
+        return arr
+    }
+}
+
 extension Array<String> {
     func countStringContainingOccurrences(_ elem: String) -> Int {
         var count = 0

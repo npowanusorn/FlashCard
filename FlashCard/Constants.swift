@@ -13,6 +13,8 @@ enum K {
         static let chapterNameArrayAppend = "-keys"
         static let isShuffled = "isShuffled"
         static let isAutoSpeak = "isAutoSpeak"
+        static let isMcq = "isMcq"
+        static let chaptersList = "chaptersList"
     }
     
     enum CellIDs {

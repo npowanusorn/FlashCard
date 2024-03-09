@@ -7,12 +7,17 @@
 
 import Foundation
 
-struct Chapter: Codable {
+struct Chapter: Codable, Equatable {
     var title: String
     var wordList: [WordList]
 }
 
-struct WordList: Codable {
+struct WordList: Codable, Equatable {
     var korDef: String
     var enDef: String
+    var syn: String
+    var ant: String
+    var korExSe: String
+    var enExSe: String
+    var descr: String
 }
