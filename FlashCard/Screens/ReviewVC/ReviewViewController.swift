@@ -24,15 +24,22 @@ class ReviewViewController: UIViewController {
     let defaults = UserDefaults.standard
     var isShuffled = false
     var isAutoSpeak = false
-    var wordsDict = [String:String]()
-    var keysArray = [String]()
-    let selectedChapters: [String]
-    var shuffledArray = [String]()
-    var prevItemsStack = Stack()
+//    var wordsDict = [String:String]()
+//    var keysArray = [String]()
+//    let dict: [String:[String: String]]
+    let selectedChapters: [Chapter]
+    var tupleArray: [(kor: String, en: String)] = []
+    var shuffledTupleArray: [(kor: String, en: String)] = []
+//    var shuffledArray = [String]()
+//    var prevItemsStack = Stack()
     let synthesizer = AVSpeechSynthesizer()
     var currentIdx = 0
     var totalCount: Int {
-        return keysArray.count
+        var count = 0
+        for selectedChapter in selectedChapters {
+            count += selectedChapter.wordList.count
+        }
+        return count
     }
     
     var progressLabelText: String {
@@ -67,9 +74,11 @@ class ReviewViewController: UIViewController {
         if selectedChapters.isEmpty {
             fatalError()
         }
-        initializeArrayAndDict()
+
         self.navigationItem.largeTitleDisplayMode = .never
-        shuffledArray = keysArray.shuffled()
+        for selectedChapter in selectedChapters {
+            tupleArray += selectedChapter.getTuple()
+        }
         isShuffled = defaults.bool(forKey: K.Defaults.isShuffled)
         isAutoSpeak = defaults.bool(forKey: K.Defaults.isAutoSpeak)
         
@@ -124,31 +133,33 @@ class ReviewViewController: UIViewController {
     @IBAction func repeatPressed(_ sender: Any) {
         reset()
     }
-    
-    func initializeArrayAndDict() {
-        for chapter in selectedChapters {
-            let arr = defaults.array(forKey: chapter + K.Defaults.chapterNameArrayAppend) as! [String]
-            let dict = defaults.object(forKey: chapter) as! [String:String]
-            for key in arr {
-                let dupKey = key + String(
-                    repeating: K.Texts.dup,
-                    count: keysArray.countStringContainingOccurrences(key)
-                )
-                keysArray.append(dupKey)
-                wordsDict[dupKey] = dict[key]
-            }
-        }
-    }
+        
+//    func initializeArrayAndDict() {
+//        for chapter in selectedChapters {
+//            let arr = defaults.array(forKey: chapter + K.Defaults.chapterNameArrayAppend) as! [String]
+//            let dict = defaults.object(forKey: chapter) as! [String:String]
+//            for key in arr {
+//                let dupKey = key + String(
+//                    repeating: K.Texts.dup,
+//                    count: keysArray.countStringContainingOccurrences(key)
+//                )
+//                keysArray.append(dupKey)
+//                wordsDict[dupKey] = dict[key]
+//            }
+//        }
+//    }
     
     func updateButtonsIfNeeded() {
-        nextBtn.isEnabled = !(currentIdx + 1 == keysArray.count)
+        nextBtn.isEnabled = !(currentIdx + 1 == tupleArray.count)
         prevBtn.isEnabled = !(currentIdx == 0)
     }
     
     func setLabelsWithValues() {
-        let key = isShuffled ? shuffledArray[currentIdx] : keysArray[currentIdx]
-        topLabelText = key.replacingOccurrences(of: K.Texts.dup, with: "")
-        bottomLabelText = wordsDict[key]!
+        let currentTuple = isShuffled ? shuffledTupleArray[currentIdx] : tupleArray[currentIdx]
+        topLabelText = currentTuple.kor
+        bottomLabelText = currentTuple.en
+//        topLabelText = key.replacingOccurrences(of: K.Texts.dup, with: "")
+//        bottomLabelText = wordsDict[key]!
         progressLabelText = "\(currentIdx + 1)/\(totalCount)"
         if selectedSegment == 1 {
             bottomLabel.alpha = 0
@@ -207,7 +218,7 @@ class ReviewViewController: UIViewController {
     }
     
     func reset() {
-        shuffledArray = self.keysArray.shuffled()
+        shuffledTupleArray = self.tupleArray.shuffled()
         currentIdx = 0
         updateButtonsIfNeeded()
         setLabelsWithValues()

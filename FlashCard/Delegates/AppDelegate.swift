@@ -6,14 +6,27 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseAuth
+import FirebaseFirestore
+import SwiftyBeaver
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    let log = SwiftyBeaver.self
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        FirebaseApp.configure()
+        _ = Firestore.firestore()
+        
+        AppCache.shared.isSignInTapped = nil
+        
+        let console = ConsoleDestination()
+        console.format = "$DHH:mm:ss$d $C$L$c $N.$F:$l - $M"
+        log.addDestination(console)
+        
         return true
     }
 

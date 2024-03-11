@@ -21,8 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.makeKeyAndVisible()
-        let homeVC = HomeViewController()
-        let navVC = UINavigationController(rootViewController: homeVC)
+//        let welcomeVC = WelcomeViewController()
+//        let homeVC = HomeViewController()
+        let splashVC = SplashViewController()
+        let navVC = UINavigationController(rootViewController: splashVC)
         navVC.navigationBar.prefersLargeTitles = true
         window?.rootViewController = navVC
 //        let homeVC = HViewController()

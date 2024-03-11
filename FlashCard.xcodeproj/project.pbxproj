@@ -10,6 +10,22 @@
 		502F20442B99694B001053D8 /* SCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502F20432B99694B001053D8 /* SCView.swift */; };
 		502F20482B998EFE001053D8 /* SelectChaptersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 502F20472B998EFE001053D8 /* SelectChaptersViewController.xib */; };
 		502F20492B998EFE001053D8 /* SelectChaptersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502F20462B998EFE001053D8 /* SelectChaptersViewController.swift */; };
+		50A9ED8E2B9E424400F1DBB1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50A9ED8D2B9E424300F1DBB1 /* GoogleService-Info.plist */; };
+		50A9ED912B9E426C00F1DBB1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9ED902B9E426C00F1DBB1 /* FirebaseAuth */; };
+		50A9ED932B9E426C00F1DBB1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9ED922B9E426C00F1DBB1 /* FirebaseFirestore */; };
+		50A9ED962B9E43A800F1DBB1 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9ED942B9E43A800F1DBB1 /* WelcomeViewController.swift */; };
+		50A9ED972B9E43A800F1DBB1 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A9ED952B9E43A800F1DBB1 /* WelcomeViewController.xib */; };
+		50A9ED9A2B9E43B300F1DBB1 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9ED982B9E43B300F1DBB1 /* SplashViewController.swift */; };
+		50A9ED9B2B9E43B300F1DBB1 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A9ED992B9E43B300F1DBB1 /* SplashViewController.xib */; };
+		50A9ED9E2B9E43C500F1DBB1 /* SignUpSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9ED9C2B9E43C500F1DBB1 /* SignUpSignInViewController.swift */; };
+		50A9ED9F2B9E43C500F1DBB1 /* SignUpSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A9ED9D2B9E43C500F1DBB1 /* SignUpSignInViewController.xib */; };
+		50A9EDA42B9E492500F1DBB1 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9EDA32B9E492500F1DBB1 /* FirebaseManager.swift */; };
+		50A9EDA72B9E498900F1DBB1 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9EDA62B9E498900F1DBB1 /* KeychainSwift */; };
+		50A9EDAA2B9E4A5B00F1DBB1 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9EDA92B9E4A5B00F1DBB1 /* SwiftyBeaver */; };
+		50A9EDAC2B9E4FAA00F1DBB1 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9EDAB2B9E4FAA00F1DBB1 /* TextFields.swift */; };
+		50A9EDAE2B9E532400F1DBB1 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9EDAD2B9E532400F1DBB1 /* Validator.swift */; };
+		50A9EDB02B9E8B2800F1DBB1 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9EDAF2B9E8B2800F1DBB1 /* Buttons.swift */; };
+		50A9EDB32B9E9CC100F1DBB1 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9EDB22B9E9CC100F1DBB1 /* ProgressHUD */; };
 		50C125B02B983FC900BC57B6 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C125AE2B983FC900BC57B6 /* ReviewViewController.swift */; };
 		50C125B12B983FC900BC57B6 /* ReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50C125AF2B983FC900BC57B6 /* ReviewViewController.xib */; };
 		50C125B42B98441700BC57B6 /* RoundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C125B32B98441700BC57B6 /* RoundShadowView.swift */; };
@@ -23,7 +39,7 @@
 		50F354A92B979202003AEBE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50F354A72B979202003AEBE1 /* LaunchScreen.storyboard */; };
 		50F354B62B979635003AEBE1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F354B42B979635003AEBE1 /* HomeViewController.swift */; };
 		50F354B72B979635003AEBE1 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50F354B52B979635003AEBE1 /* HomeViewController.xib */; };
-		50F354BD2B979FAC003AEBE1 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F354BC2B979FAC003AEBE1 /* JSON.swift */; };
+		50F354BD2B979FAC003AEBE1 /* Chapter+WordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F354BC2B979FAC003AEBE1 /* Chapter+WordList.swift */; };
 		50F354C42B97DD4A003AEBE1 /* WordsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F354C22B97DD4A003AEBE1 /* WordsListViewController.swift */; };
 		50F354C52B97DD4A003AEBE1 /* WordsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50F354C32B97DD4A003AEBE1 /* WordsListViewController.xib */; };
 		50F354ED2B98009D003AEBE1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F354EC2B98009D003AEBE1 /* Constants.swift */; };
@@ -34,6 +50,17 @@
 		502F20432B99694B001053D8 /* SCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCView.swift; sourceTree = "<group>"; };
 		502F20462B998EFE001053D8 /* SelectChaptersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChaptersViewController.swift; sourceTree = "<group>"; };
 		502F20472B998EFE001053D8 /* SelectChaptersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectChaptersViewController.xib; sourceTree = "<group>"; };
+		50A9ED8D2B9E424300F1DBB1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		50A9ED942B9E43A800F1DBB1 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		50A9ED952B9E43A800F1DBB1 /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
+		50A9ED982B9E43B300F1DBB1 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		50A9ED992B9E43B300F1DBB1 /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
+		50A9ED9C2B9E43C500F1DBB1 /* SignUpSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSignInViewController.swift; sourceTree = "<group>"; };
+		50A9ED9D2B9E43C500F1DBB1 /* SignUpSignInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpSignInViewController.xib; sourceTree = "<group>"; };
+		50A9EDA32B9E492500F1DBB1 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		50A9EDAB2B9E4FAA00F1DBB1 /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
+		50A9EDAD2B9E532400F1DBB1 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		50A9EDAF2B9E8B2800F1DBB1 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		50C125AE2B983FC900BC57B6 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		50C125AF2B983FC900BC57B6 /* ReviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewViewController.xib; sourceTree = "<group>"; };
 		50C125B32B98441700BC57B6 /* RoundShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundShadowView.swift; sourceTree = "<group>"; };
@@ -49,7 +76,7 @@
 		50F354AA2B979202003AEBE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50F354B42B979635003AEBE1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		50F354B52B979635003AEBE1 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
-		50F354BC2B979FAC003AEBE1 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		50F354BC2B979FAC003AEBE1 /* Chapter+WordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chapter+WordList.swift"; sourceTree = "<group>"; };
 		50F354C22B97DD4A003AEBE1 /* WordsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsListViewController.swift; sourceTree = "<group>"; };
 		50F354C32B97DD4A003AEBE1 /* WordsListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordsListViewController.xib; sourceTree = "<group>"; };
 		50F354EC2B98009D003AEBE1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -61,17 +88,51 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50A9EDB32B9E9CC100F1DBB1 /* ProgressHUD in Frameworks */,
+				50A9EDA72B9E498900F1DBB1 /* KeychainSwift in Frameworks */,
+				50A9ED912B9E426C00F1DBB1 /* FirebaseAuth in Frameworks */,
+				50A9ED932B9E426C00F1DBB1 /* FirebaseFirestore in Frameworks */,
+				50A9EDAA2B9E4A5B00F1DBB1 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		50A9EDA02B9E43CF00F1DBB1 /* SignUpSignInVC */ = {
+			isa = PBXGroup;
+			children = (
+				50A9ED9C2B9E43C500F1DBB1 /* SignUpSignInViewController.swift */,
+				50A9ED9D2B9E43C500F1DBB1 /* SignUpSignInViewController.xib */,
+			);
+			path = SignUpSignInVC;
+			sourceTree = "<group>";
+		};
+		50A9EDA12B9E43D700F1DBB1 /* WelcomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				50A9ED942B9E43A800F1DBB1 /* WelcomeViewController.swift */,
+				50A9ED952B9E43A800F1DBB1 /* WelcomeViewController.xib */,
+			);
+			path = WelcomeVC;
+			sourceTree = "<group>";
+		};
+		50A9EDA22B9E43DD00F1DBB1 /* SplashVC */ = {
+			isa = PBXGroup;
+			children = (
+				50A9ED982B9E43B300F1DBB1 /* SplashViewController.swift */,
+				50A9ED992B9E43B300F1DBB1 /* SplashViewController.xib */,
+			);
+			path = SplashVC;
+			sourceTree = "<group>";
+		};
 		50C125B22B9843FC00BC57B6 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				50C125B32B98441700BC57B6 /* RoundShadowView.swift */,
 				502F20432B99694B001053D8 /* SCView.swift */,
+				50A9EDAB2B9E4FAA00F1DBB1 /* TextFields.swift */,
+				50A9EDAF2B9E8B2800F1DBB1 /* Buttons.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -164,10 +225,13 @@
 				50C125B72B98529500BC57B6 /* Data */,
 				50E7FFAA2B9D6462009745C7 /* Delegates */,
 				50F354AA2B979202003AEBE1 /* Info.plist */,
-				50F354BC2B979FAC003AEBE1 /* JSON.swift */,
+				50A9ED8D2B9E424300F1DBB1 /* GoogleService-Info.plist */,
+				50F354BC2B979FAC003AEBE1 /* Chapter+WordList.swift */,
 				50F354A72B979202003AEBE1 /* LaunchScreen.storyboard */,
 				50F354F22B981F19003AEBE1 /* Screens */,
 				50C125B22B9843FC00BC57B6 /* View */,
+				50A9EDA32B9E492500F1DBB1 /* FirebaseManager.swift */,
+				50A9EDAD2B9E532400F1DBB1 /* Validator.swift */,
 			);
 			path = FlashCard;
 			sourceTree = "<group>";
@@ -179,6 +243,9 @@
 				50E7FFAF2B9D6488009745C7 /* QuizVC */,
 				50E7FFAB2B9D646E009745C7 /* ReviewVC */,
 				50E7FFAE2B9D6481009745C7 /* SelectChaptersVC */,
+				50A9EDA02B9E43CF00F1DBB1 /* SignUpSignInVC */,
+				50A9EDA22B9E43DD00F1DBB1 /* SplashVC */,
+				50A9EDA12B9E43D700F1DBB1 /* WelcomeVC */,
 				50E7FFAD2B9D647C009745C7 /* WordsListVC */,
 			);
 			path = Screens;
@@ -200,6 +267,13 @@
 			dependencies = (
 			);
 			name = FlashCard;
+			packageProductDependencies = (
+				50A9ED902B9E426C00F1DBB1 /* FirebaseAuth */,
+				50A9ED922B9E426C00F1DBB1 /* FirebaseFirestore */,
+				50A9EDA62B9E498900F1DBB1 /* KeychainSwift */,
+				50A9EDA92B9E4A5B00F1DBB1 /* SwiftyBeaver */,
+				50A9EDB22B9E9CC100F1DBB1 /* ProgressHUD */,
+			);
 			productName = flashcard;
 			productReference = 50F354992B979201003AEBE1 /* FlashCard.app */;
 			productType = "com.apple.product-type.application";
@@ -228,6 +302,12 @@
 				Base,
 			);
 			mainGroup = 50F354902B979201003AEBE1;
+			packageReferences = (
+				50A9ED8F2B9E426C00F1DBB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				50A9EDA52B9E498900F1DBB1 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				50A9EDA82B9E4A5B00F1DBB1 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
+				50A9EDB12B9E9CC100F1DBB1 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
+			);
 			productRefGroup = 50F3549A2B979201003AEBE1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -243,7 +323,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				50F354C52B97DD4A003AEBE1 /* WordsListViewController.xib in Resources */,
+				50A9ED8E2B9E424400F1DBB1 /* GoogleService-Info.plist in Resources */,
+				50A9ED972B9E43A800F1DBB1 /* WelcomeViewController.xib in Resources */,
+				50A9ED9B2B9E43B300F1DBB1 /* SplashViewController.xib in Resources */,
 				50F354A92B979202003AEBE1 /* LaunchScreen.storyboard in Resources */,
+				50A9ED9F2B9E43C500F1DBB1 /* SignUpSignInViewController.xib in Resources */,
 				502F20482B998EFE001053D8 /* SelectChaptersViewController.xib in Resources */,
 				50C125B12B983FC900BC57B6 /* ReviewViewController.xib in Resources */,
 				50E7FF5E2B9A7797009745C7 /* QuizViewController.xib in Resources */,
@@ -260,19 +344,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				50C125B62B984DBD00BC57B6 /* AppCache.swift in Sources */,
+				50A9EDA42B9E492500F1DBB1 /* FirebaseManager.swift in Sources */,
+				50A9ED9E2B9E43C500F1DBB1 /* SignUpSignInViewController.swift in Sources */,
 				50E7FF5F2B9A7797009745C7 /* QuizViewController.swift in Sources */,
 				502F20492B998EFE001053D8 /* SelectChaptersViewController.swift in Sources */,
+				50A9EDB02B9E8B2800F1DBB1 /* Buttons.swift in Sources */,
 				50F354C42B97DD4A003AEBE1 /* WordsListViewController.swift in Sources */,
 				50F354EF2B980695003AEBE1 /* CommonMethods+Extensions.swift in Sources */,
 				50F3549D2B979201003AEBE1 /* AppDelegate.swift in Sources */,
+				50A9EDAC2B9E4FAA00F1DBB1 /* TextFields.swift in Sources */,
+				50A9ED962B9E43A800F1DBB1 /* WelcomeViewController.swift in Sources */,
 				502F20442B99694B001053D8 /* SCView.swift in Sources */,
 				50F3549F2B979201003AEBE1 /* SceneDelegate.swift in Sources */,
+				50A9EDAE2B9E532400F1DBB1 /* Validator.swift in Sources */,
 				50C125B92B9852A100BC57B6 /* Stack.swift in Sources */,
 				50F354ED2B98009D003AEBE1 /* Constants.swift in Sources */,
 				50C125B42B98441700BC57B6 /* RoundShadowView.swift in Sources */,
 				50F354B62B979635003AEBE1 /* HomeViewController.swift in Sources */,
 				50C125B02B983FC900BC57B6 /* ReviewViewController.swift in Sources */,
-				50F354BD2B979FAC003AEBE1 /* JSON.swift in Sources */,
+				50F354BD2B979FAC003AEBE1 /* Chapter+WordList.swift in Sources */,
+				50A9ED9A2B9E43B300F1DBB1 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +576,69 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		50A9ED8F2B9E426C00F1DBB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.22.1;
+			};
+		};
+		50A9EDA52B9E498900F1DBB1 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 21.0.0;
+			};
+		};
+		50A9EDA82B9E4A5B00F1DBB1 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		50A9EDB12B9E9CC100F1DBB1 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/relatedcode/ProgressHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		50A9ED902B9E426C00F1DBB1 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 50A9ED8F2B9E426C00F1DBB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		50A9ED922B9E426C00F1DBB1 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 50A9ED8F2B9E426C00F1DBB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		50A9EDA62B9E498900F1DBB1 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 50A9EDA52B9E498900F1DBB1 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		50A9EDA92B9E4A5B00F1DBB1 /* SwiftyBeaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 50A9EDA82B9E4A5B00F1DBB1 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			productName = SwiftyBeaver;
+		};
+		50A9EDB22B9E9CC100F1DBB1 /* ProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 50A9EDB12B9E9CC100F1DBB1 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
+			productName = ProgressHUD;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 50F354912B979201003AEBE1 /* Project object */;
 }

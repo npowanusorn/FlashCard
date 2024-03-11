@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import SwiftyBeaver
+
+public var Log = SwiftyBeaver.self
 
 enum K {
     enum Defaults {
@@ -15,6 +18,7 @@ enum K {
         static let isAutoSpeak = "isAutoSpeak"
         static let isMcq = "isMcq"
         static let chaptersList = "chaptersList"
+        static let rememberMe = "rememberMe"
     }
     
     enum CellIDs {
@@ -41,6 +45,7 @@ enum K {
         static let shuffle = "Shuffle"
         static let isAutoSpeak = "Auto Speak"
         static let dup = "-dup"
+        static let settings = "Settings"
     }
     
     enum Language {
@@ -55,10 +60,36 @@ enum K {
         static let speakerFilled = "speaker.wave.2.circle.fill"
         static let speaker = "speaker.wave.2"
         static let ellipsis = "ellipsis.circle"
+        static let gear = "gear"
     }
     
     enum Notifications {
         static let selectedChapters = Notification.Name("selectedChapters")
+    }
+    
+    enum Keychain {
+        static let password = "password"
+        static let email = "email"
+    }
+    
+    enum FirestoreKeys {
+        enum CollectionKeys {
+            static let users = "users"
+            static let chapters = "chapters"
+            static let wordList = "wordList"
+        }
+        
+        enum FieldKeys {
+            static let title = "title"
+            static let korDef = "korDef"
+            static let enDef = "enDef"
+            static let syn = "syn"
+            static let ant = "ant"
+            static let korExSe = "korExSe"
+            static let enExSe = "enExSe"
+            static let descr = "descr"
+            static let id = "id"
+        }
     }
     
     static let fadeDuration = 0.1

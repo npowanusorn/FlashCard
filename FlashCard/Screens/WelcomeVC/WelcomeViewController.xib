@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WelcomeViewController" customModule="FlashCard" customModuleProvider="target">
+            <connections>
+                <outlet property="createAccountButton" destination="ISQ-vY-EeJ" id="5nO-dV-IeG"/>
+                <outlet property="emailButton" destination="d1G-iY-jQy" id="ggl-hx-8cv"/>
+                <outlet property="googleButton" destination="NZ6-pd-rVw" id="ffx-fp-pyA"/>
+                <outlet property="headerLabel" destination="Ubs-gV-RSA" id="hgF-E4-qxd"/>
+                <outlet property="optionsView" destination="wpY-Xw-n2l" id="cku-Pw-3zj"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FlashCard" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ubs-gV-RSA">
+                    <rect key="frame" x="83.666666666666671" y="397.33333333333331" width="225.66666666666663" height="57.333333333333314"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpY-Xw-n2l">
+                    <rect key="frame" x="40" y="478" width="313" height="220"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGA-Ju-yJr">
+                            <rect key="frame" x="0.0" y="120" width="313" height="50"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wod-r7-YpB">
+                                    <rect key="frame" x="150.33333333333334" y="17" width="12.666666666666657" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k8f-8j-45D">
+                                    <rect key="frame" x="0.0" y="25.666666666666629" width="140.33333333333334" height="1"/>
+                                    <color key="backgroundColor" systemColor="placeholderTextColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="ghn-5V-lDe"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRZ-Ae-rJX">
+                                    <rect key="frame" x="173" y="25.666666666666629" width="140" height="1"/>
+                                    <color key="backgroundColor" systemColor="placeholderTextColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="4DV-lL-K8w"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="wod-r7-YpB" firstAttribute="centerX" secondItem="OGA-Ju-yJr" secondAttribute="centerX" id="124-uq-VCW"/>
+                                <constraint firstItem="k8f-8j-45D" firstAttribute="centerY" secondItem="wod-r7-YpB" secondAttribute="centerY" constant="1" id="9Hc-xH-1lz"/>
+                                <constraint firstItem="hRZ-Ae-rJX" firstAttribute="centerY" secondItem="wod-r7-YpB" secondAttribute="centerY" constant="1" id="DhQ-dy-7Uh"/>
+                                <constraint firstAttribute="height" constant="50" id="RMT-QZ-Yty"/>
+                                <constraint firstItem="wod-r7-YpB" firstAttribute="centerY" secondItem="OGA-Ju-yJr" secondAttribute="centerY" id="TAZ-wd-mr5"/>
+                                <constraint firstItem="hRZ-Ae-rJX" firstAttribute="leading" secondItem="wod-r7-YpB" secondAttribute="trailing" constant="10" id="aDR-RU-clm"/>
+                                <constraint firstAttribute="trailing" secondItem="hRZ-Ae-rJX" secondAttribute="trailing" id="gIv-y2-BSY"/>
+                                <constraint firstItem="wod-r7-YpB" firstAttribute="leading" secondItem="k8f-8j-45D" secondAttribute="trailing" constant="10" id="gcK-fN-hoF"/>
+                                <constraint firstItem="k8f-8j-45D" firstAttribute="leading" secondItem="OGA-Ju-yJr" secondAttribute="leading" id="xvv-6c-yIw"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NZ6-pd-rVw" customClass="BounceButton" customModule="FlashCard" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="313" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="Xeo-QU-4aw"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Sign in with Google" cornerStyle="large">
+                                <backgroundConfiguration key="background">
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="strokeColor" systemColor="placeholderTextColor"/>
+                                </backgroundConfiguration>
+                                <fontDescription key="titleFontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="baseForegroundColor" systemColor="labelColor"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="signInWithGoogleTapped:" destination="-1" eventType="touchUpInside" id="h3n-MC-oN3"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1G-iY-jQy" customClass="BounceButton" customModule="FlashCard" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="70" width="313" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="Q4u-Ra-x7l"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Sign in with email" cornerStyle="large">
+                                <backgroundConfiguration key="background">
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="strokeColor" systemColor="placeholderTextColor"/>
+                                </backgroundConfiguration>
+                                <fontDescription key="titleFontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="baseForegroundColor" systemColor="labelColor"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="signInTapped:" destination="-1" eventType="touchUpInside" id="wbK-oU-3ct"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISQ-vY-EeJ" customClass="BounceButton" customModule="FlashCard" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="170" width="313" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="xVI-Ij-hjq"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Create Account" cornerStyle="large">
+                                <fontDescription key="titleFontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="baseBackgroundColor" systemColor="labelColor"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="signUpTapped:" destination="-1" eventType="touchUpInside" id="LtD-Cb-6vw"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="NZ6-pd-rVw" firstAttribute="leading" secondItem="wpY-Xw-n2l" secondAttribute="leading" id="0y3-og-nAG"/>
+                        <constraint firstItem="ISQ-vY-EeJ" firstAttribute="top" secondItem="OGA-Ju-yJr" secondAttribute="bottom" id="1lc-bl-KAm"/>
+                        <constraint firstAttribute="trailing" secondItem="NZ6-pd-rVw" secondAttribute="trailing" id="20w-uP-Opj"/>
+                        <constraint firstItem="ISQ-vY-EeJ" firstAttribute="leading" secondItem="wpY-Xw-n2l" secondAttribute="leading" id="9uw-hZ-DTw"/>
+                        <constraint firstItem="OGA-Ju-yJr" firstAttribute="top" secondItem="d1G-iY-jQy" secondAttribute="bottom" id="QTr-Nx-0tI"/>
+                        <constraint firstItem="d1G-iY-jQy" firstAttribute="leading" secondItem="wpY-Xw-n2l" secondAttribute="leading" id="ZmA-Hh-si0"/>
+                        <constraint firstAttribute="trailing" secondItem="OGA-Ju-yJr" secondAttribute="trailing" id="ewS-0x-eZ4"/>
+                        <constraint firstAttribute="trailing" secondItem="d1G-iY-jQy" secondAttribute="trailing" id="l8S-uq-QK7"/>
+                        <constraint firstItem="OGA-Ju-yJr" firstAttribute="leading" secondItem="wpY-Xw-n2l" secondAttribute="leading" id="m1p-fH-ka5"/>
+                        <constraint firstItem="d1G-iY-jQy" firstAttribute="top" secondItem="NZ6-pd-rVw" secondAttribute="bottom" constant="20" id="mgK-uV-j7o"/>
+                        <constraint firstAttribute="trailing" secondItem="ISQ-vY-EeJ" secondAttribute="trailing" id="otq-d0-7FH"/>
+                        <constraint firstItem="NZ6-pd-rVw" firstAttribute="top" secondItem="wpY-Xw-n2l" secondAttribute="top" id="sEJ-k9-onZ"/>
+                        <constraint firstAttribute="bottom" secondItem="ISQ-vY-EeJ" secondAttribute="bottom" id="yVA-VJ-Cp1"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="Ubs-gV-RSA" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0Uw-KW-yKy"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="wpY-Xw-n2l" secondAttribute="bottom" constant="120" id="DJF-1k-FlI"/>
+                <constraint firstItem="Ubs-gV-RSA" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="FhQ-z7-u7K"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wpY-Xw-n2l" secondAttribute="trailing" constant="40" id="T83-36-Sd4"/>
+                <constraint firstItem="wpY-Xw-n2l" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="rhs-Pz-rV9"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="-11"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="placeholderTextColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

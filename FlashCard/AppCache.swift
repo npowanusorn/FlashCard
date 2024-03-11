@@ -10,9 +10,10 @@ import Foundation
 class AppCache {
     static let shared = AppCache()
     
-    var selectedChapters = [String]()
+    var selectedChapters = [Chapter]()
     var dictForSelectedChapter = [String:String]()
     var keyArrayForSelectedChapter = [String]()
     var allChapters = [String]()
-    var reviewQuizSelectedChapters = [String]()
+    var reviewQuizSelectedChapters = [Chapter]()
+    var isSignInTapped: Bool?
 }

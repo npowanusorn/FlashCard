@@ -12,8 +12,8 @@ class SelectChaptersViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectAllBtn: UIButton!
     
-    var allChapters: [String] = []
-    var selected: [String] = []
+    var allChapters: [Chapter] = []
+    var selected: [Chapter] = []
     var defaults = UserDefaults.standard
     private var buttonState: ButtonState = .selectAll {
         didSet {
@@ -29,7 +29,8 @@ class SelectChaptersViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
         self.navigationItem.rightBarButtonItem?.isEnabled = false
-        allChapters = defaults.array(forKey: K.Defaults.chapterNameList) as! [String]
+        allChapters = ChapterManager.shared.getChapters()
+//        allChapters = defaults.array(forKey: K.Defaults.chapterNameList) as! [String]
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.CellIDs.selectChaptersVCID)
         tableView.delegate = self
         tableView.dataSource = self
@@ -88,7 +89,7 @@ extension SelectChaptersViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIDs.selectChaptersVCID, for: indexPath)
         var content = UIListContentConfiguration.cell()
-        content.text = allChapters[indexPath.row]
+        content.text = allChapters[indexPath.row].title
         cell.contentConfiguration = content
         cell.accessoryType = selected.contains(allChapters[indexPath.row]) ? .checkmark : .none
         return cell

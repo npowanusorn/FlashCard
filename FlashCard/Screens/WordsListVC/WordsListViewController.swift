@@ -10,16 +10,19 @@ import SwiftUI
 
 class WordsListViewController: UIViewController {
 
-    let chapter: String
+    let chapter: Chapter
+    var wordList: [WordList] {
+        chapter.wordList
+    }
     let defaults = UserDefaults.standard
-    var wordsDictArr = [String:String]()
-    var keysForChapter = [String()]
+//    var wordsDictArr = [String:String]()
+//    var keysForChapter = [String()]
     
     @IBOutlet weak var segmentedControl: SCView!
     @IBOutlet weak var tableView: UITableView!
     
     init() {
-        self.chapter = AppCache.shared.selectedChapters.first!
+        chapter = AppCache.shared.selectedChapters.first!
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,19 +32,19 @@ class WordsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = chapter
+        self.title = chapter.title
         self.navigationItem.largeTitleDisplayMode = .never
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.CellIDs.wordsVCID)
-        wordsDictArr = defaults.object(forKey: chapter) as? [String: String] ?? [:]
-        keysForChapter = defaults.array(forKey: chapter + K.Defaults.chapterNameArrayAppend) as? [String] ?? []
+//        wordsDictArr = defaults.object(forKey: chapter) as? [String: String] ?? [:]
+//        keysForChapter = defaults.array(forKey: chapter + K.Defaults.chapterNameArrayAppend) as? [String] ?? []
         setupSegmentedControl()
-        self.navigationItem.rightBarButtonItem?.isEnabled = !keysForChapter.isEmpty
+        self.navigationItem.rightBarButtonItem?.isEnabled = !wordList.isEmpty
         
         let reviewAction = UIAction(title: K.Texts.review) { _ in
-            AppCache.shared.dictForSelectedChapter = self.wordsDictArr
-            AppCache.shared.keyArrayForSelectedChapter = self.keysForChapter
+//            AppCache.shared.dictForSelectedChapter = self.wordsDictArr
+//            AppCache.shared.keyArrayForSelectedChapter = self.keysForChapter
             let reviewVC = ReviewViewController()
             self.navigationController?.pushViewController(reviewVC, animated: true)
         }
@@ -79,7 +82,7 @@ extension WordsListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        "Number of words: \(keysForChapter.count)"
+        "Number of words: \(wordList.count)"
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -91,7 +94,7 @@ extension WordsListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return wordsDictArr.count
+        return wordList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,8 +103,8 @@ extension WordsListViewController: UITableViewDelegate, UITableViewDataSource {
         content.secondaryTextProperties.numberOfLines = 0
         content.secondaryTextProperties.font = UIFont.systemFont(ofSize: UIFont.systemFontSize, weight: .regular)
         content.prefersSideBySideTextAndSecondaryText = true
-        content.text = keysForChapter[indexPath.row]
-        content.secondaryText = wordsDictArr[keysForChapter[indexPath.row]]
+        content.text = wordList[indexPath.row].korDef
+        content.secondaryText = wordList[indexPath.row].enDef
         if segmentedControl.currentIndex == 1 {
             content.secondaryTextProperties.color = UIColor.label.withAlphaComponent(0)
         } else if segmentedControl.currentIndex == 2 {

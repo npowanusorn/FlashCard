@@ -10,7 +10,11 @@ import UniformTypeIdentifiers
 
 class HomeViewController: UITableViewController {
     
-    var list = [String]()
+    var list: [String] {
+        ChapterManager.shared.getChapters().map({ chapter in
+            chapter.title
+        })
+    }
     var filteredList = [String]()
     let defaults = UserDefaults.standard
     let searchController = UISearchController(searchResultsController: nil)
@@ -24,6 +28,7 @@ class HomeViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        Log.info(ChapterManager.shared.getChapters())
         self.title = K.Texts.home
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.CellIDs.homeVCID)
         let action1 = UIAction(title: K.Texts.importFromFile, image: UIImage(systemName: K.Image.importFromFile)) { _ in
@@ -33,20 +38,23 @@ class HomeViewController: UITableViewController {
             print("create")
         }
         let divider = makeMenu(children: [action1, action2])
-        let action3 = UIAction(title: K.Texts.review, image: UIImage(systemName: K.Image.book)) { _ in
+        let reviewAction = UIAction(title: K.Texts.review, image: UIImage(systemName: K.Image.book)) { _ in
             let vc = SelectChaptersViewController()
             let nav = UINavigationController(rootViewController: vc)
             self.present(nav, animated: true)
         }
-        let action4 = UIAction(title: K.Texts.quiz, image: UIImage(systemName: K.Image.book)) { _ in
-            print("quiz")
+        let quizAction = UIAction(title: K.Texts.quiz, image: UIImage(systemName: K.Image.book)) { _ in
+            Log.info("QUIZ")
         }
-        let menu = makeMenu(children: [divider, action3, action4])
+        let divider2 = makeMenu(children: [divider, reviewAction, quizAction])
+        let settingsAction = UIAction(title: K.Texts.settings, image: UIImage(systemName: K.Image.gear)) { _ in
+            self.openSettings()
+        }
+        let menu = makeMenu(children: [divider, divider2, settingsAction])
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: K.Image.ellipsis), menu: menu)
         self.navigationItem.leftBarButtonItem = editButtonItem
         self.navigationItem.largeTitleDisplayMode = .always
-        list = defaults.object(forKey: K.Defaults.chapterNameList) as? [String] ?? [String]()
-        AppCache.shared.allChapters = list
+
         filteredList = list
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -68,6 +76,7 @@ class HomeViewController: UITableViewController {
         let decoder = JSONDecoder()
         if let json = try? decoder.decode(Chapter.self, from: json) {
             if list.contains(json.title) {
+                Log.info("list contains \(json.title)")
                 let alert = UIAlertController(
                     title: K.Texts.error,
                     message: K.Texts.addErrorDuplicate.formatted(string: json.title),
@@ -77,19 +86,21 @@ class HomeViewController: UITableViewController {
                 present(alert, animated: true)
                 return
             }
-            list.append(json.title)
-            list.sort(using: .localizedStandard)
+            ChapterManager.shared.addChapter(chapter: json)
+            FirestoreManager.writeData(newChapter: json)
             
-            defaults.setValue(list, forKey: K.Defaults.chapterNameList)
-            var dict: [String: String] = [:]
-            var keyForChapter = [String]()
-            for word in json.wordList {
-                dict[word.korDef] = word.enDef
-                keyForChapter.append(word.korDef)
-            }
-            defaults.setValue(dict, forKey: json.title)
-            defaults.setValue(keyForChapter, forKey: json.title + K.Defaults.chapterNameArrayAppend)
+//            defaults.setValue(list, forKey: K.Defaults.chapterNameList)
+//            var dict: [String: String] = [:]
+//            var keyForChapter = [String]()
+//            for word in json.wordList {
+//                dict[word.korDef] = word.enDef
+//                keyForChapter.append(word.korDef)
+//            }
+//            defaults.setValue(dict, forKey: json.title)
+//            defaults.setValue(keyForChapter, forKey: json.title + K.Defaults.chapterNameArrayAppend)
             tableView.reloadData()
+        } else {
+            Log.error("Failed to parse json")
         }
     }
     
@@ -108,6 +119,10 @@ class HomeViewController: UITableViewController {
         AppCache.shared.selectedChapters = AppCache.shared.reviewQuizSelectedChapters
         let reviewVC = ReviewViewController()
         self.navigationController?.pushViewController(reviewVC, animated: true)
+    }
+    
+    func openSettings() {
+        Log.info("OPEN SETTINGS")
     }
 }
 
@@ -149,11 +164,11 @@ extension HomeViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIDs.homeVCID, for: indexPath)
         var content = UIListContentConfiguration.cell()
-        if isFiltering {
-            content.text = filteredList[indexPath.row]
-        } else {
-            content.text = list[indexPath.row]
-        }
+        let chapter = isFiltering ? ChapterManager.shared.getChapter(title: filteredList[indexPath.row]) : ChapterManager.shared.getChapter(title: list[indexPath.row])
+        content.text = chapter.title
+        content.secondaryText = String(chapter.wordList.count)
+        content.prefersSideBySideTextAndSecondaryText = true
+        content.secondaryTextProperties.font = UIFont.systemFont(ofSize: UIFont.systemFontSize, weight: .regular)
         cell.contentConfiguration = content
         cell.accessoryType = .disclosureIndicator
         return cell
@@ -162,7 +177,9 @@ extension HomeViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.isSelected = false
-        AppCache.shared.selectedChapters = isFiltering ? [filteredList[indexPath.row]] : [list[indexPath.row]]
+        let chapter = isFiltering ? ChapterManager.shared.getChapter(title: filteredList[indexPath.row]) : ChapterManager.shared.getChapter(title: list[indexPath.row])
+        AppCache.shared.selectedChapters = [chapter]
+//        AppCache.shared.selectedChapters = isFiltering ? [filteredList[indexPath.row]] : [list[indexPath.row]]
         let wordsVC = WordsListViewController()
         self.navigationController?.pushViewController(wordsVC, animated: true)
     }
@@ -172,8 +189,9 @@ extension HomeViewController {
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        list.remove(at: indexPath.row)
-        defaults.set(list, forKey: K.Defaults.chapterNameList)
+        _ = ChapterManager.shared.removeChapter(at: indexPath.row)
+//        list.remove(at: indexPath.row)
+//        defaults.set(list, forKey: K.Defaults.chapterNameList)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
 }
