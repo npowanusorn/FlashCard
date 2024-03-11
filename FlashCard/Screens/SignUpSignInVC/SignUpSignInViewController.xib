@@ -96,7 +96,7 @@
                         <constraint firstAttribute="height" constant="40" id="j4Q-wo-P3v"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES" textContentType="password"/>
                     <connections>
                         <action selector="textFieldDidChange:" destination="-1" eventType="editingChanged" id="0wn-fv-kgP"/>
                     </connections>

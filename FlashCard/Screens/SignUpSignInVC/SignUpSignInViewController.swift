@@ -40,6 +40,9 @@ class SignUpSignInViewController: UIViewController {
             return password == confirmPassword && !password.isEmpty
         }
     }
+    private var isEmailPasswordEmpty: Bool {
+        email.isEmpty || password.isEmpty
+    }
     private var isValidEmail: Bool { Validator.isValidEmail(email) }
     private var isValidPassword: Bool { password.count >= 6 }
     let defaults = UserDefaults.standard
@@ -48,8 +51,29 @@ class SignUpSignInViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        confirmPasswordTextField.delegate = self
     }
-
+    
+    @IBAction func textFieldDidBeginEdit(_ sender: Any) {
+        Log.info("did begin edit")
+        guard let textField = sender as? BaseTextField else { return }
+        if textField == emailTextField {
+            emailTextField.setWhiteBorder()
+            passwordTextField.removeBorder()
+            confirmPasswordTextField.removeBorder()
+        } else if textField == passwordTextField {
+            passwordTextField.setWhiteBorder()
+            emailTextField.removeBorder()
+            confirmPasswordTextField.removeBorder()
+        } else {
+            confirmPasswordTextField.setWhiteBorder()
+            emailTextField.removeBorder()
+            passwordTextField.removeBorder()
+        }
+    }
+    
     @IBAction func textFieldDidChange(_ sender: Any) {
         if !isValidEmail {
             continueButton.isEnabled = false
@@ -113,6 +137,7 @@ class SignUpSignInViewController: UIViewController {
         if isSignIn {
             validationLabelToTextFieldConstraint.constant -= confirmPasswordView.frame.height
             rememberMeViewToConfirmViewConstraint.constant -= confirmPasswordView.frame.height
+            passwordTextField.returnKeyType = .done
         }
     }
     
@@ -131,6 +156,7 @@ class SignUpSignInViewController: UIViewController {
     
     func handleCreateUser() {
         ProgressHUD.animationType = .horizontalDotScaling
+        ProgressHUD.colorHUD = .systemGroupedBackground
         ProgressHUD.animate()
         Task {
             let success = await AuthManager.createUser(email: email, password: password, viewController: self)
@@ -141,5 +167,41 @@ class SignUpSignInViewController: UIViewController {
             }
             ProgressHUD.dismiss()
         }
+    }
+}
+
+extension SignUpSignInViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField {
+            passwordTextField.becomeFirstResponder()
+            return false
+        } else if textField == passwordTextField {
+            if isSignIn {
+                if !isEmailPasswordEmpty {
+                    continueTapped(textField)
+                    return true
+                }
+                return false
+            } else {
+                confirmPasswordTextField.becomeFirstResponder()
+                return false
+            }
+        } else {
+            if !isEmailPasswordEmpty && isPasswordMatch {
+                continueTapped(textField)
+                return true
+            }
+        }
+        return false
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        guard let textField = textField as? BaseTextField else { return }
+        textField.setWhiteBorder()
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let textField = textField as? BaseTextField else { return }
+        textField.removeBorder()
     }
 }
