@@ -10,7 +10,6 @@
 		502F20442B99694B001053D8 /* SCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502F20432B99694B001053D8 /* SCView.swift */; };
 		502F20482B998EFE001053D8 /* SelectChaptersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 502F20472B998EFE001053D8 /* SelectChaptersViewController.xib */; };
 		502F20492B998EFE001053D8 /* SelectChaptersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502F20462B998EFE001053D8 /* SelectChaptersViewController.swift */; };
-		50A9ED8E2B9E424400F1DBB1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50A9ED8D2B9E424300F1DBB1 /* GoogleService-Info.plist */; };
 		50A9ED912B9E426C00F1DBB1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9ED902B9E426C00F1DBB1 /* FirebaseAuth */; };
 		50A9ED932B9E426C00F1DBB1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9ED922B9E426C00F1DBB1 /* FirebaseFirestore */; };
 		50A9ED962B9E43A800F1DBB1 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9ED942B9E43A800F1DBB1 /* WelcomeViewController.swift */; };
@@ -26,6 +25,9 @@
 		50A9EDAE2B9E532400F1DBB1 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9EDAD2B9E532400F1DBB1 /* Validator.swift */; };
 		50A9EDB02B9E8B2800F1DBB1 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9EDAF2B9E8B2800F1DBB1 /* Buttons.swift */; };
 		50A9EDB32B9E9CC100F1DBB1 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9EDB22B9E9CC100F1DBB1 /* ProgressHUD */; };
+		50A9EDB82B9F7B9900F1DBB1 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9EDB72B9F7B9900F1DBB1 /* GoogleSignIn */; };
+		50A9EDBA2B9F7B9900F1DBB1 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9EDB92B9F7B9900F1DBB1 /* GoogleSignInSwift */; };
+		50A9EDBC2B9F81C600F1DBB1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50A9EDBB2B9F81C600F1DBB1 /* GoogleService-Info.plist */; };
 		50C125B02B983FC900BC57B6 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C125AE2B983FC900BC57B6 /* ReviewViewController.swift */; };
 		50C125B12B983FC900BC57B6 /* ReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50C125AF2B983FC900BC57B6 /* ReviewViewController.xib */; };
 		50C125B42B98441700BC57B6 /* RoundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C125B32B98441700BC57B6 /* RoundShadowView.swift */; };
@@ -50,7 +52,6 @@
 		502F20432B99694B001053D8 /* SCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCView.swift; sourceTree = "<group>"; };
 		502F20462B998EFE001053D8 /* SelectChaptersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChaptersViewController.swift; sourceTree = "<group>"; };
 		502F20472B998EFE001053D8 /* SelectChaptersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectChaptersViewController.xib; sourceTree = "<group>"; };
-		50A9ED8D2B9E424300F1DBB1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		50A9ED942B9E43A800F1DBB1 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		50A9ED952B9E43A800F1DBB1 /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		50A9ED982B9E43B300F1DBB1 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +62,7 @@
 		50A9EDAB2B9E4FAA00F1DBB1 /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
 		50A9EDAD2B9E532400F1DBB1 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		50A9EDAF2B9E8B2800F1DBB1 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		50A9EDBB2B9F81C600F1DBB1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		50C125AE2B983FC900BC57B6 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		50C125AF2B983FC900BC57B6 /* ReviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewViewController.xib; sourceTree = "<group>"; };
 		50C125B32B98441700BC57B6 /* RoundShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundShadowView.swift; sourceTree = "<group>"; };
@@ -90,9 +92,11 @@
 			files = (
 				50A9EDB32B9E9CC100F1DBB1 /* ProgressHUD in Frameworks */,
 				50A9EDA72B9E498900F1DBB1 /* KeychainSwift in Frameworks */,
+				50A9EDBA2B9F7B9900F1DBB1 /* GoogleSignInSwift in Frameworks */,
 				50A9ED912B9E426C00F1DBB1 /* FirebaseAuth in Frameworks */,
 				50A9ED932B9E426C00F1DBB1 /* FirebaseFirestore in Frameworks */,
 				50A9EDAA2B9E4A5B00F1DBB1 /* SwiftyBeaver in Frameworks */,
+				50A9EDB82B9F7B9900F1DBB1 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,7 +229,7 @@
 				50C125B72B98529500BC57B6 /* Data */,
 				50E7FFAA2B9D6462009745C7 /* Delegates */,
 				50F354AA2B979202003AEBE1 /* Info.plist */,
-				50A9ED8D2B9E424300F1DBB1 /* GoogleService-Info.plist */,
+				50A9EDBB2B9F81C600F1DBB1 /* GoogleService-Info.plist */,
 				50F354BC2B979FAC003AEBE1 /* Chapter+WordList.swift */,
 				50F354A72B979202003AEBE1 /* LaunchScreen.storyboard */,
 				50F354F22B981F19003AEBE1 /* Screens */,
@@ -273,6 +277,8 @@
 				50A9EDA62B9E498900F1DBB1 /* KeychainSwift */,
 				50A9EDA92B9E4A5B00F1DBB1 /* SwiftyBeaver */,
 				50A9EDB22B9E9CC100F1DBB1 /* ProgressHUD */,
+				50A9EDB72B9F7B9900F1DBB1 /* GoogleSignIn */,
+				50A9EDB92B9F7B9900F1DBB1 /* GoogleSignInSwift */,
 			);
 			productName = flashcard;
 			productReference = 50F354992B979201003AEBE1 /* FlashCard.app */;
@@ -307,6 +313,7 @@
 				50A9EDA52B9E498900F1DBB1 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				50A9EDA82B9E4A5B00F1DBB1 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				50A9EDB12B9E9CC100F1DBB1 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
+				50A9EDB62B9F7B9900F1DBB1 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 50F3549A2B979201003AEBE1 /* Products */;
 			projectDirPath = "";
@@ -323,7 +330,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				50F354C52B97DD4A003AEBE1 /* WordsListViewController.xib in Resources */,
-				50A9ED8E2B9E424400F1DBB1 /* GoogleService-Info.plist in Resources */,
 				50A9ED972B9E43A800F1DBB1 /* WelcomeViewController.xib in Resources */,
 				50A9ED9B2B9E43B300F1DBB1 /* SplashViewController.xib in Resources */,
 				50F354A92B979202003AEBE1 /* LaunchScreen.storyboard in Resources */,
@@ -331,6 +337,7 @@
 				502F20482B998EFE001053D8 /* SelectChaptersViewController.xib in Resources */,
 				50C125B12B983FC900BC57B6 /* ReviewViewController.xib in Resources */,
 				50E7FF5E2B9A7797009745C7 /* QuizViewController.xib in Resources */,
+				50A9EDBC2B9F81C600F1DBB1 /* GoogleService-Info.plist in Resources */,
 				50F354A62B979202003AEBE1 /* Assets.xcassets in Resources */,
 				50F354B72B979635003AEBE1 /* HomeViewController.xib in Resources */,
 			);
@@ -610,6 +617,14 @@
 				minimumVersion = 14.1.1;
 			};
 		};
+		50A9EDB62B9F7B9900F1DBB1 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -637,6 +652,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 50A9EDB12B9E9CC100F1DBB1 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
 			productName = ProgressHUD;
+		};
+		50A9EDB72B9F7B9900F1DBB1 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 50A9EDB62B9F7B9900F1DBB1 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		50A9EDB92B9F7B9900F1DBB1 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 50A9EDB62B9F7B9900F1DBB1 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

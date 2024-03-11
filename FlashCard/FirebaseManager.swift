@@ -14,6 +14,20 @@ import SwiftyBeaver
 
 // MARK: - AuthManager
 class AuthManager {
+    static func signIn(with credentials: AuthCredential, viewController: UIViewController? = nil) async -> Bool {
+        do {
+            let keychain = KeychainSwift()
+            Log.info("SIGNING IN WITH CREDENTIALS")
+            try await Auth.auth().signIn(with: credentials)
+            Log.info("SIGNED IN WITH CREDENTIALS")
+            return true
+        } catch let error as NSError {
+            Log.error("ERROR SIGNING IN: \(error.localizedDescription)")
+            if let vc = viewController { FirebaseErrorManager.handleError(error: error, viewController: vc) }
+            return false
+        }
+    }
+    
     static func signIn(email: String, password: String, viewController: UIViewController? = nil) async -> Bool {
         do {
             let keychain = KeychainSwift()
@@ -113,7 +127,7 @@ class FirestoreManager {
         }
     }
     
-    static func writeData(newChapter: Chapter) {
+    static func writeData(newChapter: Chapter) async {
         guard let currentUser = Auth.auth().currentUser else { return }
         let db = Firestore.firestore()
         let chapterCollection = db.collection(K.FirestoreKeys.CollectionKeys.users)
@@ -139,12 +153,33 @@ class FirestoreManager {
                 K.FirestoreKeys.FieldKeys.korExSe : wordList.korExSe,
                 K.FirestoreKeys.FieldKeys.enExSe : wordList.enExSe,
                 K.FirestoreKeys.FieldKeys.descr : wordList.descr,
-            ])
+            ]) { error in
+                if let error = error {
+                    Log.error("ERROR: \(error)")
+                }
+            }
         }
     }
     
-    static func deleteData(chapterID: String) {
-        
+    static func deleteData(chapterIDToDelete: String) async {
+        guard let currentUser = Auth.auth().currentUser else { return }
+        let db = Firestore.firestore()
+        let chaptersCollection = db.collection(K.FirestoreKeys.CollectionKeys.users)
+            .document(currentUser.uid)
+            .collection(K.FirestoreKeys.CollectionKeys.chapters)
+        do {
+            let chapterDocuments = try await chaptersCollection.getDocuments().documents
+            for chapterDocument in chapterDocuments {
+                let chapterID = (chapterDocument.data()[K.FirestoreKeys.FieldKeys.id] as? String) ?? ""
+                Log.info(chapterDocument.documentID)
+                if chapterID == chapterIDToDelete {
+                    try await chaptersCollection.document(chapterDocument.documentID).delete()
+                    
+                }
+            }
+        } catch {
+            Log.error("ERROR: \(error)")
+        }
     }
 }
 

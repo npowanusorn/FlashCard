@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import GoogleSignIn
+import FirebaseAuth
+import ProgressHUD
+import KeychainSwift
 
 class WelcomeViewController: UIViewController {
 
@@ -14,6 +18,8 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var emailButton: BounceButton!
     @IBOutlet weak var createAccountButton: BounceButton!
     @IBOutlet weak var optionsView: UIView!
+    
+    private let keychain = KeychainSwift()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +40,25 @@ class WelcomeViewController: UIViewController {
     }
     
     @IBAction func signInWithGoogleTapped(_ sender: Any) {
-        Log.info("SIGN IN WITH GOOGLE TAPPED")
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { result, error in
+            guard error == nil else { return }
+            guard let user = result?.user, let idToken = user.idToken?.tokenString else { return }
+            ProgressHUD.animationType = .horizontalDotScaling
+            ProgressHUD.animate()
+            
+            let credentials = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
+            Auth.auth().signIn(with: credentials) { _, error in
+                guard error == nil else { return }
+                Task {
+                    await FirestoreManager.getData()
+                    self.goToHome(isFromSplash: false)
+                    ProgressHUD.dismiss()
+                    UserDefaults.standard.set(true, forKey: K.Defaults.isGoogleSignedIn)
+                    self.keychain.set(idToken, forKey: K.Keychain.idToken)
+                    self.keychain.set(user.accessToken.tokenString, forKey: K.Keychain.tokenString)
+                }
+            }
+        }
     }
     
     func goToNextVC() {

@@ -10,10 +10,14 @@ import Foundation
 class AppCache {
     static let shared = AppCache()
     
+    private let defaults = UserDefaults.standard
+    
     var selectedChapters = [Chapter]()
     var dictForSelectedChapter = [String:String]()
     var keyArrayForSelectedChapter = [String]()
     var allChapters = [String]()
     var reviewQuizSelectedChapters = [Chapter]()
     var isSignInTapped: Bool?
+    var isAppSignedIn: Bool { defaults.bool(forKey: K.Defaults.rememberMe) }
+    var isAppGoogleSignedIn: Bool { defaults.bool(forKey: K.Defaults.isGoogleSignedIn)}
 }

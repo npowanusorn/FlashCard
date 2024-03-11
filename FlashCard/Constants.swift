@@ -19,6 +19,7 @@ enum K {
         static let isMcq = "isMcq"
         static let chaptersList = "chaptersList"
         static let rememberMe = "rememberMe"
+        static let isGoogleSignedIn = "isGoogleSignedIn"
     }
     
     enum CellIDs {
@@ -70,6 +71,8 @@ enum K {
     enum Keychain {
         static let password = "password"
         static let email = "email"
+        static let idToken = "idToken"
+        static let tokenString = "tokenString"
     }
     
     enum FirestoreKeys {

@@ -74,7 +74,7 @@ class HomeViewController: UITableViewController {
     
     func parse(json: Data) {
         let decoder = JSONDecoder()
-        if let json = try? decoder.decode(Chapter.self, from: json) {
+        if let json = try? decoder.decode(ChapterStruct.self, from: json) {
             if list.contains(json.title) {
                 Log.info("list contains \(json.title)")
                 let alert = UIAlertController(
@@ -86,18 +86,12 @@ class HomeViewController: UITableViewController {
                 present(alert, animated: true)
                 return
             }
-            ChapterManager.shared.addChapter(chapter: json)
-            FirestoreManager.writeData(newChapter: json)
             
-//            defaults.setValue(list, forKey: K.Defaults.chapterNameList)
-//            var dict: [String: String] = [:]
-//            var keyForChapter = [String]()
-//            for word in json.wordList {
-//                dict[word.korDef] = word.enDef
-//                keyForChapter.append(word.korDef)
-//            }
-//            defaults.setValue(dict, forKey: json.title)
-//            defaults.setValue(keyForChapter, forKey: json.title + K.Defaults.chapterNameArrayAppend)
+            let newChapter = Chapter(chapterStruct: json)
+            ChapterManager.shared.addChapter(chapter: newChapter)
+            Task {
+                await FirestoreManager.writeData(newChapter: newChapter)
+            }
             tableView.reloadData()
         } else {
             Log.error("Failed to parse json")
@@ -189,9 +183,10 @@ extension HomeViewController {
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        _ = ChapterManager.shared.removeChapter(at: indexPath.row)
-//        list.remove(at: indexPath.row)
-//        defaults.set(list, forKey: K.Defaults.chapterNameList)
+        let removed = ChapterManager.shared.removeChapter(at: indexPath.row)
+        Task {
+            await FirestoreManager.deleteData(chapterIDToDelete: removed.id)
+        }
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
 }

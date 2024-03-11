@@ -8,6 +8,7 @@
 import UIKit
 import KeychainSwift
 import ProgressHUD
+import FirebaseAuth
 
 class SplashViewController: UIViewController {
 
@@ -42,9 +43,19 @@ class SplashViewController: UIViewController {
     }
     
     private func attemptToLogIn() async {
-        let rememberMe = defaults.bool(forKey: K.Defaults.rememberMe)
+        let rememberMe = AppCache.shared.isAppSignedIn
         Log.info("REMEMBER ME: \(rememberMe)")
-        if rememberMe {
+        if AppCache.shared.isAppGoogleSignedIn {
+            guard let idToken = keychain.get(K.Keychain.idToken), let tokenString = keychain.get(K.Keychain.tokenString) else { return }
+            let credentials = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: tokenString)
+            let success = await AuthManager.signIn(with: credentials)
+            if success {
+                self.isSignedIn = true
+                await attemptToGetData()
+                isFirebaseDone = true
+                if isAnimationDone { self.navigateToNextScreen(isSignedIn: self.isSignedIn)}
+            }
+        } else if rememberMe {
             guard let email = keychain.get(K.Keychain.email), let password = keychain.get(K.Keychain.password) else { return }
             let success = await AuthManager.signIn(email: email, password: password, viewController: self)
             if success {
