@@ -16,7 +16,6 @@ import SwiftyBeaver
 class AuthManager {
     static func signIn(with credentials: AuthCredential, viewController: UIViewController? = nil) async -> Bool {
         do {
-            let keychain = KeychainSwift()
             Log.info("SIGNING IN WITH CREDENTIALS")
             try await Auth.auth().signIn(with: credentials)
             Log.info("SIGNED IN WITH CREDENTIALS")
@@ -75,6 +74,16 @@ class AuthManager {
         } catch let error as NSError {
             Log.error("ERROR DELETING: \(error.localizedDescription)")
             FirebaseErrorManager.handleError(error: error, viewController: viewController)
+        }
+    }
+    
+    static func signOut(viewController: UIViewController) -> Bool {
+        do {
+            try Auth.auth().signOut()
+            return true
+        } catch let error as NSError {
+            FirebaseErrorManager.handleError(error: error, viewController: viewController)
+            return false
         }
     }
 }

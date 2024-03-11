@@ -19,6 +19,9 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var createAccountButton: BounceButton!
     @IBOutlet weak var optionsView: UIView!
     
+    private var shouldAnimate: Bool {
+        AppCache.shared.shouldWelcomeVCAnimate
+    }
     private let keychain = KeychainSwift()
     
     override func viewDidLoad() {
@@ -70,14 +73,12 @@ class WelcomeViewController: UIViewController {
         Log.info("ANIMATE")
 
         let yTranslation = view.frame.height / 5
-        optionsView.fadeIn()
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0) {
+        let duration: TimeInterval = shouldAnimate ? 1 : 0
+        optionsView.fadeIn(duration: duration)
+        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0) {
             self.headerLabel.transform = CGAffineTransform(translationX: 0, y: -yTranslation).scaledBy(x: 0.9, y: 0.9)
             self.optionsView.transform = CGAffineTransform(translationX: 0, y: -20)
         }
-//        UIView.animate(withDuration: 1) {
-//            self.optionsView.transform = CGAffineTransform(translationX: 0, y: -20)
-//        }
     }
 
 }

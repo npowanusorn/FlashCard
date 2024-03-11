@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GoogleSignIn
 
 class AppCache {
     static let shared = AppCache()
@@ -20,4 +21,7 @@ class AppCache {
     var isSignInTapped: Bool?
     var isAppSignedIn: Bool { defaults.bool(forKey: K.Defaults.rememberMe) }
     var isAppGoogleSignedIn: Bool { defaults.bool(forKey: K.Defaults.isGoogleSignedIn)}
+    var user: GIDGoogleUser?
+    var hasRestoredPreviousGoogleSignIn: Bool = false
+    var shouldWelcomeVCAnimate: Bool = true
 }

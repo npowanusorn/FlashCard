@@ -9,6 +9,14 @@ import UIKit
 import KeychainSwift
 
 // MARK: - Common functions
+func resetApp() {
+    let keychain = KeychainSwift()
+    keychain.clear()
+    while !ChapterManager.shared.getChapters().isEmpty {
+        _ = ChapterManager.shared.removeChapter(at: 0)
+    }
+}
+
 func makeMenu(children: [UIMenuElement]) -> UIMenu {
     let menu = UIMenu(options: .displayInline, children: children)
     return menu

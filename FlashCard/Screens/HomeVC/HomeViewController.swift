@@ -116,7 +116,8 @@ class HomeViewController: UITableViewController {
     }
     
     func openSettings() {
-        Log.info("OPEN SETTINGS")
+        let settingsVC = SettingsViewController()
+        self.navigationController?.pushViewController(settingsVC, animated: true)
     }
 }
 

@@ -24,10 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
             if error != nil || user == nil {
+                Log.info("unable to restore previous signin")
 //                AppCache.shared.isAppSignedIn = false
             } else {
-//                AppCache.shared.isAppSignedIn = true
-                
+                Log.info("restored previous signin")
+                AppCache.shared.hasRestoredPreviousGoogleSignIn = true
+                AppCache.shared.user = user
             }
         }
         
