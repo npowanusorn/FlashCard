@@ -47,6 +47,7 @@ enum K {
         static let isAutoSpeak = "Auto Speak"
         static let dup = "-dup"
         static let settings = "Settings"
+        static let refresh = "Refresh"
     }
     
     enum Language {
@@ -62,6 +63,7 @@ enum K {
         static let speaker = "speaker.wave.2"
         static let ellipsis = "ellipsis.circle"
         static let gear = "gear"
+        static let refresh = "arrow.clockwise"
     }
     
     enum Notifications {

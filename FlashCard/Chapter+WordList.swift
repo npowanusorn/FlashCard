@@ -19,6 +19,10 @@ class ChapterManager {
         chapters.sort { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
     }
     
+    func removeAll() {
+        chapters.removeAll()
+    }
+    
     func getChapters() -> [Chapter] {
         return chapters
     }

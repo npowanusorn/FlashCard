@@ -90,8 +90,10 @@ class AuthManager {
 
 // MARK: - Firestore
 class FirestoreManager {
-    static func getData() async {
-        guard let currentUser = Auth.auth().currentUser else { return }
+    static func getData() async -> Bool {
+        guard let currentUser = Auth.auth().currentUser else { return false }
+        Log.info("getData called")
+        ChapterManager.shared.removeAll()
         let db = Firestore.firestore()
         let chaptersCollection = db.collection(K.FirestoreKeys.CollectionKeys.users)
             .document(currentUser.uid)
@@ -128,16 +130,19 @@ class FirestoreManager {
                     )
                     newChapter.addWord(new: WordList(wordStruct: newWordStruct, id: id))
                 }
-                Log.info(newChapter)
                 ChapterManager.shared.addChapter(chapter: newChapter)
             }
+            Log.info("getData finish")
+            return true
         } catch {
-            Log.error(error)
+            Log.error("getData error: \(error)")
+            return false
         }
     }
     
     static func writeData(newChapter: Chapter) async {
         guard let currentUser = Auth.auth().currentUser else { return }
+        Log.info("writeData called")
         let db = Firestore.firestore()
         let chapterCollection = db.collection(K.FirestoreKeys.CollectionKeys.users)
             .document(currentUser.uid)
@@ -168,10 +173,12 @@ class FirestoreManager {
                 }
             }
         }
+        Log.info("writeData finish")
     }
     
     static func deleteData(chapterIDToDelete: String) async {
         guard let currentUser = Auth.auth().currentUser else { return }
+        Log.info("deleteData called")
         let db = Firestore.firestore()
         let chaptersCollection = db.collection(K.FirestoreKeys.CollectionKeys.users)
             .document(currentUser.uid)
@@ -180,15 +187,14 @@ class FirestoreManager {
             let chapterDocuments = try await chaptersCollection.getDocuments().documents
             for chapterDocument in chapterDocuments {
                 let chapterID = (chapterDocument.data()[K.FirestoreKeys.FieldKeys.id] as? String) ?? ""
-                Log.info(chapterDocument.documentID)
                 if chapterID == chapterIDToDelete {
                     try await chaptersCollection.document(chapterDocument.documentID).delete()
-                    
                 }
             }
         } catch {
-            Log.error("ERROR: \(error)")
+            Log.error("deleteData error: \(error)")
         }
+        Log.info("deleteData finish")
     }
 }
 

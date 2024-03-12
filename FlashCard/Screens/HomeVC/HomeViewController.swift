@@ -7,6 +7,7 @@
 
 import UIKit
 import UniformTypeIdentifiers
+import ProgressHUD
 
 class HomeViewController: UITableViewController {
     
@@ -18,6 +19,7 @@ class HomeViewController: UITableViewController {
     var filteredList = [String]()
     let defaults = UserDefaults.standard
     let searchController = UISearchController(searchResultsController: nil)
+//    let refreshControl = UIRefreshControl()
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
     }
@@ -28,9 +30,9 @@ class HomeViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        Log.info(ChapterManager.shared.getChapters())
         self.title = K.Texts.home
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.CellIDs.homeVCID)
+        self.tableView.alwaysBounceVertical = true
         let action1 = UIAction(title: K.Texts.importFromFile, image: UIImage(systemName: K.Image.importFromFile)) { _ in
             self.addTapped()
         }
@@ -50,10 +52,13 @@ class HomeViewController: UITableViewController {
         let settingsAction = UIAction(title: K.Texts.settings, image: UIImage(systemName: K.Image.gear)) { _ in
             self.openSettings()
         }
-        let menu = makeMenu(children: [divider, divider2, settingsAction])
+        let refreshAction = UIAction(title: K.Texts.refresh, image: UIImage(systemName: K.Image.refresh)) { _ in
+            self.refresh()
+        }
+        let menu = makeMenu(children: [divider2, settingsAction, refreshAction])
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: K.Image.ellipsis), menu: menu)
         self.navigationItem.leftBarButtonItem = editButtonItem
-        self.navigationItem.largeTitleDisplayMode = .always
+        self.navigationItem.largeTitleDisplayMode = .never
 
         filteredList = list
         searchController.searchResultsUpdater = self
@@ -63,6 +68,21 @@ class HomeViewController: UITableViewController {
         definesPresentationContext = true
         
         setupNotification()
+//        let refreshControl = UIRefreshControl()
+//        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+//        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+//        tableView.refreshControl = refreshControl
+    }
+    
+    @objc func refresh() {
+        Task {
+            ProgressHUD.animationType = .horizontalDotScaling
+            ProgressHUD.animate()
+            let success = await FirestoreManager.getData()
+            guard success else { return }
+            self.tableView.reloadData()
+            ProgressHUD.dismiss()
+        }
     }
     
     @objc func addTapped() {
