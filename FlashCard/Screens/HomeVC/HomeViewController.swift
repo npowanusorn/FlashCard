@@ -58,7 +58,7 @@ class HomeViewController: UITableViewController {
         let menu = makeMenu(children: [divider2, settingsAction, refreshAction])
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: K.Image.ellipsis), menu: menu)
         self.navigationItem.leftBarButtonItem = editButtonItem
-        self.navigationItem.largeTitleDisplayMode = .never
+        self.navigationItem.largeTitleDisplayMode = .always
 
         filteredList = list
         searchController.searchResultsUpdater = self

@@ -202,22 +202,19 @@ class FirestoreManager {
 class FirebaseErrorManager {
     static func handleError(error: NSError, viewController: UIViewController) {
         var errorMessage = ""
-        
-        switch error.code {
-        case AuthErrorCode.networkError.rawValue:
-            errorMessage = "No internet connection available"
-        case
-            AuthErrorCode.userNotFound.rawValue,
-            AuthErrorCode.wrongPassword.rawValue:
-            errorMessage = "Email or password is incorrect"
-        case AuthErrorCode.userDisabled.rawValue:
+        guard let errorCode = AuthErrorCode.Code(rawValue: error.code) else { return }
+        Log.error("ERROR: \(errorCode.rawValue)")
+        switch errorCode {
+        case .emailAlreadyInUse:
+            errorMessage = "Email already in use"
+        case .userDisabled:
             errorMessage = "Account is disabled"
-        case AuthErrorCode.weakPassword.rawValue:
+        case .wrongPassword, .userNotFound, .invalidCredential:
+            errorMessage = "Email or password incorrect"
+        case .weakPassword:
             errorMessage = "Password must be at least 6 characters long"
-        case AuthErrorCode.emailAlreadyInUse.rawValue:
-            errorMessage = "Email already in use. Sign in or use a different email"
         default:
-            errorMessage = "Unknown error, try again later. \nError code: \(error.code)"
+            errorMessage = "Unknown error, try again later. \nError code: \(errorCode.rawValue)"
         }
         let alert = UIAlertController.showErrorAlert(message: errorMessage)
         main { viewController.present(alert, animated: true) }

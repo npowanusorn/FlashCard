@@ -100,6 +100,7 @@ class SignUpSignInViewController: UIViewController {
         if !isValidPassword {
             continueButton.isEnabled = false
             validationText = "Password must be at least 6 characters"
+            return
         }
         passwordValidationLbl.isHidden = true
         continueButton.isEnabled = true
