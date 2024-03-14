@@ -24,4 +24,6 @@ class AppCache {
     var user: GIDGoogleUser?
     var hasRestoredPreviousGoogleSignIn: Bool = false
     var shouldWelcomeVCAnimate: Bool = true
+    var didAddSnapshotListener: Bool = false
+    var isToastShown: Bool = false
 }

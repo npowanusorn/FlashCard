@@ -1,5 +1,5 @@
 {
-  "originHash" : "10445160f51114d2dc6958e95597a4f318203807bbdd465d11c2ab4883d7fbf8",
+  "originHash" : "99444e1ddbc6dddf0f45f8651e40a2c9d3f9a75e8efa84f1d8bbe3791b24ac7a",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -170,6 +170,15 @@
       "state" : {
         "revision" : "1080914828ef1c9ca9cd2bad50667b3d847dabff",
         "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "toast-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/BastiaanJansen/toast-swift",
+      "state" : {
+        "revision" : "9a40b722b6eeb9683d47e3584501e81525741291",
+        "version" : "2.1.2"
       }
     }
   ],

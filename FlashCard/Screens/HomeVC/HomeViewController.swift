@@ -8,6 +8,7 @@
 import UIKit
 import UniformTypeIdentifiers
 import ProgressHUD
+import Toast
 
 class HomeViewController: UITableViewController {
     
@@ -26,10 +27,11 @@ class HomeViewController: UITableViewController {
     var isFiltering: Bool {
         return searchController.isActive && !isSearchBarEmpty
     }
+    var toast: Toast?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        FirestoreManager.delegate = self
         self.title = K.Texts.home
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.CellIDs.homeVCID)
         self.tableView.alwaysBounceVertical = true
@@ -78,8 +80,7 @@ class HomeViewController: UITableViewController {
         Task {
             ProgressHUD.animationType = .horizontalDotScaling
             ProgressHUD.animate()
-            let success = await FirestoreManager.getData()
-            guard success else { return }
+            await FirestoreManager.getData()
             self.tableView.reloadData()
             ProgressHUD.dismiss()
         }
@@ -138,6 +139,18 @@ class HomeViewController: UITableViewController {
     func openSettings() {
         let settingsVC = SettingsViewController()
         self.navigationController?.pushViewController(settingsVC, animated: true)
+    }
+    
+    @objc func didTapToast() {
+        AppCache.shared.isToastShown = false
+        toast?.close()
+        Task {
+            ProgressHUD.animationType = .horizontalDotScaling
+            ProgressHUD.animate()
+            await FirestoreManager.getData()
+            tableView.reloadData()
+            ProgressHUD.dismiss()
+        }
     }
 }
 
@@ -227,5 +240,24 @@ extension HomeViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
         filterListForSearch(searchText)
+    }
+}
+
+extension HomeViewController: FirestoreDelegate {
+    func didUpdate(change: Change) {
+        Log.debug("AppCache.shared.isToastShown: \(AppCache.shared.isToastShown)")
+        guard !AppCache.shared.isToastShown else { return }
+        Log.info("DIDUPDATE CALLED: \(change)")
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapToast))
+        let iconView = IconAppleToastView(image: UIImage(systemName: K.Image.refresh)!, title: "Update available", subtitle: "Tap to refresh", viewConfig: ToastViewConfiguration())
+        let customToastView = AppleToastView(child: iconView)
+//        let customToastView = AppleToastView(child: TextToastView("Update available", subtitle: "Tap to refresh", viewConfig: ToastViewConfiguration()))
+        customToastView.addGestureRecognizer(tap)
+//        iconView.addGestureRecognizer(tap)
+        let config = ToastConfiguration(direction: .bottom, dismissBy: [.swipe(direction: .natural)])
+        toast = Toast.custom(view: customToastView, config: config)
+        toast?.show()
+        AppCache.shared.isToastShown = true
     }
 }

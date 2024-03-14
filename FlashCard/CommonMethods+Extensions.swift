@@ -7,6 +7,7 @@
 
 import UIKit
 import KeychainSwift
+import Toast
 
 // MARK: - Common functions
 func resetApp() {
@@ -459,4 +460,8 @@ extension Dictionary {
             left[k] = v
         }
     }
+}
+
+public extension Toast {
+    static var callback: (() -> ())?
 }
