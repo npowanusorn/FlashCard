@@ -37,22 +37,10 @@ class WordsListViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.CellIDs.wordsVCID)
-//        wordsDictArr = defaults.object(forKey: chapter) as? [String: String] ?? [:]
-//        keysForChapter = defaults.array(forKey: chapter + K.Defaults.chapterNameArrayAppend) as? [String] ?? []
+        self.tableView.allowsSelectionDuringEditing = true
         setupSegmentedControl()
         self.navigationItem.rightBarButtonItem?.isEnabled = !wordList.isEmpty
-        
-        let reviewAction = UIAction(title: K.Texts.review) { _ in
-//            AppCache.shared.dictForSelectedChapter = self.wordsDictArr
-//            AppCache.shared.keyArrayForSelectedChapter = self.keysForChapter
-            let reviewVC = ReviewViewController()
-            self.navigationController?.pushViewController(reviewVC, animated: true)
-        }
-        let quizAction = UIAction(title: K.Texts.quiz) { _ in
-            // TODO
-        }
-        let menu = UIMenu(options: .displayInline, children: [reviewAction, quizAction])
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: K.Image.book), menu: menu)
+        makeMenu()
     }
     
     func didTapSegment(_ segment: Int) {
@@ -73,9 +61,42 @@ class WordsListViewController: UIViewController {
         segmentedControl.segmentsTitle = [K.Texts.all, K.Texts.kor, K.Texts.en]
         segmentedControl.isHidden = true
     }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: true)
+        if editing {
+            self.navigationItem.leftBarButtonItem = editButtonItem
+            let addAction = UIAction { _ in
+                Log.info("ADD")
+            }
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add, primaryAction: addAction)
+        } else {
+            makeMenu()
+        }
+    }
+    
+    func makeMenu() {
+        let reviewAction = UIAction(title: K.Texts.review) { _ in
+            let reviewVC = ReviewViewController()
+            self.navigationController?.pushViewController(reviewVC, animated: true)
+        }
+        let quizAction = UIAction(title: K.Texts.quiz) { _ in
+            // TODO
+        }
+        let submenu = UIMenu(options: .displayInline, children: [reviewAction, quizAction])
+        let editAction = UIAction(title: "Edit") { _ in
+            Log.info("EDIT")
+            self.setEditing(true, animated: true)
+        }
+        let menu = UIMenu(options: .displayInline, children: [submenu, editAction])
+        self.navigationItem.rightBarButtonItem = isEditing ? editButtonItem : UIBarButtonItem(image: UIImage(systemName: K.Image.ellipsis), menu: menu)
+        self.navigationItem.leftBarButtonItem = nil
+        self.navigationItem.backButtonDisplayMode = .default
+    }
 }
-    // MARK: - Table view data source
 
+// MARK: - Table view data source
 extension WordsListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         30
@@ -111,7 +132,12 @@ extension WordsListViewController: UITableViewDelegate, UITableViewDataSource {
             content.textProperties.color = UIColor.label.withAlphaComponent(0)
         }
         cell.contentConfiguration = content
-        cell.selectionStyle = .none
+        cell.selectionStyle = tableView.isEditing ? .default : .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard tableView.isEditing else { return }
+        Log.info(indexPath.row)
     }
 }

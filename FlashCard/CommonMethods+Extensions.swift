@@ -433,12 +433,10 @@ extension StringProtocol {
 
 // MARK: - UIViewController
 extension UIViewController {
-    func goToHome(isFromSplash: Bool) {
+    func goToHome() {
         let homeVC = HomeViewController()
         navigationController?.pushViewController(homeVC, animated: true, completion: {
-            if isFromSplash {
-                self.navigationController?.viewControllers = [homeVC]
-            }
+            self.navigationController?.viewControllers = [homeVC]
         })
     }
 }
@@ -462,6 +460,21 @@ extension Dictionary {
     }
 }
 
-public extension Toast {
-    static var callback: (() -> ())?
+// MARK: - CGFloat
+extension CGFloat {
+    static func random() -> CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UInt32.max)
+    }
+}
+
+// MARK: - UIColor
+extension UIColor {
+    static func random() -> UIColor {
+        return UIColor(
+           red:   .random(),
+           green: .random(),
+           blue:  .random(),
+           alpha: 1.0
+        )
+    }
 }

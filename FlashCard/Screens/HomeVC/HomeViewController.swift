@@ -207,7 +207,6 @@ extension HomeViewController {
         cell?.isSelected = false
         let chapter = isFiltering ? ChapterManager.shared.getChapter(title: filteredList[indexPath.row]) : ChapterManager.shared.getChapter(title: list[indexPath.row])
         AppCache.shared.selectedChapters = [chapter]
-//        AppCache.shared.selectedChapters = isFiltering ? [filteredList[indexPath.row]] : [list[indexPath.row]]
         let wordsVC = WordsListViewController()
         self.navigationController?.pushViewController(wordsVC, animated: true)
     }
@@ -252,9 +251,7 @@ extension HomeViewController: FirestoreDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapToast))
         let iconView = IconAppleToastView(image: UIImage(systemName: K.Image.refresh)!, title: "Update available", subtitle: "Tap to refresh", viewConfig: ToastViewConfiguration())
         let customToastView = AppleToastView(child: iconView)
-//        let customToastView = AppleToastView(child: TextToastView("Update available", subtitle: "Tap to refresh", viewConfig: ToastViewConfiguration()))
         customToastView.addGestureRecognizer(tap)
-//        iconView.addGestureRecognizer(tap)
         let config = ToastConfiguration(direction: .bottom, dismissBy: [.swipe(direction: .natural)])
         toast = Toast.custom(view: customToastView, config: config)
         toast?.show()

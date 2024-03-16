@@ -111,15 +111,10 @@ class SplashViewController: UIViewController {
     
     private func navigateToNextScreen(isSignedIn: Bool) {
         if isSignedIn {
-            let homeVC = HomeViewController()
-            self.navigationController?.pushViewController(homeVC, animated: true)
+            goToHome()
         } else {
             let welcomeVC = WelcomeViewController()
             self.navigationController?.viewControllers = [welcomeVC]
-//            self.navigationController?.pushViewController(welcomeVC, animated: true, completion: {
-//                self.navigationController?.viewControllers = [welcomeVC]
-//            })
-//            self.navigationController?.pushViewController(welcomeVC, animated: true)
         }
     }
 

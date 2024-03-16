@@ -20,6 +20,8 @@ enum K {
         static let chaptersList = "chaptersList"
         static let rememberMe = "rememberMe"
         static let isGoogleSignedIn = "isGoogleSignedIn"
+        static let questionType = "questionType"
+        static let reviewSelectedSegment = "reviewSelectedSegment"
     }
     
     enum CellIDs {
@@ -31,7 +33,7 @@ enum K {
     enum Texts {
         static let kor = "KOR"
         static let en = "EN"
-        static let all = "All"
+        static let all = "KOR/EN"
         static let home = "Home"
         static let error = "Error"
         static let addErrorDuplicate = "%@ already exists"
@@ -44,7 +46,7 @@ enum K {
         static let importFromFile = "Import from file"
         static let search = "Search"
         static let shuffle = "Shuffle"
-        static let isAutoSpeak = "Auto Speak"
+        static let type = "Type"
         static let dup = "-dup"
         static let settings = "Settings"
         static let refresh = "Refresh"
