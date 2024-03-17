@@ -194,6 +194,7 @@ extension HomeViewController {
         var content = UIListContentConfiguration.cell()
         let chapter = isFiltering ? ChapterManager.shared.getChapter(title: filteredList[indexPath.row]) : ChapterManager.shared.getChapter(title: list[indexPath.row])
         content.text = chapter.title
+        content.textProperties.font = UIFont.systemFont(ofSize: UIFont.labelFontSize, weight: .regular)
         content.secondaryText = String(chapter.wordList.count)
         content.prefersSideBySideTextAndSecondaryText = true
         content.secondaryTextProperties.font = UIFont.systemFont(ofSize: UIFont.systemFontSize, weight: .regular)
@@ -216,11 +217,15 @@ extension HomeViewController {
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let removed = ChapterManager.shared.removeChapter(at: indexPath.row)
-        Task {
-            await FirestoreManager.deleteData(chapterIDToDelete: removed.id)
+        let title = ChapterManager.shared.getChapter(at: indexPath.row).title
+        let alert = UIAlertController.showDeleteConfirmationAlert(with: "Delete \(title)?", message: nil) {
+            let removed = ChapterManager.shared.removeChapter(at: indexPath.row)
+            Task {
+                await FirestoreManager.deleteData(chapterIDToDelete: removed.id)
+            }
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        present(alert, animated: true)
     }
 }
 
@@ -228,9 +233,11 @@ extension HomeViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
             print(url)
-            if let data = try? Data(contentsOf: url) {
-                parse(json: data)
+            guard url.startAccessingSecurityScopedResource(), let data = try? Data(contentsOf: url) else {
+                let alert = UIAlertController.showErrorAlert(title: "Error", message: "Unable to open file")
+                return
             }
+            parse(json: data)
         }
     }
 }

@@ -184,10 +184,11 @@ class ReviewViewController: UIViewController {
         leftButton.setTitle("I don't know", for: .normal)
         leftButton.setImage(nil, for: .normal)
         for button in answersButton {
-            button.setTitle(String(button.tag), for: .normal)
+//            button.setTitle(String(button.tag), for: .normal)
             button.titleLabel?.textAlignment = .center
-            button.titleLabel?.adjustsFontSizeToFitWidth = true
-            button.titleLabel?.minimumScaleFactor = 0.1
+//            button.setAttributedTitle(getAttributedString(for: String(button.tag), fontSize: 24, weight: .bold), for: .normal)
+//            button.titleLabel?.adjustsFontSizeToFitWidth = true
+//            button.titleLabel?.minimumScaleFactor = 0.1
         }
         
         mcqProgressLabel.text = ""
@@ -208,7 +209,7 @@ class ReviewViewController: UIViewController {
         
     func setLabelsWithValues() {
         guard currentIdx < tupleArray.count else {
-            let alert = UIAlertController(title: "Complete", message: "\(correctCount)/\(tupleArray.count)", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Complete", message: "Score: \(correctCount)/\(tupleArray.count)", preferredStyle: .alert)
             let exitAction = UIAlertAction(title: "Exit", style: .default) { _ in
                 self.navigationController?.popViewController(animated: true)
             }
@@ -249,7 +250,7 @@ class ReviewViewController: UIViewController {
                 uniqueAnswersSet.forEach { answerChoicesArray.append($0) }
             } else {
                 answerChoicesArray.append(correctChoice)
-                for i in 0..<9 {
+                for _ in 0..<9 {
                     var randAnswer = uniqueAnswersSet.randomElement()!
                     while answerChoicesArray.contains(randAnswer) {
                         randAnswer = uniqueAnswersSet.randomElement()!
@@ -263,7 +264,7 @@ class ReviewViewController: UIViewController {
             answerChoicesArray.shuffle()
             for button in answersButton {
                 let title = answerChoicesArray[button.tag]
-                button.setTitle(title, for: .normal)
+                button.setAttributedTitle(getAttributedString(for: title, fontSize: Constants.choiceFontSize, weight: .bold), for: .normal)
                 button.configuration?.baseBackgroundColor = nil
                 button.isEnabled = !title.isEmpty
             }
@@ -273,6 +274,7 @@ class ReviewViewController: UIViewController {
     func setUIForMCQ() {
         flashCardView.isHidden = true
         mcqView.isHidden = false
+        mcqLabel.font = UIFont.systemFont(ofSize: Constants.questionFontSize, weight: .bold)
         reset()
     }
     
@@ -369,4 +371,10 @@ private extension ReviewViewController {
         case flashcard
         case mcq
     }
+}
+
+private enum Constants {
+    static let isPad = UIDevice.current.userInterfaceIdiom == .pad
+    static let choiceFontSize: CGFloat = isPad ? 24 : 18
+    static let questionFontSize: CGFloat = isPad ? 36 : 30
 }

@@ -55,7 +55,7 @@ class BaseTextField: UITextField {
 
     func setWhiteBorder() {
         self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderColor = UIColor.label.cgColor
     }
 
     func removeBorder() {

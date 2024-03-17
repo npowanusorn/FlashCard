@@ -122,7 +122,8 @@ extension WordsListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIDs.wordsVCID, for: indexPath)
         var content = UIListContentConfiguration.cell()
         content.secondaryTextProperties.numberOfLines = 0
-        content.secondaryTextProperties.font = UIFont.systemFont(ofSize: UIFont.systemFontSize, weight: .regular)
+        content.textProperties.font = UIFont.systemFont(ofSize: UIFont.labelFontSize, weight: .bold)
+        content.secondaryTextProperties.font = UIFont.systemFont(ofSize: UIFont.labelFontSize, weight: .regular)
         content.prefersSideBySideTextAndSecondaryText = true
         content.text = wordList[indexPath.row].korDef
         content.secondaryText = wordList[indexPath.row].enDef
@@ -141,3 +142,8 @@ extension WordsListViewController: UITableViewDelegate, UITableViewDataSource {
         Log.info(indexPath.row)
     }
 }
+
+//private enum Constants {
+//    static let isPad = UIDevice.current.userInterfaceIdiom == .pad
+//    static let fontSize: CGFloat = isPad ? 20 : UIFont.systemFontSize
+//}
