@@ -56,16 +56,21 @@ enum K {
         static let ko = "ko"
     }
     
-    enum Image {
-        static let book = "text.book.closed"
-        static let importFromFile = "doc.fill"
-        static let plus = "plus"
-        static let shuffle = "shuffle"
-        static let speakerFilled = "speaker.wave.2.circle.fill"
-        static let speaker = "speaker.wave.2"
-        static let ellipsis = "ellipsis.circle"
-        static let gear = "gear"
-        static let refresh = "arrow.clockwise"
+    enum Image: String {
+        case book = "text.book.closed"
+        case importFromFile = "doc.fill"
+        case plus = "plus"
+        case shuffle = "shuffle"
+        case speakerFilled = "speaker.wave.2.circle.fill"
+        case speaker = "speaker.wave.2"
+        case ellipsis = "ellipsis.circle"
+        case gear = "gear"
+        case refresh = "arrow.clockwise"
+        case pencil = "pencil"
+        
+        var safeUIImage: UIImage {
+            return UIImage(systemName: self.rawValue) ?? UIImage()
+        }
     }
     
     enum Notifications {

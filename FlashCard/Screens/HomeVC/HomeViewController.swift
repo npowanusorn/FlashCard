@@ -35,33 +35,33 @@ class HomeViewController: UITableViewController {
         self.title = K.Texts.home
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.CellIDs.homeVCID)
         self.tableView.alwaysBounceVertical = true
-        let importFromFileAction = UIAction(title: K.Texts.importFromFile, image: UIImage(systemName: K.Image.importFromFile)) { _ in
+        let importFromFileAction = UIAction(title: K.Texts.importFromFile, image: K.Image.importFromFile.safeUIImage) { _ in
             self.addTapped()
         }
-        let createAction = UIAction(title: K.Texts.create, image: UIImage(systemName: K.Image.plus)) { _ in
+        let createAction = UIAction(title: K.Texts.create, image: K.Image.plus.safeUIImage) { _ in
             let alert = UIAlertController.showTextFieldAlert(with: "New Chapter", message: "Enter the name for the new chapter", actionTitle: "Create") { textField in
                 self.createNewChapter(title: textField.text ?? "")
             }
             self.present(alert, animated: true)
         }
         let divider = makeMenu(children: [importFromFileAction, createAction])
-        let reviewAction = UIAction(title: K.Texts.review, image: UIImage(systemName: K.Image.book)) { _ in
+        let reviewAction = UIAction(title: K.Texts.review, image: K.Image.book.safeUIImage) { _ in
             let vc = SelectChaptersViewController()
             let nav = UINavigationController(rootViewController: vc)
             self.present(nav, animated: true)
         }
-        let quizAction = UIAction(title: K.Texts.quiz, image: UIImage(systemName: K.Image.book)) { _ in
+        let quizAction = UIAction(title: K.Texts.quiz, image: K.Image.book.safeUIImage) { _ in
             Log.info("QUIZ")
         }
         let divider2 = makeMenu(children: [divider, reviewAction, quizAction])
-        let settingsAction = UIAction(title: K.Texts.settings, image: UIImage(systemName: K.Image.gear)) { _ in
+        let settingsAction = UIAction(title: K.Texts.settings, image: K.Image.gear.safeUIImage) { _ in
             self.openSettings()
         }
-        let refreshAction = UIAction(title: K.Texts.refresh, image: UIImage(systemName: K.Image.refresh)) { _ in
+        let refreshAction = UIAction(title: K.Texts.refresh, image: K.Image.refresh.safeUIImage) { _ in
             self.refresh()
         }
         let menu = makeMenu(children: [divider2, settingsAction, refreshAction])
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: K.Image.ellipsis), menu: menu)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: K.Image.ellipsis.safeUIImage, menu: menu)
         self.navigationItem.leftBarButtonItem = editButtonItem
         self.navigationItem.largeTitleDisplayMode = .always
 
@@ -276,7 +276,7 @@ extension HomeViewController: FirestoreDelegate {
         Log.info("DIDUPDATE CALLED: \(change)")
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapToast))
-        let iconView = IconAppleToastView(image: UIImage(systemName: K.Image.refresh)!, title: "Update available", subtitle: "Tap to refresh", viewConfig: ToastViewConfiguration())
+        let iconView = IconAppleToastView(image: K.Image.refresh.safeUIImage, title: "Update available", subtitle: "Tap to refresh", viewConfig: ToastViewConfiguration())
         let customToastView = AppleToastView(child: iconView)
         customToastView.addGestureRecognizer(tap)
         let config = ToastConfiguration(direction: .bottom, dismissBy: [.swipe(direction: .natural)])

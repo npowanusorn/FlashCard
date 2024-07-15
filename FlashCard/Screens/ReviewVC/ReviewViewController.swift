@@ -177,7 +177,7 @@ class ReviewViewController: UIViewController {
     func setupCommonUI() {
         self.navigationItem.largeTitleDisplayMode = .never
         self.title = K.Texts.review
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: K.Image.ellipsis), menu: makeMenu())
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: K.Image.ellipsis.safeUIImage, menu: makeMenu())
         
         rightButton.setTitle("I know", for: .normal)
         rightButton.setImage(nil, for: .normal)
@@ -293,7 +293,7 @@ class ReviewViewController: UIViewController {
         bottomView.addGestureRecognizer(tap)
         
         let cfg = UIImage.SymbolConfiguration(hierarchicalColor: .placeholderText)
-        speakerImg.image = UIImage(systemName: K.Image.speakerFilled)?.withRenderingMode(.automatic).applyingSymbolConfiguration(cfg)
+        speakerImg.image = K.Image.speakerFilled.safeUIImage.withRenderingMode(.automatic).applyingSymbolConfiguration(cfg)
         reset()
     }
     
@@ -326,7 +326,7 @@ class ReviewViewController: UIViewController {
     func makeMenu() -> UIMenu {
         let menu = UIMenu(options: .displayInline, children: [
             UIDeferredMenuElement.uncached { [weak self] completion in
-                let action = UIAction(title: K.Texts.shuffle, image: UIImage(systemName: K.Image.shuffle), state: self!.isShuffled ? .on : .off) { _ in
+                let action = UIAction(title: K.Texts.shuffle, image: K.Image.shuffle.safeUIImage, state: self!.isShuffled ? .on : .off) { _ in
                     self!.isShuffled.toggle()
                     self!.reset()
                     self!.defaults.set(self!.isShuffled, forKey: K.Defaults.isShuffled)

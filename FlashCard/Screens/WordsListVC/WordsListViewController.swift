@@ -70,30 +70,30 @@ class WordsListViewController: UIViewController {
         tableView.setEditing(editing, animated: true)
         if editing {
             self.navigationItem.leftBarButtonItem = editButtonItem
-            let addAction = UIAction { _ in
-                self.addNewWord()
-            }
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add, primaryAction: addAction)
+            self.navigationItem.rightBarButtonItem?.isHidden = true
         } else {
             makeMenu()
         }
     }
     
     func makeMenu() {
-        let reviewAction = UIAction(title: K.Texts.review) { _ in
+        let reviewAction = UIAction(title: K.Texts.review, image: K.Image.book.safeUIImage) { _ in
             let reviewVC = ReviewViewController()
             self.navigationController?.pushViewController(reviewVC, animated: true)
         }
-        let quizAction = UIAction(title: K.Texts.quiz) { _ in
+        let quizAction = UIAction(title: K.Texts.quiz, image: K.Image.book.safeUIImage) { _ in
             // TODO
         }
         let submenu = UIMenu(options: .displayInline, children: [reviewAction, quizAction])
-        let editAction = UIAction(title: "Edit") { _ in
+        let addAction = UIAction(title: "Add", image: K.Image.plus.safeUIImage) { _ in
+            self.addNewWord()
+        }
+        let editAction = UIAction(title: "Edit", image: K.Image.pencil.safeUIImage) { _ in
             Log.info("EDIT")
             self.setEditing(true, animated: true)
         }
-        let menu = UIMenu(options: .displayInline, children: [submenu, editAction])
-        self.navigationItem.rightBarButtonItem = isEditing ? editButtonItem : UIBarButtonItem(image: UIImage(systemName: K.Image.ellipsis), menu: menu)
+        let menu = UIMenu(options: .displayInline, children: [submenu, addAction, editAction])
+        self.navigationItem.rightBarButtonItem = isEditing ? editButtonItem : UIBarButtonItem(image: K.Image.ellipsis.safeUIImage, menu: menu)
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.backButtonDisplayMode = .default
     }
