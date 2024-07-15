@@ -235,6 +235,7 @@ extension HomeViewController: UIDocumentPickerDelegate {
             print(url)
             guard url.startAccessingSecurityScopedResource(), let data = try? Data(contentsOf: url) else {
                 let alert = UIAlertController.showErrorAlert(title: "Error", message: "Unable to open file")
+                self.present(alert, animated: true)
                 return
             }
             parse(json: data)
