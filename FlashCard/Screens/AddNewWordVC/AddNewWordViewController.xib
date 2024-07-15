@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddNewWordViewController" customModule="FlashCard" customModuleProvider="target">
+            <connections>
+                <outlet property="addButton" destination="LHj-Af-FcO" id="aOo-e6-iPo"/>
+                <outlet property="meaningTextField" destination="fQp-TE-tmE" id="RY3-Fo-1iF"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="wordTextField" destination="j6X-zZ-QX4" id="pnV-TY-Vaj"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UaB-n4-NIA">
+                    <rect key="frame" x="20" y="79" width="353" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="4qK-Tl-KXo"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="Z1E-5D-pZN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meaning" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXf-LL-1mF">
+                    <rect key="frame" x="20" y="173" width="353" height="24"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fQp-TE-tmE" userLabel="Password Text Field" customClass="BaseTextField" customModule="FlashCard" customModuleProvider="target">
+                    <rect key="frame" x="20" y="207" width="353" height="40"/>
+                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="vY4-7H-eqD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                </textField>
+                <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j6X-zZ-QX4" userLabel="Email Text Field" customClass="BaseTextField" customModule="FlashCard" customModuleProvider="target">
+                    <rect key="frame" x="20" y="113" width="353" height="40"/>
+                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="2j4-TG-lu3"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LHj-Af-FcO" customClass="BounceButton" customModule="FlashCard" customModuleProvider="target">
+                    <rect key="frame" x="40" y="327" width="313" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Lar-AM-LEX"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Add" cornerStyle="large">
+                        <fontDescription key="titleFontDescription" type="boldSystem" pointSize="15"/>
+                        <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="baseBackgroundColor" systemColor="labelColor"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="addButtonPressed:" destination="-1" eventType="touchUpInside" id="bjv-x6-4zw"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="OXf-LL-1mF" firstAttribute="leading" secondItem="UaB-n4-NIA" secondAttribute="leading" id="0eK-th-DkQ"/>
+                <constraint firstItem="fQp-TE-tmE" firstAttribute="top" secondItem="OXf-LL-1mF" secondAttribute="bottom" constant="10" id="2Ba-7L-7eJ"/>
+                <constraint firstItem="UaB-n4-NIA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="9fp-Jy-n8N"/>
+                <constraint firstItem="LHj-Af-FcO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="CnK-LF-XkM"/>
+                <constraint firstItem="OXf-LL-1mF" firstAttribute="height" secondItem="UaB-n4-NIA" secondAttribute="height" id="DRh-kj-Ufl"/>
+                <constraint firstItem="OXf-LL-1mF" firstAttribute="top" secondItem="j6X-zZ-QX4" secondAttribute="bottom" constant="20" id="Jym-ub-q0k"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LHj-Af-FcO" secondAttribute="trailing" constant="40" id="KHv-ky-kKy"/>
+                <constraint firstItem="UaB-n4-NIA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="RtA-bb-tTA"/>
+                <constraint firstItem="j6X-zZ-QX4" firstAttribute="trailing" secondItem="UaB-n4-NIA" secondAttribute="trailing" id="TU5-iT-ceb"/>
+                <constraint firstItem="fQp-TE-tmE" firstAttribute="trailing" secondItem="UaB-n4-NIA" secondAttribute="trailing" id="Uij-tv-OUe"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="UaB-n4-NIA" secondAttribute="trailing" constant="20" id="Z3P-Cw-m8Z"/>
+                <constraint firstItem="OXf-LL-1mF" firstAttribute="trailing" secondItem="UaB-n4-NIA" secondAttribute="trailing" id="Zke-6S-tg3"/>
+                <constraint firstItem="j6X-zZ-QX4" firstAttribute="top" secondItem="UaB-n4-NIA" secondAttribute="bottom" constant="10" id="dqu-2O-hud"/>
+                <constraint firstItem="LHj-Af-FcO" firstAttribute="top" secondItem="fQp-TE-tmE" secondAttribute="bottom" constant="80" id="seJ-kJ-RT1"/>
+                <constraint firstItem="j6X-zZ-QX4" firstAttribute="leading" secondItem="UaB-n4-NIA" secondAttribute="leading" id="tNu-jE-BuI"/>
+                <constraint firstItem="fQp-TE-tmE" firstAttribute="leading" secondItem="UaB-n4-NIA" secondAttribute="leading" id="ytr-ib-BKF"/>
+            </constraints>
+            <point key="canvasLocation" x="130" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

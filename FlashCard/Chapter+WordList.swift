@@ -51,7 +51,11 @@ class ChapterManager {
     }
 }
 
-class Chapter: Codable, Equatable {
+class Chapter: Codable, Equatable, CustomStringConvertible {
+    var description: String {
+        return "title: \(title), wordList: \(wordList)"
+    }
+    
     static func == (lhs: Chapter, rhs: Chapter) -> Bool {
         return lhs.title == rhs.title && lhs.wordList == rhs.wordList
     }
@@ -96,7 +100,11 @@ class Chapter: Codable, Equatable {
     }    
 }
 
-class WordList: Codable, Equatable {
+class WordList: Codable, Equatable, CustomStringConvertible {
+    var description: String {
+        return "korDef: \(korDef), enDef: \(enDef)"
+    }
+    
     static func == (lhs: WordList, rhs: WordList) -> Bool {
         return (lhs.korDef == rhs.korDef) &&
         (lhs.enDef == rhs.enDef) &&

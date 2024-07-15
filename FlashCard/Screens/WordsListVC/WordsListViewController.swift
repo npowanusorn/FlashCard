@@ -10,19 +10,22 @@ import SwiftUI
 
 class WordsListViewController: UIViewController {
 
-    let chapter: Chapter
-    var wordList: [WordList] {
+    private let viewModel: WordsListViewModel
+    private var chapter: Chapter {
+        viewModel.chapter
+    }
+    private var wordList: [WordList] {
         chapter.wordList
     }
-    let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
 //    var wordsDictArr = [String:String]()
 //    var keysForChapter = [String()]
     
     @IBOutlet weak var segmentedControl: SCView!
     @IBOutlet weak var tableView: UITableView!
     
-    init() {
-        chapter = AppCache.shared.selectedChapters.first!
+    init(viewModel: WordsListViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -68,7 +71,7 @@ class WordsListViewController: UIViewController {
         if editing {
             self.navigationItem.leftBarButtonItem = editButtonItem
             let addAction = UIAction { _ in
-                Log.info("ADD")
+                self.addNewWord()
             }
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add, primaryAction: addAction)
         } else {
@@ -93,6 +96,13 @@ class WordsListViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = isEditing ? editButtonItem : UIBarButtonItem(image: UIImage(systemName: K.Image.ellipsis), menu: menu)
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.backButtonDisplayMode = .default
+    }
+    
+    func addNewWord() {
+        let addNewWordViewModel = AddNewWordViewModel(chapter: chapter, delegate: self)
+        let addNewWordVC = AddNewWordViewController(viewModel: addNewWordViewModel)
+        let navVC = UINavigationController(rootViewController: addNewWordVC)
+        present(navVC, animated: true)
     }
 }
 
@@ -140,6 +150,13 @@ extension WordsListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard tableView.isEditing else { return }
         Log.info(indexPath.row)
+    }
+}
+
+extension WordsListViewController: AddNewWordDelegate {
+    func didAddNewWord() {
+        viewModel.delegate.didAddNewWord()
+        self.tableView.reloadData()
     }
 }
 

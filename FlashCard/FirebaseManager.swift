@@ -210,6 +210,10 @@ class FirestoreManager {
         Log.info("writeData finish")
     }
     
+    static func writeData(newWord: WordList, for chapter: Chapter) async {
+        Log.info("WRITE WORDLIST: \(newWord.description) FOR CHAPTER: \(chapter.description)")
+    }
+    
     static func deleteData(chapterIDToDelete: String) async {
         guard let currentUser = Auth.auth().currentUser else { return }
         Log.info("deleteData called")

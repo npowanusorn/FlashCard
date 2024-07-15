@@ -35,13 +35,16 @@ class HomeViewController: UITableViewController {
         self.title = K.Texts.home
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.CellIDs.homeVCID)
         self.tableView.alwaysBounceVertical = true
-        let action1 = UIAction(title: K.Texts.importFromFile, image: UIImage(systemName: K.Image.importFromFile)) { _ in
+        let importFromFileAction = UIAction(title: K.Texts.importFromFile, image: UIImage(systemName: K.Image.importFromFile)) { _ in
             self.addTapped()
         }
-        let action2 = UIAction(title: K.Texts.create, image: UIImage(systemName: K.Image.plus)) { _ in
-            print("create")
+        let createAction = UIAction(title: K.Texts.create, image: UIImage(systemName: K.Image.plus)) { _ in
+            let alert = UIAlertController.showTextFieldAlert(with: "New Chapter", message: "Enter the name for the new chapter", actionTitle: "Create") { textField in
+                self.createNewChapter(title: textField.text ?? "")
+            }
+            self.present(alert, animated: true)
         }
-        let divider = makeMenu(children: [action1, action2])
+        let divider = makeMenu(children: [importFromFileAction, createAction])
         let reviewAction = UIAction(title: K.Texts.review, image: UIImage(systemName: K.Image.book)) { _ in
             let vc = SelectChaptersViewController()
             let nav = UINavigationController(rootViewController: vc)
@@ -152,6 +155,21 @@ class HomeViewController: UITableViewController {
             ProgressHUD.dismiss()
         }
     }
+    
+    func createNewChapter(title: String) {
+        guard !title.isEmpty else {
+            let alert = UIAlertController.showErrorAlert(message: "Title cannot be blank")
+            self.present(alert, animated: true)
+            return
+        }
+        
+        let newChapter = Chapter(chapterStruct: ChapterStruct(title: title, wordList: [WordStruct]()))
+        ChapterManager.shared.addChapter(chapter: newChapter)
+        Task {
+            await FirestoreManager.writeData(newChapter: newChapter)
+        }
+        tableView.reloadData()
+    }
 }
 
 // MARK: - Table view data source
@@ -208,7 +226,8 @@ extension HomeViewController {
         cell?.isSelected = false
         let chapter = isFiltering ? ChapterManager.shared.getChapter(title: filteredList[indexPath.row]) : ChapterManager.shared.getChapter(title: list[indexPath.row])
         AppCache.shared.selectedChapters = [chapter]
-        let wordsVC = WordsListViewController()
+        let wordsVM = WordsListViewModel(chapter: chapter, delegate: self)
+        let wordsVC = WordsListViewController(viewModel: wordsVM)
         self.navigationController?.pushViewController(wordsVC, animated: true)
     }
     
@@ -264,5 +283,11 @@ extension HomeViewController: FirestoreDelegate {
         toast = Toast.custom(view: customToastView, config: config)
         toast?.show()
         AppCache.shared.isToastShown = true
+    }
+}
+
+extension HomeViewController: WordsListDelegate {
+    func didAddNewWord() {
+        self.tableView.reloadData()
     }
 }

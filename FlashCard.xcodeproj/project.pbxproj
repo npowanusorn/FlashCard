@@ -30,6 +30,10 @@
 		50A9EDBC2B9F81C600F1DBB1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50A9EDBB2B9F81C600F1DBB1 /* GoogleService-Info.plist */; };
 		50A9EDC02B9F96A200F1DBB1 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A9EDBF2B9F96A200F1DBB1 /* SettingsViewController.xib */; };
 		50A9EDC12B9F96A200F1DBB1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9EDBE2B9F96A200F1DBB1 /* SettingsViewController.swift */; };
+		50B2C4EA2C4582D300E0DC88 /* AddNewWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50B2C4E92C4582D300E0DC88 /* AddNewWordViewController.xib */; };
+		50B2C4EB2C4582D300E0DC88 /* AddNewWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B2C4E82C4582D300E0DC88 /* AddNewWordViewController.swift */; };
+		50B2C4ED2C45849100E0DC88 /* AddNewWordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B2C4EC2C45849100E0DC88 /* AddNewWordViewModel.swift */; };
+		50B2C4EF2C45880100E0DC88 /* WordsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B2C4EE2C45880100E0DC88 /* WordsListViewModel.swift */; };
 		50B7A4DF2BA1056400F4AC6A /* Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B7A4DE2BA1056400F4AC6A /* Change.swift */; };
 		50B7A4E32BA119C600F4AC6A /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B7A4E22BA119C600F4AC6A /* Toast.swift */; };
 		50B7A4EB2BA1238D00F4AC6A /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 50B7A4EA2BA1238D00F4AC6A /* Toast */; };
@@ -70,6 +74,10 @@
 		50A9EDBB2B9F81C600F1DBB1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		50A9EDBE2B9F96A200F1DBB1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		50A9EDBF2B9F96A200F1DBB1 /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		50B2C4E82C4582D300E0DC88 /* AddNewWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewWordViewController.swift; sourceTree = "<group>"; };
+		50B2C4E92C4582D300E0DC88 /* AddNewWordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNewWordViewController.xib; sourceTree = "<group>"; };
+		50B2C4EC2C45849100E0DC88 /* AddNewWordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewWordViewModel.swift; sourceTree = "<group>"; };
+		50B2C4EE2C45880100E0DC88 /* WordsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsListViewModel.swift; sourceTree = "<group>"; };
 		50B7A4DE2BA1056400F4AC6A /* Change.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Change.swift; sourceTree = "<group>"; };
 		50B7A4E22BA119C600F4AC6A /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		50C125AE2B983FC900BC57B6 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +157,16 @@
 			path = SettingsVC;
 			sourceTree = "<group>";
 		};
+		50B2C4E72C4582C400E0DC88 /* AddNewWordVC */ = {
+			isa = PBXGroup;
+			children = (
+				50B2C4E82C4582D300E0DC88 /* AddNewWordViewController.swift */,
+				50B2C4E92C4582D300E0DC88 /* AddNewWordViewController.xib */,
+				50B2C4EC2C45849100E0DC88 /* AddNewWordViewModel.swift */,
+			);
+			path = AddNewWordVC;
+			sourceTree = "<group>";
+		};
 		50C125B22B9843FC00BC57B6 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +220,7 @@
 			children = (
 				50F354C22B97DD4A003AEBE1 /* WordsListViewController.swift */,
 				50F354C32B97DD4A003AEBE1 /* WordsListViewController.xib */,
+				50B2C4EE2C45880100E0DC88 /* WordsListViewModel.swift */,
 			);
 			path = WordsListVC;
 			sourceTree = "<group>";
@@ -264,6 +283,7 @@
 		50F354F22B981F19003AEBE1 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				50B2C4E72C4582C400E0DC88 /* AddNewWordVC */,
 				50A9EDBD2B9F969100F1DBB1 /* SettingsVC */,
 				50E7FFAC2B9D6473009745C7 /* HomeVC */,
 				50E7FFAF2B9D6488009745C7 /* QuizVC */,
@@ -360,6 +380,7 @@
 				50A9ED9F2B9E43C500F1DBB1 /* SignUpSignInViewController.xib in Resources */,
 				502F20482B998EFE001053D8 /* SelectChaptersViewController.xib in Resources */,
 				50C125B12B983FC900BC57B6 /* ReviewViewController.xib in Resources */,
+				50B2C4EA2C4582D300E0DC88 /* AddNewWordViewController.xib in Resources */,
 				50A9EDC02B9F96A200F1DBB1 /* SettingsViewController.xib in Resources */,
 				50E7FF5E2B9A7797009745C7 /* QuizViewController.xib in Resources */,
 				50A9EDBC2B9F81C600F1DBB1 /* GoogleService-Info.plist in Resources */,
@@ -390,11 +411,14 @@
 				502F20442B99694B001053D8 /* SCView.swift in Sources */,
 				50F3549F2B979201003AEBE1 /* SceneDelegate.swift in Sources */,
 				50A9EDC12B9F96A200F1DBB1 /* SettingsViewController.swift in Sources */,
+				50B2C4EF2C45880100E0DC88 /* WordsListViewModel.swift in Sources */,
 				50A9EDAE2B9E532400F1DBB1 /* Validator.swift in Sources */,
 				50C125B92B9852A100BC57B6 /* Stack.swift in Sources */,
 				50F354ED2B98009D003AEBE1 /* Constants.swift in Sources */,
 				50C125B42B98441700BC57B6 /* RoundShadowView.swift in Sources */,
+				50B2C4EB2C4582D300E0DC88 /* AddNewWordViewController.swift in Sources */,
 				50B7A4DF2BA1056400F4AC6A /* Change.swift in Sources */,
+				50B2C4ED2C45849100E0DC88 /* AddNewWordViewModel.swift in Sources */,
 				50F354B62B979635003AEBE1 /* HomeViewController.swift in Sources */,
 				50C125B02B983FC900BC57B6 /* ReviewViewController.swift in Sources */,
 				50F354BD2B979FAC003AEBE1 /* Chapter+WordList.swift in Sources */,
