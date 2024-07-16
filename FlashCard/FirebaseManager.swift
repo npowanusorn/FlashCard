@@ -103,34 +103,7 @@ class FirestoreManager {
             .collection(K.FirestoreKeys.CollectionKeys.chapters)
         do {
             if !AppCache.shared.didAddSnapshotListener {
-                chaptersCollection.addSnapshotListener { querySnapshot, error in
-                    guard let snapshot = querySnapshot else {
-                        Log.error(error!)
-                        return
-                    }
-                    AppCache.shared.didAddSnapshotListener = true
-                    snapshot.documentChanges.forEach { diff in
-                        let data = diff.document.data()
-                        let title = data[K.FirestoreKeys.FieldKeys.title] as? String ?? ""
-                        let id = data[K.FirestoreKeys.FieldKeys.id] as? String ?? ""
-                        guard !selfChanges.contains(id) else {
-                            selfChanges.removeAll { $0 == id }
-                            return
-                        }
-                        if diff.type == .added {
-                            Log.info("ADDED: \(data)")
-                            delegate?.didUpdate(change: Change(changeType: .added, title: title, id: id))
-                        }
-                        if diff.type == .removed {
-                            Log.info("REMOVED: \(data)")
-                            delegate?.didUpdate(change: Change(changeType: .removed, title: title, id: id))
-                        }
-                        if diff.type == .modified {
-                            Log.info("MODIFIED: \(data)")
-                            delegate?.didUpdate(change: Change(changeType: .modified, title: title, id: id))
-                        }
-                    }
-                }
+                addSnapshotListener(collection: chaptersCollection)
             }
             let chaptersSnapshot = try await chaptersCollection.order(by: "title").getDocuments()
             let chaptersDocuments = chaptersSnapshot.documents
@@ -141,6 +114,7 @@ class FirestoreManager {
                 let wordListCollectionQuery = chaptersCollection
                     .document(chaptersDocument.documentID)
                     .collection(K.FirestoreKeys.CollectionKeys.wordList)
+                addSnapshotListener(collection: wordListCollectionQuery)
                 let wordListSnapshot = try await wordListCollectionQuery.getDocuments()
                 let wordListDocuments = wordListSnapshot.documents
                 for wordListDocument in wordListDocuments {
@@ -170,6 +144,38 @@ class FirestoreManager {
         } catch {
             Log.error("getData error: \(error)")
             return
+        }
+    }
+    
+    private static func addSnapshotListener(collection: CollectionReference) {
+        collection.addSnapshotListener { querySnapshot, error in
+            guard let querySnapshot = querySnapshot else {
+                Log.error("Add snapshot error for \(collection.collectionID): \(error?.localizedDescription ?? "")")
+                return
+            }
+            AppCache.shared.didAddSnapshotListener = true
+            querySnapshot.documentChanges.forEach { diff in
+                let data = diff.document.data()
+                let title = data[K.FirestoreKeys.FieldKeys.title] as? String ?? ""
+                let id = data[K.FirestoreKeys.FieldKeys.id] as? String ?? ""
+                guard !selfChanges.contains(id) else {
+                    selfChanges.removeAll { $0 == id }
+                    return
+                }
+                Log.info(diff.type.rawValue)
+                if diff.type == .added {
+                    Log.info("ADDED: \(data)")
+                    delegate?.didUpdate(change: Change(changeType: .added, title: title, id: id))
+                }
+                if diff.type == .removed {
+                    Log.info("REMOVED: \(data)")
+                    delegate?.didUpdate(change: Change(changeType: .removed, title: title, id: id))
+                }
+                if diff.type == .modified {
+                    Log.info("MODIFIED: \(data)")
+                    delegate?.didUpdate(change: Change(changeType: .modified, title: title, id: id))
+                }
+            }
         }
     }
     

@@ -60,15 +60,15 @@ class SignUpSignInViewController: UIViewController {
         Log.info("did begin edit")
         guard let textField = sender as? BaseTextField else { return }
         if textField == emailTextField {
-            emailTextField.setWhiteBorder()
+            emailTextField.setBorder()
             passwordTextField.removeBorder()
             confirmPasswordTextField.removeBorder()
         } else if textField == passwordTextField {
-            passwordTextField.setWhiteBorder()
+            passwordTextField.setBorder()
             emailTextField.removeBorder()
             confirmPasswordTextField.removeBorder()
         } else {
-            confirmPasswordTextField.setWhiteBorder()
+            confirmPasswordTextField.setBorder()
             emailTextField.removeBorder()
             passwordTextField.removeBorder()
         }
@@ -198,7 +198,7 @@ extension SignUpSignInViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         guard let textField = textField as? BaseTextField else { return }
-        textField.setWhiteBorder()
+        textField.setBorder()
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {

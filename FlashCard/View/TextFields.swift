@@ -46,21 +46,23 @@ class BaseTextField: UITextField {
 
         self.layer.cornerRadius = 12.0
         self.layer.masksToBounds = true
-        self.layer.borderWidth = 0.0
-        self.layer.borderColor = nil
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.label.withAlphaComponent(0).cgColor
         self.clipsToBounds = false
         self.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         self.textColor = .label
     }
 
-    func setWhiteBorder() {
-        self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.label.cgColor
+    func setBorder() {
+        UIView.animate(withDuration: 0.1) {
+            self.layer.borderColor = UIColor.label.withAlphaComponent(1).cgColor
+        }
     }
 
     func removeBorder() {
-        self.layer.borderWidth = 0.0
-        self.layer.borderColor = nil
+        UIView.animate(withDuration: 0.1) {
+            self.layer.borderColor = UIColor.label.withAlphaComponent(0).cgColor
+        }
     }
 
 }
