@@ -211,7 +211,45 @@ class FirestoreManager {
     }
     
     static func writeData(newWord: WordList, for chapter: Chapter) async {
+        guard let currentUser = Auth.auth().currentUser else { return }
         Log.info("WRITE WORDLIST: \(newWord.description) FOR CHAPTER: \(chapter.description)")
+        let db = Firestore.firestore()
+        do {
+            let chapterCollection = db.collection(K.FirestoreKeys.CollectionKeys.users)
+                .document(currentUser.uid)
+                .collection(K.FirestoreKeys.CollectionKeys.chapters)
+            let documentForChapter = try await chapterCollection.getDocuments()
+            var correctDocumentID = ""
+            documentForChapter.documents.forEach { document in
+                let id = document.data()[K.FirestoreKeys.FieldKeys.id] as? String ?? ""
+                if id == chapter.id {
+                    correctDocumentID = document.documentID
+                }
+            }
+            guard !correctDocumentID.isEmpty else {
+                Log.error("unable to find chapter")
+                return
+            }
+            let wordsListCollection = chapterCollection
+                .document(correctDocumentID)
+                .collection(K.FirestoreKeys.CollectionKeys.wordList)
+            wordsListCollection.addDocument(data: [
+                K.FirestoreKeys.FieldKeys.korDef : newWord.korDef,
+                K.FirestoreKeys.FieldKeys.enDef : newWord.enDef,
+                K.FirestoreKeys.FieldKeys.syn : newWord.syn,
+                K.FirestoreKeys.FieldKeys.ant : newWord.ant,
+                K.FirestoreKeys.FieldKeys.korExSe : newWord.korExSe,
+                K.FirestoreKeys.FieldKeys.enExSe : newWord.enExSe,
+                K.FirestoreKeys.FieldKeys.descr : newWord.descr,
+            ]) { error in
+                if let error = error {
+                    Log.error("ERROR: \(error.localizedDescription)")
+                }
+            }
+            Log.info("WRITE FINISH")
+        } catch {
+            Log.error("WRITE NEWWORD FAILED")
+        }
     }
     
     static func deleteData(chapterIDToDelete: String) async {
