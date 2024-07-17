@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import SnapKit
 
 class SettingsViewController: UIViewController {
 
@@ -26,6 +27,21 @@ class SettingsViewController: UIViewController {
     
     private func getTableFooterView() -> UIView {
         let logOutView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 120))
+        let currentEmail = Auth.auth().currentUser?.email ?? "Unknown email"
+        let currentEmailLabel = UILabel()
+        currentEmailLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        currentEmailLabel.text = "\(currentEmail)\n\nuid: \(Auth.auth().currentUser?.uid ?? "Unknown uid")"
+        currentEmailLabel.translatesAutoresizingMaskIntoConstraints = false
+        currentEmailLabel.numberOfLines = 0
+        currentEmailLabel.textAlignment = .center
+        logOutView.addSubview(currentEmailLabel)
+        
+        currentEmailLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+        
         var buttonConfiguration = UIButton.Configuration.filled()
         buttonConfiguration.attributedTitle = getAttributedString(
             for: "Log out",
@@ -35,26 +51,18 @@ class SettingsViewController: UIViewController {
         buttonConfiguration.baseForegroundColor = .white
         buttonConfiguration.background.strokeWidth = 1.0
         buttonConfiguration.cornerStyle = .large
-        let button = BounceButton(configuration: buttonConfiguration)
+        let button = UIButton(configuration: buttonConfiguration)
         button.addTarget(self, action: #selector(logOutTapped), for: .touchUpInside)
         logOutView.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.snp.makeConstraints { make in
+            make.width.equalToSuperview().dividedBy(2)
+            make.height.equalTo(40)
+            make.top.equalTo(currentEmailLabel.snp.bottom).offset(20)
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
 
-        button.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        button.centerXAnchor.constraint(equalTo: logOutView.centerXAnchor, constant: 0).isActive = true
-        button.centerYAnchor.constraint(equalTo: logOutView.centerYAnchor, constant: 0).isActive = true
-        
-        let currentEmail = Auth.auth().currentUser?.email ?? "LocalizedKeys.localAccount.localized"
-        let currentEmailLabel = UILabel()
-        currentEmailLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        currentEmailLabel.text = currentEmail
-        currentEmailLabel.translatesAutoresizingMaskIntoConstraints = false
-        logOutView.addSubview(currentEmailLabel)
-        
-        currentEmailLabel.centerXAnchor.constraint(equalTo: logOutView.centerXAnchor).isActive = true
-        currentEmailLabel.topAnchor.constraint(equalTo: logOutView.topAnchor, constant: 0).isActive = true
-        
         return logOutView
     }
     
@@ -84,9 +92,11 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath)
         var content = UIListContentConfiguration.cell()

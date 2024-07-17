@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppCache.shared.isSignInTapped = nil
         
         let console = ConsoleDestination()
-        console.format = "$DHH:mm:ss$d $C$L$c $N.$F:$l - $M"
+        console.format = "--LOG-- $DHH:mm:ss$d $C$L$c $N.$F:$l - $M"
         log.addDestination(console)
         
         return true

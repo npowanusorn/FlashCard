@@ -22,6 +22,7 @@ enum K {
         static let isGoogleSignedIn = "isGoogleSignedIn"
         static let questionType = "questionType"
         static let reviewSelectedSegment = "reviewSelectedSegment"
+        static let addedCollectionsSnapshotID = "addedCollectionsSnapshotID"
     }
     
     enum CellIDs {
@@ -101,6 +102,7 @@ enum K {
             static let enExSe = "enExSe"
             static let descr = "descr"
             static let id = "id"
+            static let isChapter = "isChapter"
         }
     }
     

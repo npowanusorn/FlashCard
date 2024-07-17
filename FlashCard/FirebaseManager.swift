@@ -91,9 +91,17 @@ class AuthManager {
 // MARK: - Firestore
 class FirestoreManager {
     static var delegate: FirestoreDelegate?
+    private static var allChapterIDs = [String]()
+    private static var allWordsIDs: [String] = ChapterManager.shared.getWordListIDs() {
+        didSet {
+            
+        }
+    }
     private static var selfChanges: [String] = []
     
-    static func getData() async {
+    // MARK: - getData
+    /// gets all data from Firebase
+    static func getData(isFromAppLaunch: Bool) async {
         guard let currentUser = Auth.auth().currentUser else { return }
         Log.info("getData called")
         ChapterManager.shared.removeAll()
@@ -102,19 +110,18 @@ class FirestoreManager {
             .document(currentUser.uid)
             .collection(K.FirestoreKeys.CollectionKeys.chapters)
         do {
-            if !AppCache.shared.didAddSnapshotListener {
-                addSnapshotListener(collection: chaptersCollection)
-            }
-            let chaptersSnapshot = try await chaptersCollection.order(by: "title").getDocuments()
+            addSnapshotListener(collection: chaptersCollection)
+            let chaptersSnapshot = try await chaptersCollection.order(by: K.FirestoreKeys.FieldKeys.title).getDocuments()
             let chaptersDocuments = chaptersSnapshot.documents
             for chaptersDocument in chaptersDocuments {
                 let title = chaptersDocument.data()[K.FirestoreKeys.FieldKeys.title] as? String ?? ""
                 let id = chaptersDocument.data()[K.FirestoreKeys.FieldKeys.id] as? String ?? ""
+                allChapterIDs.append(id)
                 let newChapter = Chapter(chapterStruct: ChapterStruct(title: title, wordList: []), id: id)
                 let wordListCollectionQuery = chaptersCollection
                     .document(chaptersDocument.documentID)
                     .collection(K.FirestoreKeys.CollectionKeys.wordList)
-                addSnapshotListener(collection: wordListCollectionQuery)
+                addSnapshotListener(collection: wordListCollectionQuery, with: chaptersDocument.documentID)
                 let wordListSnapshot = try await wordListCollectionQuery.getDocuments()
                 let wordListDocuments = wordListSnapshot.documents
                 for wordListDocument in wordListDocuments {
@@ -138,6 +145,8 @@ class FirestoreManager {
                     newChapter.addWord(new: WordList(wordStruct: newWordStruct, id: id))
                 }
                 ChapterManager.shared.addChapter(chapter: newChapter)
+                Log.info("chapterIDs: \(ChapterManager.shared.getChapterIDs())")
+                Log.info("wordListIDs: \(ChapterManager.shared.getWordListIDs())")
             }
             Log.info("getData finish")
             return
@@ -147,38 +156,60 @@ class FirestoreManager {
         }
     }
     
-    private static func addSnapshotListener(collection: CollectionReference) {
+    // MARK: - addSnapshotListener
+    /// Adds snapshot listener to the collection to listen for changes
+    /// - Parameters:
+    ///     - collection: collection to add listener to
+    private static func addSnapshotListener(collection: CollectionReference, with id: String? = nil) {
+        guard !AppCache.shared.didAddSnapshotListener(for: id ?? collection.collectionID) else { return }
+        Log.info("add listener for: \(id ?? collection.collectionID)")
         collection.addSnapshotListener { querySnapshot, error in
             guard let querySnapshot = querySnapshot else {
                 Log.error("Add snapshot error for \(collection.collectionID): \(error?.localizedDescription ?? "")")
                 return
             }
-            AppCache.shared.didAddSnapshotListener = true
-            querySnapshot.documentChanges.forEach { diff in
-                let data = diff.document.data()
-                let title = data[K.FirestoreKeys.FieldKeys.title] as? String ?? ""
-                let id = data[K.FirestoreKeys.FieldKeys.id] as? String ?? ""
-                guard !selfChanges.contains(id) else {
-                    selfChanges.removeAll { $0 == id }
-                    return
-                }
-                Log.info(diff.type.rawValue)
-                if diff.type == .added {
-                    Log.info("ADDED: \(data)")
-                    delegate?.didUpdate(change: Change(changeType: .added, title: title, id: id))
-                }
-                if diff.type == .removed {
-                    Log.info("REMOVED: \(data)")
-                    delegate?.didUpdate(change: Change(changeType: .removed, title: title, id: id))
-                }
-                if diff.type == .modified {
-                    Log.info("MODIFIED: \(data)")
-                    delegate?.didUpdate(change: Change(changeType: .modified, title: title, id: id))
+            AppCache.shared.addedSnapshotListener(for: id ?? collection.collectionID)
+            Log.info("documentChanges: \(querySnapshot.documentChanges.count)")
+            Task {
+                try await Task.sleep(nanoseconds: UInt64(1 * Double(NSEC_PER_SEC)))
+                main {
+                    handleDocumentChanges(changes: querySnapshot.documentChanges)
                 }
             }
         }
     }
     
+    static private func handleDocumentChanges(changes: [DocumentChange]) {
+        changes.forEach { diff in
+            let data = diff.document.data()
+            let id = data[K.FirestoreKeys.FieldKeys.id] as? String ?? ""
+            Log.info("data: \(data)")
+            let chapterIDs = ChapterManager.shared.getChapterIDs()
+            let wordListIDs = ChapterManager.shared.getWordListIDs()
+            Log.info("chapterIDs: \(chapterIDs)")
+            Log.info("wordListIDs: \(wordListIDs)")
+            switch diff.type {
+            case .added:
+                if !chapterIDs.contains(id) && !wordListIDs.contains(id) {
+                    Log.info("ADDED: \(data)")
+                    delegate?.didUpdate()
+                }
+            case .removed:
+                if chapterIDs.contains(id) || wordListIDs.contains(id) {
+                    Log.info("REMOVED: \(data)")
+                    delegate?.didUpdate()
+                }
+            case .modified:
+                Log.info("MODIFIED: \(data)")
+                delegate?.didUpdate()
+            }
+        }
+    }
+    
+    // MARK: - writeData(newChapter)
+    /// adds new chapter to Firebase
+    /// - Parameters:
+    ///     - newChapter: new chapter to be added
     static func writeData(newChapter: Chapter) async {
         guard let currentUser = Auth.auth().currentUser else { return }
         selfChanges.append(newChapter.id)
@@ -188,8 +219,9 @@ class FirestoreManager {
             .document(currentUser.uid)
             .collection(K.FirestoreKeys.CollectionKeys.chapters)
         let newDocID = chapterCollection.addDocument(data: [
-            K.FirestoreKeys.FieldKeys.title : newChapter.title,
-            K.FirestoreKeys.FieldKeys.id : newChapter.id
+            K.FirestoreKeys.FieldKeys.title: newChapter.title,
+            K.FirestoreKeys.FieldKeys.id: newChapter.id,
+            K.FirestoreKeys.FieldKeys.isChapter: true
         ]) { error in
             if let error = error {
                 Log.error("ERROR WRITING CHAPTER: \(error)")
@@ -200,13 +232,14 @@ class FirestoreManager {
             .collection(K.FirestoreKeys.CollectionKeys.wordList)
         for wordList in newChapter.wordList {
             wordListCollection.addDocument(data: [
-                K.FirestoreKeys.FieldKeys.korDef : wordList.korDef,
-                K.FirestoreKeys.FieldKeys.enDef : wordList.enDef,
-                K.FirestoreKeys.FieldKeys.syn : wordList.syn,
-                K.FirestoreKeys.FieldKeys.ant : wordList.ant,
-                K.FirestoreKeys.FieldKeys.korExSe : wordList.korExSe,
-                K.FirestoreKeys.FieldKeys.enExSe : wordList.enExSe,
-                K.FirestoreKeys.FieldKeys.descr : wordList.descr,
+                K.FirestoreKeys.FieldKeys.korDef: wordList.korDef,
+                K.FirestoreKeys.FieldKeys.enDef: wordList.enDef,
+                K.FirestoreKeys.FieldKeys.syn: wordList.syn,
+                K.FirestoreKeys.FieldKeys.ant: wordList.ant,
+                K.FirestoreKeys.FieldKeys.korExSe: wordList.korExSe,
+                K.FirestoreKeys.FieldKeys.enExSe: wordList.enExSe,
+                K.FirestoreKeys.FieldKeys.descr: wordList.descr,
+                K.FirestoreKeys.FieldKeys.id: wordList.getId()
             ]) { error in
                 if let error = error {
                     Log.error("ERROR: \(error)")
@@ -216,9 +249,15 @@ class FirestoreManager {
         Log.info("writeData finish")
     }
     
+    // MARK: - writeData(newWord)
+    /// adds new word to a chapter
+    /// - Parameters:
+    ///     - newWord: new word to be added
+    ///     - chapter: chapter the word belongs to
     static func writeData(newWord: WordList, for chapter: Chapter) async {
         guard let currentUser = Auth.auth().currentUser else { return }
         Log.info("WRITE WORDLIST: \(newWord.description) FOR CHAPTER: \(chapter.description)")
+        selfChanges.append(newWord.getId())
         let db = Firestore.firestore()
         do {
             let chapterCollection = db.collection(K.FirestoreKeys.CollectionKeys.users)
@@ -240,13 +279,14 @@ class FirestoreManager {
                 .document(correctDocumentID)
                 .collection(K.FirestoreKeys.CollectionKeys.wordList)
             wordsListCollection.addDocument(data: [
-                K.FirestoreKeys.FieldKeys.korDef : newWord.korDef,
-                K.FirestoreKeys.FieldKeys.enDef : newWord.enDef,
-                K.FirestoreKeys.FieldKeys.syn : newWord.syn,
-                K.FirestoreKeys.FieldKeys.ant : newWord.ant,
-                K.FirestoreKeys.FieldKeys.korExSe : newWord.korExSe,
-                K.FirestoreKeys.FieldKeys.enExSe : newWord.enExSe,
-                K.FirestoreKeys.FieldKeys.descr : newWord.descr,
+                K.FirestoreKeys.FieldKeys.korDef: newWord.korDef,
+                K.FirestoreKeys.FieldKeys.enDef: newWord.enDef,
+                K.FirestoreKeys.FieldKeys.syn: newWord.syn,
+                K.FirestoreKeys.FieldKeys.ant: newWord.ant,
+                K.FirestoreKeys.FieldKeys.korExSe: newWord.korExSe,
+                K.FirestoreKeys.FieldKeys.enExSe: newWord.enExSe,
+                K.FirestoreKeys.FieldKeys.descr: newWord.descr,
+                K.FirestoreKeys.FieldKeys.id: newWord.getId()
             ]) { error in
                 if let error = error {
                     Log.error("ERROR: \(error.localizedDescription)")
@@ -258,6 +298,10 @@ class FirestoreManager {
         }
     }
     
+    // MARK: - deleteData
+    /// delete chapter from Firebase
+    /// - Parameters:
+    ///     - chapterIDToDelete: ID of the chapter to be deleted
     static func deleteData(chapterIDToDelete: String) async {
         guard let currentUser = Auth.auth().currentUser else { return }
         Log.info("deleteData called")
@@ -281,12 +325,20 @@ class FirestoreManager {
     }
 }
 
+// MARK: - FirestoreDelegate
+/// delegate protocol to notify change
 protocol FirestoreDelegate {
-    func didUpdate(change: Change) -> Void
+    func didUpdate() -> Void
 }
 
 // MARK: - FirebaseErrorManager
 class FirebaseErrorManager {
+    
+    // MARK: - handleError
+    /// handle errors returned from Firebase operations
+    /// - Parameters:
+    ///     - error: The error returned from Firebase operation
+    ///     - viewController: ViewController to display error alert
     static func handleError(error: NSError, viewController: UIViewController) {
         var errorMessage = ""
         guard let errorCode = AuthErrorCode.Code(rawValue: error.code) else { return }

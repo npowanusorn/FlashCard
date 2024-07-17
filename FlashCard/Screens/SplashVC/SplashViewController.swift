@@ -106,7 +106,7 @@ class SplashViewController: UIViewController {
     }
     
     private func attemptToGetData() async {
-        await FirestoreManager.getData()
+        await FirestoreManager.getData(isFromAppLaunch: true)
     }
     
     private func navigateToNextScreen(isSignedIn: Bool) {

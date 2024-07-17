@@ -10,6 +10,7 @@
 		502F20442B99694B001053D8 /* SCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502F20432B99694B001053D8 /* SCView.swift */; };
 		502F20482B998EFE001053D8 /* SelectChaptersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 502F20472B998EFE001053D8 /* SelectChaptersViewController.xib */; };
 		502F20492B998EFE001053D8 /* SelectChaptersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502F20462B998EFE001053D8 /* SelectChaptersViewController.swift */; };
+		505429B72C4808D600D0C0EA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 505429B62C4808D600D0C0EA /* SnapKit */; };
 		50A9ED912B9E426C00F1DBB1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9ED902B9E426C00F1DBB1 /* FirebaseAuth */; };
 		50A9ED932B9E426C00F1DBB1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9ED922B9E426C00F1DBB1 /* FirebaseFirestore */; };
 		50A9ED962B9E43A800F1DBB1 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9ED942B9E43A800F1DBB1 /* WelcomeViewController.swift */; };
@@ -113,6 +114,7 @@
 				50A9EDBA2B9F7B9900F1DBB1 /* GoogleSignInSwift in Frameworks */,
 				50A9ED912B9E426C00F1DBB1 /* FirebaseAuth in Frameworks */,
 				50A9ED932B9E426C00F1DBB1 /* FirebaseFirestore in Frameworks */,
+				505429B72C4808D600D0C0EA /* SnapKit in Frameworks */,
 				50A9EDAA2B9E4A5B00F1DBB1 /* SwiftyBeaver in Frameworks */,
 				50A9EDB82B9F7B9900F1DBB1 /* GoogleSignIn in Frameworks */,
 			);
@@ -121,6 +123,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		505429B42C47AACC00D0C0EA /* QuizModule */ = {
+			isa = PBXGroup;
+			children = (
+				50E7FFAF2B9D6488009745C7 /* QuizVC */,
+			);
+			path = QuizModule;
+			sourceTree = "<group>";
+		};
 		50A9EDA02B9E43CF00F1DBB1 /* SignUpSignInVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,6 +272,7 @@
 		50F3549B2B979201003AEBE1 /* FlashCard */ = {
 			isa = PBXGroup;
 			children = (
+				505429B42C47AACC00D0C0EA /* QuizModule */,
 				50C125B52B984DBD00BC57B6 /* AppCache.swift */,
 				50F354A52B979202003AEBE1 /* Assets.xcassets */,
 				50F354EE2B980695003AEBE1 /* CommonMethods+Extensions.swift */,
@@ -286,7 +297,6 @@
 				50B2C4E72C4582C400E0DC88 /* AddNewWordVC */,
 				50A9EDBD2B9F969100F1DBB1 /* SettingsVC */,
 				50E7FFAC2B9D6473009745C7 /* HomeVC */,
-				50E7FFAF2B9D6488009745C7 /* QuizVC */,
 				50E7FFAB2B9D646E009745C7 /* ReviewVC */,
 				50E7FFAE2B9D6481009745C7 /* SelectChaptersVC */,
 				50A9EDA02B9E43CF00F1DBB1 /* SignUpSignInVC */,
@@ -322,6 +332,7 @@
 				50A9EDB72B9F7B9900F1DBB1 /* GoogleSignIn */,
 				50A9EDB92B9F7B9900F1DBB1 /* GoogleSignInSwift */,
 				50B7A4EA2BA1238D00F4AC6A /* Toast */,
+				505429B62C4808D600D0C0EA /* SnapKit */,
 			);
 			productName = flashcard;
 			productReference = 50F354992B979201003AEBE1 /* FlashCard.app */;
@@ -358,6 +369,7 @@
 				50A9EDB12B9E9CC100F1DBB1 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 				50A9EDB62B9F7B9900F1DBB1 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				50B7A4E92BA1238D00F4AC6A /* XCRemoteSwiftPackageReference "toast-swift" */,
+				505429B52C4808D600D0C0EA /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 50F3549A2B979201003AEBE1 /* Products */;
 			projectDirPath = "";
@@ -637,6 +649,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		505429B52C4808D600D0C0EA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 		50A9ED8F2B9E426C00F1DBB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -688,6 +708,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		505429B62C4808D600D0C0EA /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 505429B52C4808D600D0C0EA /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
 		50A9ED902B9E426C00F1DBB1 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 50A9ED8F2B9E426C00F1DBB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

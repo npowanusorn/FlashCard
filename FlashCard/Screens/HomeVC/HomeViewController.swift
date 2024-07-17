@@ -83,7 +83,7 @@ class HomeViewController: UITableViewController {
         Task {
             ProgressHUD.animationType = .horizontalDotScaling
             ProgressHUD.animate()
-            await FirestoreManager.getData()
+            await FirestoreManager.getData(isFromAppLaunch: false)
             self.tableView.reloadData()
             ProgressHUD.dismiss()
         }
@@ -150,15 +150,22 @@ class HomeViewController: UITableViewController {
         Task {
             ProgressHUD.animationType = .horizontalDotScaling
             ProgressHUD.animate()
-            await FirestoreManager.getData()
+            await FirestoreManager.getData(isFromAppLaunch: false)
             tableView.reloadData()
             ProgressHUD.dismiss()
+            self.navigationController?.popToRootViewController(animated: true)
         }
     }
     
     func createNewChapter(title: String) {
         guard !title.isEmpty else {
             let alert = UIAlertController.showErrorAlert(message: "Title cannot be blank")
+            self.present(alert, animated: true)
+            return
+        }
+        
+        guard !ChapterManager.shared.getChapters().contains(where: { $0.title == title }) else {
+            let alert = UIAlertController.showErrorAlert(message: "\(title) is already used")
             self.present(alert, animated: true)
             return
         }
@@ -270,10 +277,10 @@ extension HomeViewController: UISearchResultsUpdating {
 }
 
 extension HomeViewController: FirestoreDelegate {
-    func didUpdate(change: Change) {
+    func didUpdate() {
         Log.debug("AppCache.shared.isToastShown: \(AppCache.shared.isToastShown)")
         guard !AppCache.shared.isToastShown else { return }
-        Log.info("DIDUPDATE CALLED: \(change)")
+        Log.info("DIDUPDATE CALLED")
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapToast))
         let iconView = IconAppleToastView(image: K.Image.refresh.safeUIImage, title: "Update available", subtitle: "Tap to refresh", viewConfig: ToastViewConfiguration())

@@ -54,7 +54,7 @@ class WelcomeViewController: UIViewController {
             Auth.auth().signIn(with: credentials) { _, error in
                 guard error == nil else { return }
                 Task {
-                    await FirestoreManager.getData()
+                    await FirestoreManager.getData(isFromAppLaunch: true)
                     self.goToHome()
                     ProgressHUD.dismiss()
                     UserDefaults.standard.set(true, forKey: K.Defaults.isGoogleSignedIn)

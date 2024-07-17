@@ -12,6 +12,7 @@ class AppCache {
     static let shared = AppCache()
     
     private let defaults = UserDefaults.standard
+    private var addedCollectionIDs = [String]()
     
     var selectedChapters = [Chapter]()
     var dictForSelectedChapter = [String:String]()
@@ -24,6 +25,16 @@ class AppCache {
     var user: GIDGoogleUser?
     var hasRestoredPreviousGoogleSignIn: Bool = false
     var shouldWelcomeVCAnimate: Bool = true
-    var didAddSnapshotListener: Bool = false
     var isToastShown: Bool = false
+    
+    func didAddSnapshotListener(for id: String) -> Bool {
+        addedCollectionIDs.contains(id)
+    }
+    
+    func addedSnapshotListener(for id: String) {
+//        var newCollectionIDs = addedCollectionIDs
+        addedCollectionIDs.append(id)
+        Log.info("addedCollectionIDs: \(addedCollectionIDs)")
+//        defaults.set(newCollectionIDs, forKey: K.Defaults.addedCollectionsSnapshotID)
+    }
 }

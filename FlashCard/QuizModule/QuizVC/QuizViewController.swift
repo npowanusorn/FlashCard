@@ -10,13 +10,13 @@ import UIKit
 class QuizViewController: UIViewController {
 
 //    private var quizType: QuizType = .mcq5
-    @IBOutlet weak var progressLabel: UILabel!
-    @IBOutlet weak var wordLabel: UILabel!
-    @IBOutlet weak var revealButton: UIButton!
-    @IBOutlet weak var bottomLeftButton: UIButton!
-    @IBOutlet weak var bottomRightButton: UIButton!
-    @IBOutlet weak var mcqView: UICollectionView!
-    @IBOutlet weak var answerLabel: UILabel!
+    @IBOutlet private weak var progressLabel: UILabel!
+    @IBOutlet private weak var wordLabel: UILabel!
+    @IBOutlet private weak var revealButton: UIButton!
+    @IBOutlet private weak var bottomLeftButton: UIButton!
+    @IBOutlet private weak var bottomRightButton: UIButton!
+    @IBOutlet private weak var mcqView: UICollectionView!
+    @IBOutlet private weak var answerLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()

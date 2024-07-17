@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,7 +10,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WordsListViewController" customModule="FlashCard" customModuleProvider="target">
             <connections>
+                <outlet property="addButton" destination="X9p-Y0-coc" id="X1I-nC-Vi1"/>
+                <outlet property="emptyTableLabel" destination="Lot-G3-lcm" id="phg-eg-6dk"/>
                 <outlet property="segmentedControl" destination="rwb-Na-J75" id="cPM-or-V6Q"/>
+                <outlet property="stackView" destination="rcg-2j-c0U" id="dd8-Pe-rWK"/>
                 <outlet property="tableView" destination="Gby-zV-nOj" id="xc0-EZ-3Cr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -30,6 +33,25 @@
                         <constraint firstAttribute="height" constant="40" id="ntB-tQ-qdE"/>
                     </constraints>
                 </view>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="rcg-2j-c0U">
+                    <rect key="frame" x="98.333333333333329" y="375.66666666666669" width="196.33333333333337" height="100.66666666666669"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lot-G3-lcm">
+                            <rect key="frame" x="0.0" y="0.0" width="196.33333333333334" height="40.333333333333336"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9p-Y0-coc">
+                            <rect key="frame" x="0.0" y="60.333333333333314" width="196.33333333333334" height="40.333333333333343"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Button" cornerStyle="large"/>
+                            <connections>
+                                <action selector="addButtonTapped:" destination="-1" eventType="touchUpInside" id="3vq-eB-sQz"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
@@ -37,10 +59,13 @@
                 <constraint firstItem="rwb-Na-J75" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="1ce-sO-SE8"/>
                 <constraint firstAttribute="bottom" secondItem="Gby-zV-nOj" secondAttribute="bottom" id="CLb-Pe-5E4"/>
                 <constraint firstItem="Gby-zV-nOj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Lqs-vO-GZF"/>
+                <constraint firstItem="X9p-Y0-coc" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="RU8-J2-qKv"/>
                 <constraint firstItem="Gby-zV-nOj" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="UHg-O9-7ah"/>
                 <constraint firstItem="Gby-zV-nOj" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="aJ8-3X-q6c"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rwb-Na-J75" secondAttribute="trailing" constant="20" id="b7z-W0-2yB"/>
+                <constraint firstItem="rcg-2j-c0U" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="esu-K2-3xT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="rwb-Na-J75" secondAttribute="bottom" constant="20" id="rEF-VM-d8E"/>
+                <constraint firstItem="rcg-2j-c0U" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="zBZ-17-d2a"/>
             </constraints>
             <point key="canvasLocation" x="145.80152671755724" y="-13.380281690140846"/>
         </view>

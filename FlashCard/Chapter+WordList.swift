@@ -13,33 +13,39 @@ class ChapterManager {
     private init() {}
     
     private var chapters = [Chapter]()
+    private var chaptersIDs: [String] { chapters.map { $0.id }.sorted() }
+    private var wordListIDs: [String] {
+        var ids = [String]()
+        for chapter in chapters {
+            for wordList in chapter.wordList {
+                ids.append(wordList.getId())
+            }
+        }
+        return ids.sorted()
+    }
     
     func addChapter(chapter: Chapter) {
         chapters.append(chapter)
         chapters.sort { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
     }
     
-    func removeAll() {
-        chapters.removeAll()
-    }
+    func removeAll() { chapters.removeAll() }
     
-    func getChapters() -> [Chapter] {
-        return chapters
-    }
+    func getChapters() -> [Chapter] { chapters }
     
-    func getChapter(at index: Int) -> Chapter {
-        return chapters[index]
-    }
+    func getChapterIDs() -> [String] { chaptersIDs }
+    
+    func getWordListIDs() -> [String] { wordListIDs }
+    
+    func getChapter(at index: Int) -> Chapter { chapters[index] }
     
     func getChapter(title: String) -> Chapter {
-        return chapters.first { chapter in
+        chapters.first { chapter in
             chapter.title == title
         }!
     }
     
-    func removeChapter(at index: Int) -> Chapter {
-        return chapters.remove(at: index)
-    }
+    func removeChapter(at index: Int) -> Chapter { chapters.remove(at: index) }
     
     func checkTitleDuplicates(title: String) -> Bool {
         for chapter in chapters {

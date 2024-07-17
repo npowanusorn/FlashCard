@@ -11,18 +11,15 @@ import SwiftUI
 class WordsListViewController: UIViewController {
 
     private let viewModel: WordsListViewModel
-    private var chapter: Chapter {
-        viewModel.chapter
-    }
-    private var wordList: [WordList] {
-        chapter.wordList
-    }
+    private var chapter: Chapter { viewModel.chapter }
+    private var wordList: [WordList] { chapter.wordList }
     private let defaults = UserDefaults.standard
-//    var wordsDictArr = [String:String]()
-//    var keysForChapter = [String()]
     
-    @IBOutlet weak var segmentedControl: SCView!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var addButton: UIButton!
+    @IBOutlet private weak var emptyTableLabel: UILabel!
+    @IBOutlet private weak var stackView: UIStackView!
+    @IBOutlet private weak var segmentedControl: SCView!
+    @IBOutlet private weak var tableView: UITableView!
     
     init(viewModel: WordsListViewModel) {
         self.viewModel = viewModel
@@ -44,10 +41,23 @@ class WordsListViewController: UIViewController {
         setupSegmentedControl()
         self.navigationItem.rightBarButtonItem?.isEnabled = !wordList.isEmpty
         makeMenu()
+        emptyTableLabel.text = "No word in this chapter"
+        addButton.setTitle("Add new word", for: .normal)
+        addButton.titleLabel?.font = .boldSystemFont(ofSize: 17)
+        showHideElementsAsAppropriate()
+    }
+    
+    @IBAction func addButtonTapped(_ sender: Any) {
+        addNewWord()
     }
     
     func didTapSegment(_ segment: Int) {
         tableView.reloadData()
+    }
+    
+    private func showHideElementsAsAppropriate() {
+        tableView.isHidden = wordList.isEmpty
+        stackView.isHidden = !wordList.isEmpty
     }
     
     @objc func segmentedControlChanged() {
@@ -157,10 +167,6 @@ extension WordsListViewController: AddNewWordDelegate {
     func didAddNewWord() {
         viewModel.delegate.didAddNewWord()
         self.tableView.reloadData()
+        self.showHideElementsAsAppropriate()
     }
 }
-
-//private enum Constants {
-//    static let isPad = UIDevice.current.userInterfaceIdiom == .pad
-//    static let fontSize: CGFloat = isPad ? 20 : UIFont.systemFontSize
-//}

@@ -148,7 +148,7 @@ class SignUpSignInViewController: UIViewController {
         Task {
             let success = await AuthManager.signIn(email: email, password: password, viewController: self)
             if success {
-                await FirestoreManager.getData()
+                await FirestoreManager.getData(isFromAppLaunch: true)
                 goToHome()
             }
             ProgressHUD.dismiss()
