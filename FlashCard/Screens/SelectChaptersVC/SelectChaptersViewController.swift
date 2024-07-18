@@ -12,6 +12,7 @@ class SelectChaptersViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectAllBtn: UIButton!
     
+    var viewModel: SelectChaptersViewModel
     var allChapters: [Chapter] = []
     var selected: [Chapter] = []
     var defaults = UserDefaults.standard
@@ -38,7 +39,16 @@ class SelectChaptersViewController: UIViewController {
         selectAllBtn.setTitle("Select all", for: .normal)
 //        selectAllBtn.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
     }
-
+    
+    init(viewModel: SelectChaptersViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     @IBAction func selectAllTapped(_ sender: Any) {
         switch buttonState {
         case .selectAll:
@@ -71,6 +81,7 @@ class SelectChaptersViewController: UIViewController {
     @objc func done() {
         AppCache.shared.reviewQuizSelectedChapters = selected       
         self.dismiss(animated: true) {
+            self.viewModel.delegate.didSelectChapter(self.selected, destination: self.viewModel.selectChapterFor)
             NotificationCenter.default.post(name: K.Notifications.selectedChapters, object: nil)
         }
     }

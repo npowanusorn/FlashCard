@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,13 +24,16 @@
                     <rect key="frame" x="0.0" y="59" width="393" height="793"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9nk-cD-WBE">
-                    <rect key="frame" x="20" y="778" width="353" height="40"/>
+                    <rect key="frame" x="40" y="778" width="313" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="hTx-du-O3S"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Button" cornerStyle="large">
+                        <fontDescription key="titleFontDescription" type="boldSystem" pointSize="17"/>
+                    </buttonConfiguration>
                     <connections>
                         <action selector="selectAllTapped:" destination="-1" eventType="touchUpInside" id="3pi-5u-foG"/>
                     </connections>
@@ -40,9 +43,9 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="9nk-cD-WBE" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="37y-vI-B8K"/>
-                <constraint firstItem="9nk-cD-WBE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="CEH-8V-9jx"/>
+                <constraint firstItem="9nk-cD-WBE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="CEH-8V-9jx"/>
                 <constraint firstItem="ucw-bq-6Ol" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Cv7-u2-ygf"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9nk-cD-WBE" secondAttribute="trailing" constant="20" id="gqv-RR-dpq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9nk-cD-WBE" secondAttribute="trailing" constant="40" id="gqv-RR-dpq"/>
                 <constraint firstItem="ucw-bq-6Ol" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="kJs-b4-xAi"/>
                 <constraint firstAttribute="bottom" secondItem="ucw-bq-6Ol" secondAttribute="bottom" id="tUn-8f-WcI"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ucw-bq-6Ol" secondAttribute="trailing" id="yX1-o5-AaG"/>

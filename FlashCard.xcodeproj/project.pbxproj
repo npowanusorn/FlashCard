@@ -11,6 +11,8 @@
 		502F20482B998EFE001053D8 /* SelectChaptersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 502F20472B998EFE001053D8 /* SelectChaptersViewController.xib */; };
 		502F20492B998EFE001053D8 /* SelectChaptersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502F20462B998EFE001053D8 /* SelectChaptersViewController.swift */; };
 		505429B72C4808D600D0C0EA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 505429B62C4808D600D0C0EA /* SnapKit */; };
+		505429B92C493A7500D0C0EA /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505429B82C493A7500D0C0EA /* QuizViewModel.swift */; };
+		505429BB2C49541300D0C0EA /* SelectChaptersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505429BA2C49541300D0C0EA /* SelectChaptersViewModel.swift */; };
 		50A9ED912B9E426C00F1DBB1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9ED902B9E426C00F1DBB1 /* FirebaseAuth */; };
 		50A9ED932B9E426C00F1DBB1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9ED922B9E426C00F1DBB1 /* FirebaseFirestore */; };
 		50A9ED962B9E43A800F1DBB1 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9ED942B9E43A800F1DBB1 /* WelcomeViewController.swift */; };
@@ -62,6 +64,8 @@
 		502F20432B99694B001053D8 /* SCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCView.swift; sourceTree = "<group>"; };
 		502F20462B998EFE001053D8 /* SelectChaptersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChaptersViewController.swift; sourceTree = "<group>"; };
 		502F20472B998EFE001053D8 /* SelectChaptersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectChaptersViewController.xib; sourceTree = "<group>"; };
+		505429B82C493A7500D0C0EA /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
+		505429BA2C49541300D0C0EA /* SelectChaptersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChaptersViewModel.swift; sourceTree = "<group>"; };
 		50A9ED942B9E43A800F1DBB1 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		50A9ED952B9E43A800F1DBB1 /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		50A9ED982B9E43B300F1DBB1 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -126,7 +130,9 @@
 		505429B42C47AACC00D0C0EA /* QuizModule */ = {
 			isa = PBXGroup;
 			children = (
-				50E7FFAF2B9D6488009745C7 /* QuizVC */,
+				50E7FF5C2B9A7797009745C7 /* QuizViewController.swift */,
+				50E7FF5D2B9A7797009745C7 /* QuizViewController.xib */,
+				505429B82C493A7500D0C0EA /* QuizViewModel.swift */,
 			);
 			path = QuizModule;
 			sourceTree = "<group>";
@@ -240,17 +246,9 @@
 			children = (
 				502F20462B998EFE001053D8 /* SelectChaptersViewController.swift */,
 				502F20472B998EFE001053D8 /* SelectChaptersViewController.xib */,
+				505429BA2C49541300D0C0EA /* SelectChaptersViewModel.swift */,
 			);
 			path = SelectChaptersVC;
-			sourceTree = "<group>";
-		};
-		50E7FFAF2B9D6488009745C7 /* QuizVC */ = {
-			isa = PBXGroup;
-			children = (
-				50E7FF5C2B9A7797009745C7 /* QuizViewController.swift */,
-				50E7FF5D2B9A7797009745C7 /* QuizViewController.xib */,
-			);
-			path = QuizVC;
 			sourceTree = "<group>";
 		};
 		50F354902B979201003AEBE1 = {
@@ -419,6 +417,7 @@
 				50F354EF2B980695003AEBE1 /* CommonMethods+Extensions.swift in Sources */,
 				50F3549D2B979201003AEBE1 /* AppDelegate.swift in Sources */,
 				50A9EDAC2B9E4FAA00F1DBB1 /* TextFields.swift in Sources */,
+				505429BB2C49541300D0C0EA /* SelectChaptersViewModel.swift in Sources */,
 				50A9ED962B9E43A800F1DBB1 /* WelcomeViewController.swift in Sources */,
 				502F20442B99694B001053D8 /* SCView.swift in Sources */,
 				50F3549F2B979201003AEBE1 /* SceneDelegate.swift in Sources */,
@@ -431,6 +430,7 @@
 				50B2C4EB2C4582D300E0DC88 /* AddNewWordViewController.swift in Sources */,
 				50B7A4DF2BA1056400F4AC6A /* Change.swift in Sources */,
 				50B2C4ED2C45849100E0DC88 /* AddNewWordViewModel.swift in Sources */,
+				505429B92C493A7500D0C0EA /* QuizViewModel.swift in Sources */,
 				50F354B62B979635003AEBE1 /* HomeViewController.swift in Sources */,
 				50C125B02B983FC900BC57B6 /* ReviewViewController.swift in Sources */,
 				50F354BD2B979FAC003AEBE1 /* Chapter+WordList.swift in Sources */,

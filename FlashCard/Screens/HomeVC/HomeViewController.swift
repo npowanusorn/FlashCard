@@ -46,12 +46,16 @@ class HomeViewController: UITableViewController {
         }
         let divider = makeMenu(children: [importFromFileAction, createAction])
         let reviewAction = UIAction(title: K.Texts.review, image: K.Image.book.safeUIImage) { _ in
-            let vc = SelectChaptersViewController()
-            let nav = UINavigationController(rootViewController: vc)
+            let viewModel = SelectChaptersViewModel(selectChapterFor: .review, delegate: self)
+            let selectChapterVC = SelectChaptersViewController(viewModel: viewModel)
+            let nav = UINavigationController(rootViewController: selectChapterVC)
             self.present(nav, animated: true)
         }
         let quizAction = UIAction(title: K.Texts.quiz, image: K.Image.book.safeUIImage) { _ in
-            Log.info("QUIZ")
+            let viewModel = SelectChaptersViewModel(selectChapterFor: .quiz, delegate: self)
+            let selectChapterVC = SelectChaptersViewController(viewModel: viewModel)
+            let nav = UINavigationController(rootViewController: selectChapterVC)
+            self.present(nav, animated: true)
         }
         let divider2 = makeMenu(children: [divider, reviewAction, quizAction])
         let settingsAction = UIAction(title: K.Texts.settings, image: K.Image.gear.safeUIImage) { _ in
@@ -135,8 +139,8 @@ class HomeViewController: UITableViewController {
     
     @objc func notificationReceived() {
         AppCache.shared.selectedChapters = AppCache.shared.reviewQuizSelectedChapters
-        let reviewVC = ReviewViewController()
-        self.navigationController?.pushViewController(reviewVC, animated: true)
+//        let reviewVC = ReviewViewController()
+//        self.navigationController?.pushViewController(reviewVC, animated: true)
     }
     
     func openSettings() {
@@ -296,5 +300,20 @@ extension HomeViewController: FirestoreDelegate {
 extension HomeViewController: WordsListDelegate {
     func didAddNewWord() {
         self.tableView.reloadData()
+    }
+}
+
+extension HomeViewController: SelectChaptersDelegate {
+    func didSelectChapter(_ chapters: [Chapter], destination: SelectChapterFor) {
+        switch destination {
+        case .review:
+            let reviewVC = ReviewViewController()
+            
+            self.navigationController?.pushViewController(reviewVC, animated: true)
+        case .quiz:
+            let quizVM = QuizViewModel(quizType: .blind, chapters: chapters)
+            let quizVC = QuizViewController(viewModel: quizVM)
+            self.navigationController?.pushViewController(quizVC, animated: true)
+        }
     }
 }

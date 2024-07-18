@@ -42,8 +42,8 @@ class WordsListViewController: UIViewController {
         self.navigationItem.rightBarButtonItem?.isEnabled = !wordList.isEmpty
         makeMenu()
         emptyTableLabel.text = "No word in this chapter"
+        emptyTableLabel.font = .boldSystemFont(ofSize: 17)
         addButton.setTitle("Add new word", for: .normal)
-        addButton.titleLabel?.font = .boldSystemFont(ofSize: 17)
         showHideElementsAsAppropriate()
     }
     
@@ -91,8 +91,11 @@ class WordsListViewController: UIViewController {
             let reviewVC = ReviewViewController()
             self.navigationController?.pushViewController(reviewVC, animated: true)
         }
-        let quizAction = UIAction(title: K.Texts.quiz, image: K.Image.book.safeUIImage) { _ in
-            // TODO
+        let quizAction = UIAction(title: K.Texts.quiz, image: K.Image.book.safeUIImage) { [self] _ in
+            let quizType = QuizType(rawValue: K.Defaults.questionType) ?? .blind
+            let quizViewModel = QuizViewModel(quizType: quizType, chapters: [viewModel.chapter])
+            let quizVC = QuizViewController(viewModel: quizViewModel)
+            self.navigationController?.pushViewController(quizVC, animated: true)
         }
         let submenu = UIMenu(options: .displayInline, children: [reviewAction, quizAction])
         let addAction = UIAction(title: "Add", image: K.Image.plus.safeUIImage) { _ in
