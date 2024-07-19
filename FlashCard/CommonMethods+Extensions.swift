@@ -156,9 +156,12 @@ extension UIAlertController {
         )
     }
     
-    static func showTextFieldAlert(with title: String, message: String?, actionTitle: String, completion: @escaping (_ textField: UITextField) -> Void) -> UIAlertController {
+    static func showTextFieldAlert(with title: String, message: String?, actionTitle: String, isSecureEntry: Bool = false, completion: @escaping (_ textField: UITextField) -> Void) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addTextField()
+        if isSecureEntry, let textField = alertController.textFields?.first {
+            textField.isSecureTextEntry = true
+        }
         
         let submitAction = UIAlertAction(title: actionTitle, style: .default) { _ in
             guard let textField = alertController.textFields?[0] else { return }

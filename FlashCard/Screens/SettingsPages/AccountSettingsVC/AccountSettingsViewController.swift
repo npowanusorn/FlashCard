@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 class AccountSettingsViewController: UIViewController {
 
@@ -43,8 +44,24 @@ extension AccountSettingsViewController: UITableViewDelegate, UITableViewDataSou
             let changeAccountVC = ChangeEmailPasswordViewController(viewModel: changeAccountViewModel)
             let navVC = UINavigationController(rootViewController: changeAccountVC)
             self.present(navVC, animated: true)
+        case 2:
+            let textFieldAlert = UIAlertController.showTextFieldAlert(with: "Delete Account", message: "Enter password to delete account", actionTitle: "Delete", isSecureEntry: true) { textField in
+                ProgressHUD.animationType = .horizontalDotScaling
+                ProgressHUD.animate()
+                Task {
+                    await AuthManager.deleteUser(password: textField.text ?? "", viewController: self)
+                    ProgressHUD.dismiss()
+                    AppCache.shared.shouldWelcomeVCAnimate = false
+                    let welcomeVC = WelcomeViewController()
+                    self.navigationController?.viewControllers = [welcomeVC, self]
+                    self.navigationController?.popToRootViewController(animated: true)
+                    resetApp()
+
+                }
+            }
+            self.present(textFieldAlert, animated: true)
         default:
-            Log.info("DELETE")
+            return
         }
     }
         

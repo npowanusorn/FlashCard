@@ -143,8 +143,9 @@ class SignUpSignInViewController: UIViewController {
     }
     
     func handleSignIn() {
-        ProgressHUD.animationType = .horizontalDotScaling
-        ProgressHUD.animate()
+        ProgressHUD.animationType = .activityIndicator
+//        ProgressHUD.colorHUD = .systemGroupedBackground
+        ProgressHUD.animate("Loading")
         Task {
             let success = await AuthManager.signIn(email: email, password: password, viewController: self)
             if success {
@@ -156,8 +157,8 @@ class SignUpSignInViewController: UIViewController {
     }
     
     func handleCreateUser() {
-        ProgressHUD.animationType = .horizontalDotScaling
-        ProgressHUD.colorHUD = .systemGroupedBackground
+        ProgressHUD.animationType = .activityIndicator
+//        ProgressHUD.colorHUD = .systemGroupedBackground
         ProgressHUD.animate()
         Task {
             let success = await AuthManager.createUser(email: email, password: password, viewController: self)
