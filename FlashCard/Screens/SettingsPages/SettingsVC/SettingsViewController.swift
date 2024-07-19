@@ -16,10 +16,10 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Settings"
+        self.title = K.Texts.settings
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "settingsCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.CellIDs.settingsVCID)
         self.navigationItem.largeTitleDisplayMode = .never
         
         tableView.tableFooterView = getTableFooterView()
@@ -27,10 +27,10 @@ class SettingsViewController: UIViewController {
     
     private func getTableFooterView() -> UIView {
         let logOutView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 120))
-        let currentEmail = Auth.auth().currentUser?.email ?? "Unknown email"
+        let currentEmail = Auth.auth().currentUser?.email ?? K.Texts.unknownEmail
         let currentEmailLabel = UILabel()
         currentEmailLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        currentEmailLabel.text = "\(currentEmail)\n\nuid: \(Auth.auth().currentUser?.uid ?? "Unknown uid")"
+        currentEmailLabel.text = "\(currentEmail)\n\nuid: \(Auth.auth().currentUser?.uid ?? K.Texts.unknownUID)"
         currentEmailLabel.translatesAutoresizingMaskIntoConstraints = false
         currentEmailLabel.numberOfLines = 0
         currentEmailLabel.textAlignment = .center
@@ -67,9 +67,16 @@ class SettingsViewController: UIViewController {
     }
     
     @objc private func logOutTapped() {
-        let alert = UIAlertController.showAlert(with: "Log out?", message: nil, style: .alert, primaryActionName: "Log out", primaryActionStyle: .default, secondaryActionName: "Cancel", secondaryActionStyle: .cancel) {
-            self.handleLogOut()
-        }
+        let alert = UIAlertController.showAlert(
+            with: "\(K.Texts.logOut)?",
+            message: nil,
+            style: .alert,
+            primaryActionName: K.Texts.logOut,
+            primaryActionStyle: .default,
+            secondaryActionName: K.Texts.cancel,
+            secondaryActionStyle: .cancel) {
+                self.handleLogOut()
+            }
         self.present(alert, animated: true)
     }
     
@@ -94,14 +101,29 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        SettingsMenu.MainSettings.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIDs.settingsVCID, for: indexPath)
         var content = UIListContentConfiguration.cell()
-        content.text = "1"
+        content.text = SettingsMenu.MainSettings.allCases[indexPath.row].rawValue
         cell.contentConfiguration = content
+        cell.accessoryType = .disclosureIndicator
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        switch SettingsMenu.MainSettings.allCases[indexPath.row] {
+        case .account:
+            let accountVC = AccountSettingsViewController()
+            accountVC.title = SettingsMenu.MainSettings.account.rawValue
+            self.navigationController?.pushViewController(accountVC, animated: true)
+        case .data:
+            Log.info("GO TO DATA")
+            present(UIAlertController.showNotImplementedAlert(), animated: true)
+        }
+         
     }
 }

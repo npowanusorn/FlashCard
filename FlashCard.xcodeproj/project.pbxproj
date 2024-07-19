@@ -13,6 +13,12 @@
 		505429B72C4808D600D0C0EA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 505429B62C4808D600D0C0EA /* SnapKit */; };
 		505429B92C493A7500D0C0EA /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505429B82C493A7500D0C0EA /* QuizViewModel.swift */; };
 		505429BB2C49541300D0C0EA /* SelectChaptersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505429BA2C49541300D0C0EA /* SelectChaptersViewModel.swift */; };
+		505429BD2C4A197200D0C0EA /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505429BC2C4A197200D0C0EA /* ReviewViewModel.swift */; };
+		505429C22C4A248800D0C0EA /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505429C02C4A248800D0C0EA /* AccountSettingsViewController.swift */; };
+		505429C32C4A248800D0C0EA /* AccountSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 505429C12C4A248800D0C0EA /* AccountSettingsViewController.xib */; };
+		505429C72C4A26FE00D0C0EA /* ChangeEmailPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505429C52C4A26FE00D0C0EA /* ChangeEmailPasswordViewController.swift */; };
+		505429C82C4A26FE00D0C0EA /* ChangeEmailPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 505429C62C4A26FE00D0C0EA /* ChangeEmailPasswordViewController.xib */; };
+		505429CA2C4A270600D0C0EA /* ChangeEmailPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505429C92C4A270600D0C0EA /* ChangeEmailPasswordViewModel.swift */; };
 		50A9ED912B9E426C00F1DBB1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9ED902B9E426C00F1DBB1 /* FirebaseAuth */; };
 		50A9ED932B9E426C00F1DBB1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 50A9ED922B9E426C00F1DBB1 /* FirebaseFirestore */; };
 		50A9ED962B9E43A800F1DBB1 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A9ED942B9E43A800F1DBB1 /* WelcomeViewController.swift */; };
@@ -66,6 +72,12 @@
 		502F20472B998EFE001053D8 /* SelectChaptersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectChaptersViewController.xib; sourceTree = "<group>"; };
 		505429B82C493A7500D0C0EA /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		505429BA2C49541300D0C0EA /* SelectChaptersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChaptersViewModel.swift; sourceTree = "<group>"; };
+		505429BC2C4A197200D0C0EA /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
+		505429C02C4A248800D0C0EA /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
+		505429C12C4A248800D0C0EA /* AccountSettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountSettingsViewController.xib; sourceTree = "<group>"; };
+		505429C52C4A26FE00D0C0EA /* ChangeEmailPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailPasswordViewController.swift; sourceTree = "<group>"; };
+		505429C62C4A26FE00D0C0EA /* ChangeEmailPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeEmailPasswordViewController.xib; sourceTree = "<group>"; };
+		505429C92C4A270600D0C0EA /* ChangeEmailPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailPasswordViewModel.swift; sourceTree = "<group>"; };
 		50A9ED942B9E43A800F1DBB1 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		50A9ED952B9E43A800F1DBB1 /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		50A9ED982B9E43B300F1DBB1 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +147,35 @@
 				505429B82C493A7500D0C0EA /* QuizViewModel.swift */,
 			);
 			path = QuizModule;
+			sourceTree = "<group>";
+		};
+		505429BE2C4A246C00D0C0EA /* SettingsPages */ = {
+			isa = PBXGroup;
+			children = (
+				505429C42C4A26E900D0C0EA /* ChangeEmailPasswordVC */,
+				505429BF2C4A247B00D0C0EA /* AccountSettingsVC */,
+				50A9EDBD2B9F969100F1DBB1 /* SettingsVC */,
+			);
+			path = SettingsPages;
+			sourceTree = "<group>";
+		};
+		505429BF2C4A247B00D0C0EA /* AccountSettingsVC */ = {
+			isa = PBXGroup;
+			children = (
+				505429C02C4A248800D0C0EA /* AccountSettingsViewController.swift */,
+				505429C12C4A248800D0C0EA /* AccountSettingsViewController.xib */,
+			);
+			path = AccountSettingsVC;
+			sourceTree = "<group>";
+		};
+		505429C42C4A26E900D0C0EA /* ChangeEmailPasswordVC */ = {
+			isa = PBXGroup;
+			children = (
+				505429C52C4A26FE00D0C0EA /* ChangeEmailPasswordViewController.swift */,
+				505429C62C4A26FE00D0C0EA /* ChangeEmailPasswordViewController.xib */,
+				505429C92C4A270600D0C0EA /* ChangeEmailPasswordViewModel.swift */,
+			);
+			path = ChangeEmailPasswordVC;
 			sourceTree = "<group>";
 		};
 		50A9EDA02B9E43CF00F1DBB1 /* SignUpSignInVC */ = {
@@ -218,6 +259,7 @@
 			children = (
 				50C125AE2B983FC900BC57B6 /* ReviewViewController.swift */,
 				50C125AF2B983FC900BC57B6 /* ReviewViewController.xib */,
+				505429BC2C4A197200D0C0EA /* ReviewViewModel.swift */,
 			);
 			path = ReviewVC;
 			sourceTree = "<group>";
@@ -293,7 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				50B2C4E72C4582C400E0DC88 /* AddNewWordVC */,
-				50A9EDBD2B9F969100F1DBB1 /* SettingsVC */,
+				505429BE2C4A246C00D0C0EA /* SettingsPages */,
 				50E7FFAC2B9D6473009745C7 /* HomeVC */,
 				50E7FFAB2B9D646E009745C7 /* ReviewVC */,
 				50E7FFAE2B9D6481009745C7 /* SelectChaptersVC */,
@@ -386,6 +428,7 @@
 				50F354C52B97DD4A003AEBE1 /* WordsListViewController.xib in Resources */,
 				50A9ED972B9E43A800F1DBB1 /* WelcomeViewController.xib in Resources */,
 				50A9ED9B2B9E43B300F1DBB1 /* SplashViewController.xib in Resources */,
+				505429C32C4A248800D0C0EA /* AccountSettingsViewController.xib in Resources */,
 				50F354A92B979202003AEBE1 /* LaunchScreen.storyboard in Resources */,
 				50A9ED9F2B9E43C500F1DBB1 /* SignUpSignInViewController.xib in Resources */,
 				502F20482B998EFE001053D8 /* SelectChaptersViewController.xib in Resources */,
@@ -393,6 +436,7 @@
 				50B2C4EA2C4582D300E0DC88 /* AddNewWordViewController.xib in Resources */,
 				50A9EDC02B9F96A200F1DBB1 /* SettingsViewController.xib in Resources */,
 				50E7FF5E2B9A7797009745C7 /* QuizViewController.xib in Resources */,
+				505429C82C4A26FE00D0C0EA /* ChangeEmailPasswordViewController.xib in Resources */,
 				50A9EDBC2B9F81C600F1DBB1 /* GoogleService-Info.plist in Resources */,
 				50F354A62B979202003AEBE1 /* Assets.xcassets in Resources */,
 				50F354B72B979635003AEBE1 /* HomeViewController.xib in Resources */,
@@ -408,8 +452,11 @@
 			files = (
 				50C125B62B984DBD00BC57B6 /* AppCache.swift in Sources */,
 				50B7A4E32BA119C600F4AC6A /* Toast.swift in Sources */,
+				505429C72C4A26FE00D0C0EA /* ChangeEmailPasswordViewController.swift in Sources */,
 				50A9EDA42B9E492500F1DBB1 /* FirebaseManager.swift in Sources */,
 				50A9ED9E2B9E43C500F1DBB1 /* SignUpSignInViewController.swift in Sources */,
+				505429CA2C4A270600D0C0EA /* ChangeEmailPasswordViewModel.swift in Sources */,
+				505429BD2C4A197200D0C0EA /* ReviewViewModel.swift in Sources */,
 				50E7FF5F2B9A7797009745C7 /* QuizViewController.swift in Sources */,
 				502F20492B998EFE001053D8 /* SelectChaptersViewController.swift in Sources */,
 				50A9EDB02B9E8B2800F1DBB1 /* Buttons.swift in Sources */,
@@ -429,6 +476,7 @@
 				50C125B42B98441700BC57B6 /* RoundShadowView.swift in Sources */,
 				50B2C4EB2C4582D300E0DC88 /* AddNewWordViewController.swift in Sources */,
 				50B7A4DF2BA1056400F4AC6A /* Change.swift in Sources */,
+				505429C22C4A248800D0C0EA /* AccountSettingsViewController.swift in Sources */,
 				50B2C4ED2C45849100E0DC88 /* AddNewWordViewModel.swift in Sources */,
 				505429B92C493A7500D0C0EA /* QuizViewModel.swift in Sources */,
 				50F354B62B979635003AEBE1 /* HomeViewController.swift in Sources */,

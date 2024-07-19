@@ -86,6 +86,42 @@ class AuthManager {
             return false
         }
     }
+    
+    static func changeEmail(newEmail: String, password: String, viewController: UIViewController) async {
+        let keychain = KeychainSwift()
+        let currentUser = Auth.auth().currentUser
+        guard let email = keychain.get(K.Keychain.email) else { return }
+        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+        do {
+            Log.info("**** REAUTHENTICATING ****")
+            try await currentUser?.reauthenticate(with: credential)
+            Log.info("**** REAUTHENTICATED - CHANGING ACCOUNT EMAIL ****")
+            try await Auth.auth().currentUser?.sendEmailVerification(beforeUpdatingEmail: newEmail)
+            Log.info("**** CHANGE COMPLETE ****")
+            clearAllData()
+        } catch let error as NSError {
+            Log.error("ERROR DELETING: \(error.localizedDescription)")
+            FirebaseErrorManager.handleError(error: error, viewController: viewController)
+        }
+    }
+    
+    static func changePassword(newPassword: String, oldPassword: String, viewController: UIViewController) async {
+        let keychain = KeychainSwift()
+        let currentUser = Auth.auth().currentUser
+        guard let email = keychain.get(K.Keychain.email) else { return }
+        let credential = EmailAuthProvider.credential(withEmail: email, password: oldPassword)
+        do {
+            Log.info("**** REAUTHENTICATING ****")
+            try await currentUser?.reauthenticate(with: credential)
+            Log.info("**** REAUTHENTICATED - CHANGING ACCOUNT PASSWORD ****")
+            try await Auth.auth().currentUser?.updatePassword(to: newPassword)
+            Log.info("**** CHANGE COMPLETE ****")
+            clearAllData()
+        } catch let error as NSError {
+            Log.error("ERROR DELETING: \(error.localizedDescription)")
+            FirebaseErrorManager.handleError(error: error, viewController: viewController)
+        }
+    }
 }
 
 // MARK: - Firestore

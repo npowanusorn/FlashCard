@@ -76,7 +76,7 @@ class HomeViewController: UITableViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        setupNotification()
+//        setupNotification()
 //        let refreshControl = UIRefreshControl()
 //        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
 //        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
@@ -133,15 +133,15 @@ class HomeViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func setupNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(notificationReceived), name: K.Notifications.selectedChapters, object: nil)
-    }
-    
-    @objc func notificationReceived() {
-        AppCache.shared.selectedChapters = AppCache.shared.reviewQuizSelectedChapters
-//        let reviewVC = ReviewViewController()
-//        self.navigationController?.pushViewController(reviewVC, animated: true)
-    }
+//    func setupNotification() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(notificationReceived), name: K.Notifications.selectedChapters, object: nil)
+//    }
+//    
+//    @objc func notificationReceived() {
+//        AppCache.shared.selectedChapters = AppCache.shared.reviewQuizSelectedChapters
+////        let reviewVC = ReviewViewController()
+////        self.navigationController?.pushViewController(reviewVC, animated: true)
+//    }
     
     func openSettings() {
         let settingsVC = SettingsViewController()
@@ -307,8 +307,8 @@ extension HomeViewController: SelectChaptersDelegate {
     func didSelectChapter(_ chapters: [Chapter], destination: SelectChapterFor) {
         switch destination {
         case .review:
-            let reviewVC = ReviewViewController()
-            
+            let reviewVM = ReviewViewModel(chapters: chapters)
+            let reviewVC = ReviewViewController(viewModel: reviewVM)
             self.navigationController?.pushViewController(reviewVC, animated: true)
         case .quiz:
             let quizVM = QuizViewModel(quizType: .blind, chapters: chapters)

@@ -87,8 +87,9 @@ class WordsListViewController: UIViewController {
     }
     
     func makeMenu() {
-        let reviewAction = UIAction(title: K.Texts.review, image: K.Image.book.safeUIImage) { _ in
-            let reviewVC = ReviewViewController()
+        let reviewAction = UIAction(title: K.Texts.review, image: K.Image.book.safeUIImage) { [self] _ in
+            let reviewVM = ReviewViewModel(chapters: [chapter])
+            let reviewVC = ReviewViewController(viewModel: reviewVM)
             self.navigationController?.pushViewController(reviewVC, animated: true)
         }
         let quizAction = UIAction(title: K.Texts.quiz, image: K.Image.book.safeUIImage) { [self] _ in

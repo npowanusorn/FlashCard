@@ -27,6 +27,7 @@ class ReviewViewController: UIViewController {
     @IBOutlet weak var mcqProgressLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
     
+    private let viewModel: ReviewViewModel
     private let defaults = UserDefaults.standard
     private var type: ReviewType
     private var isShuffled = false
@@ -66,8 +67,9 @@ class ReviewViewController: UIViewController {
         set { segmentedControl.selectedSegmentIndex = newValue }
     }
     
-    init() {
-        selectedChapters = AppCache.shared.selectedChapters
+    init(viewModel: ReviewViewModel) {
+        self.viewModel = viewModel
+        self.selectedChapters = viewModel.chapters
         type = ReviewType(rawValue: defaults.integer(forKey: K.Defaults.questionType)) ?? .flashcard
         super.init(nibName: nil, bundle: nil)
     }

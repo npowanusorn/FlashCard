@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum ChangeType {
-    case added
-    case modified
-    case removed
-}
-
-struct Change {
-    var changeType: ChangeType
-    var title: String
-    var id: String
-}
+//enum ChangeType {
+//    case added
+//    case modified
+//    case removed
+//}
+//
+//struct Change {
+//    var changeType: ChangeType
+//    var title: String
+//    var id: String
+//}

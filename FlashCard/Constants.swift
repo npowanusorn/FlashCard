@@ -29,6 +29,8 @@ enum K {
         static let homeVCID = "HomeCell"
         static let wordsVCID = "WordsCell"
         static let selectChaptersVCID = "selectChaptersCell"
+        static let settingsVCID = "settingsCell"
+        static let accountCell = "accountCell"
     }
     
     enum Texts {
@@ -51,6 +53,10 @@ enum K {
         static let dup = "-dup"
         static let settings = "Settings"
         static let refresh = "Refresh"
+        static let logOut = "Log out"
+        static let cancel = "Cancel"
+        static let unknownEmail = "Unknown email"
+        static let unknownUID = "Unknown uid"
     }
     
     enum Language {
@@ -113,3 +119,17 @@ enum ScreenSize {
     static let width = UIScreen.main.bounds.size.width
     static let height = UIScreen.main.bounds.size.height
 }
+
+enum SettingsMenu {
+    enum MainSettings: String, CaseIterable {
+        case account = "Account"
+        case data = "Data"
+    }
+    
+    enum AccountSettings: String, CaseIterable {
+        case changeEmail = "Change email"
+        case changePassword = "Change password"
+        case delete = "Delete account"
+    }
+}
+

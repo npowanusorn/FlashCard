@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import SnapKit
 
 class SelectChaptersViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var selectAllBtn: UIButton!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var selectAllBtn: UIButton!
     
     var viewModel: SelectChaptersViewModel
     var allChapters: [Chapter] = []
@@ -36,8 +37,20 @@ class SelectChaptersViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+//        selectAllBtn.isHidden = true
+//        self.view.addSubview(selectAllButton)
+//        selectAllButton.addTarget(self, action: #selector(selectAllTapped2), for: .touchUpInside)
+//        selectAllButton.snp.makeConstraints { make in
+//            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
+//            make.width.equalToSuperview().multipliedBy(0.5)
+//            make.centerX.equalToSuperview()
+//        }
         selectAllBtn.setTitle("Select all", for: .normal)
-//        selectAllBtn.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
+        selectAllBtn.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        selectAllBtn.setTitleColor(.white, for: .normal)
+        selectAllBtn.backgroundColor = .tintColor
+        selectAllBtn.layer.cornerRadius = 16
+        selectAllBtn.clipsToBounds = true
     }
     
     init(viewModel: SelectChaptersViewModel) {
@@ -48,6 +61,22 @@ class SelectChaptersViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+//    @objc private func selectAllTapped2() {
+//        switch buttonState {
+//        case .selectAll:
+//            selected = allChapters
+//            buttonState = .deselectAll
+//            self.navigationItem.rightBarButtonItem?.isEnabled = true
+//            break
+//        case .deselectAll:
+//            selected = []
+//            buttonState = .selectAll
+//            self.navigationItem.rightBarButtonItem?.isEnabled = false
+//            break
+//        }
+//        tableView.reloadData()
+//    }
     
     @IBAction func selectAllTapped(_ sender: Any) {
         switch buttonState {
@@ -79,10 +108,10 @@ class SelectChaptersViewController: UIViewController {
     }
     
     @objc func done() {
-        AppCache.shared.reviewQuizSelectedChapters = selected       
+//        AppCache.shared.reviewQuizSelectedChapters = selected       
         self.dismiss(animated: true) {
             self.viewModel.delegate.didSelectChapter(self.selected, destination: self.viewModel.selectChapterFor)
-            NotificationCenter.default.post(name: K.Notifications.selectedChapters, object: nil)
+//            NotificationCenter.default.post(name: K.Notifications.selectedChapters, object: nil)
         }
     }
 }
@@ -122,6 +151,10 @@ extension SelectChaptersViewController: UITableViewDelegate, UITableViewDataSour
         if selected.isEmpty {
             buttonState = .selectAll
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        60
     }
     
 }

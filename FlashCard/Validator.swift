@@ -13,4 +13,8 @@ class Validator {
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailPredicate.evaluate(with: email)
     }
+    
+    static func isValidPassword(_ password: String) -> Bool {
+        return password.count >= 6
+    }
 }
